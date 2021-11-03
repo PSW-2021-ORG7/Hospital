@@ -1,4 +1,6 @@
-using Hospital_API.Models;
+using Hospital_Class_Library.Graphical_Editor.DAL;
+using Hospital_Class_Library.Graphical_Editor.DAL.Repositories;
+using Hospital_Class_Library.Graphical_Editor.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -21,9 +23,10 @@ namespace Hospital_API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContext<MyDbContext>(options =>
+            services.AddDbContext<AppDbContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("APIConnection"))
             );
+            services.AddScoped<IBuildingRepository, BuildingRepository>();
 
             services.AddCors();
         }
