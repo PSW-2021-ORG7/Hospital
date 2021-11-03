@@ -4,8 +4,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:26941",
-      "sslPort": 0
+      "applicationUrl": "http://localhost:1039",
+      "sslPort": 44342
     }
   },
   "profiles": {
@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Hospital_API": {
+    "oasishealthcare": {
       "commandName": "Project",
       "applicationUrl": "http://localhost:5000",
       "environmentVariables": {
