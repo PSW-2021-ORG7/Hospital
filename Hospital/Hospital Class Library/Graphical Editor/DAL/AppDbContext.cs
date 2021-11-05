@@ -10,6 +10,8 @@ namespace Hospital_Class_Library.Graphical_Editor.DAL
         {
         }
         public DbSet<Building> Buildings { get; set; }
+        public DbSet<Room> Rooms { get; set; }
+
 
         // only for testing purposes
         protected override void OnModelCreating(ModelBuilder modelBuilder)
