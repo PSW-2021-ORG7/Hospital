@@ -2,12 +2,14 @@
 {
     public enum RoomType
     {
-        OPERATION_ROOM,
+        OPERATING_ROOM,
+        SURGERY_ROOM,
         EXAMINATION_ROOM,
-        WAITING_HALL,
-        DOSCTOR_OFFICE,
+        EMERGENCY_ROOM,
+        DOCTOR_OFFICE,
         RESTROOM,
-        LIST,
+        LIFT,
+        STAIRS,
         STORAGE
     }
 }

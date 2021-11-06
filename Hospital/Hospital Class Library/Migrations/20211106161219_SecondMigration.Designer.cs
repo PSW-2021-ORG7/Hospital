@@ -2,15 +2,17 @@
 using Hospital_Class_Library.Graphical_Editor.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Hospital_Class_Library.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211106161219_SecondMigration")]
+    partial class SecondMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -94,13 +96,13 @@ namespace Hospital_Class_Library.Migrations
                             BuildingId = "b1",
                             Floor = 0,
                             FreeBeds = 0,
-                            Height = 220.0,
+                            Height = 246.0,
                             Name = "0A",
                             Status = 1,
                             Type = 4,
-                            Width = 228.0,
-                            X = 422.0,
-                            Y = 187.0
+                            Width = 255.0,
+                            X = 9.0,
+                            Y = 9.0
                         },
                         new
                         {
@@ -108,13 +110,13 @@ namespace Hospital_Class_Library.Migrations
                             BuildingId = "b1",
                             Floor = 0,
                             FreeBeds = 0,
-                            Height = 217.0,
+                            Height = 243.0,
                             Name = "0B",
                             Status = 1,
                             Type = 4,
-                            Width = 229.0,
-                            X = 422.0,
-                            Y = 683.0
+                            Width = 256.0,
+                            X = 9.0,
+                            Y = 563.0
                         },
                         new
                         {
@@ -122,13 +124,13 @@ namespace Hospital_Class_Library.Migrations
                             BuildingId = "b1",
                             Floor = 0,
                             FreeBeds = 0,
-                            Height = 254.0,
+                            Height = 284.0,
                             Name = "0C",
                             Status = 1,
                             Type = 4,
-                            Width = 209.0,
-                            X = 651.0,
-                            Y = 596.0
+                            Width = 234.0,
+                            X = 265.0,
+                            Y = 466.0
                         },
                         new
                         {
@@ -136,13 +138,13 @@ namespace Hospital_Class_Library.Migrations
                             BuildingId = "b1",
                             Floor = 0,
                             FreeBeds = 1,
-                            Height = 170.0,
+                            Height = 190.0,
                             Name = "0A",
                             Status = 1,
                             Type = 0,
-                            Width = 210.0,
-                            X = 1182.0,
-                            Y = 237.0
+                            Width = 235.0,
+                            X = 264.0,
+                            Y = 65.0
                         },
                         new
                         {
@@ -150,13 +152,13 @@ namespace Hospital_Class_Library.Migrations
                             BuildingId = "b1",
                             Floor = 0,
                             FreeBeds = 1,
-                            Height = 170.0,
+                            Height = 190.0,
                             Name = "0B",
                             Status = 1,
                             Type = 0,
-                            Width = 210.0,
-                            X = 650.0,
-                            Y = 237.0
+                            Width = 235.0,
+                            X = 859.0,
+                            Y = 65.0
                         },
                         new
                         {
@@ -164,13 +166,13 @@ namespace Hospital_Class_Library.Migrations
                             BuildingId = "b1",
                             Floor = 0,
                             FreeBeds = 1,
-                            Height = 170.0,
+                            Height = 190.0,
                             Name = "0A",
                             Status = 1,
                             Type = 1,
-                            Width = 322.0,
-                            X = 861.0,
-                            Y = 237.0
+                            Width = 360.0,
+                            X = 499.0,
+                            Y = 65.0
                         },
                         new
                         {
@@ -178,13 +180,13 @@ namespace Hospital_Class_Library.Migrations
                             BuildingId = "b1",
                             Floor = 0,
                             FreeBeds = 1,
-                            Height = 154.0,
+                            Height = 172.37,
                             Name = "0A",
                             Status = 1,
                             Type = 3,
-                            Width = 202.0,
-                            X = 1190.0,
-                            Y = 696.0
+                            Width = 226.0,
+                            X = 868.0,
+                            Y = 577.63
                         },
                         new
                         {
@@ -192,13 +194,13 @@ namespace Hospital_Class_Library.Migrations
                             BuildingId = "b1",
                             Floor = 0,
                             FreeBeds = 1,
-                            Height = 154.0,
+                            Height = 172.37,
                             Name = "0B",
                             Status = 1,
                             Type = 3,
-                            Width = 202.0,
-                            X = 1190.0,
-                            Y = 541.0
+                            Width = 226.0,
+                            X = 868.0,
+                            Y = 405.0
                         },
                         new
                         {
@@ -206,13 +208,13 @@ namespace Hospital_Class_Library.Migrations
                             BuildingId = "b1",
                             Floor = 0,
                             FreeBeds = 0,
-                            Height = 138.0,
+                            Height = 154.0,
                             Name = "Men Restroom",
                             Status = 1,
                             Type = 5,
-                            Width = 106.0,
-                            X = 422.0,
-                            Y = 407.0
+                            Width = 119.0,
+                            X = 9.0,
+                            Y = 255.0
                         },
                         new
                         {
@@ -220,13 +222,13 @@ namespace Hospital_Class_Library.Migrations
                             BuildingId = "b1",
                             Floor = 0,
                             FreeBeds = 0,
-                            Height = 138.0,
+                            Height = 154.0,
                             Name = "Women Restroom",
                             Status = 1,
                             Type = 5,
-                            Width = 106.0,
-                            X = 422.0,
-                            Y = 544.0
+                            Width = 119.0,
+                            X = 9.0,
+                            Y = 409.0
                         },
                         new
                         {
@@ -234,13 +236,13 @@ namespace Hospital_Class_Library.Migrations
                             BuildingId = "b1",
                             Floor = 0,
                             FreeBeds = 0,
-                            Height = 69.0,
+                            Height = 77.0,
                             Name = "L",
                             Status = 1,
                             Type = 6,
-                            Width = 69.0,
-                            X = 581.0,
-                            Y = 407.0
+                            Width = 77.0,
+                            X = 187.0,
+                            Y = 255.0
                         },
                         new
                         {
@@ -248,13 +250,13 @@ namespace Hospital_Class_Library.Migrations
                             BuildingId = "b1",
                             Floor = 0,
                             FreeBeds = 0,
-                            Height = 134.0,
+                            Height = 150.0,
                             Name = "S1",
                             Status = 1,
                             Type = 7,
-                            Width = 69.0,
-                            X = 581.0,
-                            Y = 548.0
+                            Width = 77.0,
+                            X = 187.0,
+                            Y = 413.0
                         },
                         new
                         {
@@ -262,13 +264,13 @@ namespace Hospital_Class_Library.Migrations
                             BuildingId = "b1",
                             Floor = 1,
                             FreeBeds = 0,
-                            Height = 220.0,
+                            Height = 246.0,
                             Name = "1A",
                             Status = 1,
                             Type = 4,
-                            Width = 228.0,
-                            X = 422.0,
-                            Y = 187.0
+                            Width = 255.0,
+                            X = 9.0,
+                            Y = 9.0
                         },
                         new
                         {
@@ -276,13 +278,13 @@ namespace Hospital_Class_Library.Migrations
                             BuildingId = "b1",
                             Floor = 1,
                             FreeBeds = 0,
-                            Height = 217.0,
+                            Height = 243.0,
                             Name = "1B",
                             Status = 1,
                             Type = 4,
-                            Width = 229.0,
-                            X = 422.0,
-                            Y = 683.0
+                            Width = 256.0,
+                            X = 9.0,
+                            Y = 563.0
                         },
                         new
                         {
@@ -290,13 +292,13 @@ namespace Hospital_Class_Library.Migrations
                             BuildingId = "b1",
                             Floor = 1,
                             FreeBeds = 0,
-                            Height = 254.0,
+                            Height = 284.0,
                             Name = "1C",
                             Status = 1,
                             Type = 4,
-                            Width = 209.0,
-                            X = 651.0,
-                            Y = 596.0
+                            Width = 234.0,
+                            X = 265.0,
+                            Y = 466.0
                         },
                         new
                         {
@@ -304,13 +306,13 @@ namespace Hospital_Class_Library.Migrations
                             BuildingId = "b1",
                             Floor = 1,
                             FreeBeds = 1,
-                            Height = 170.0,
+                            Height = 190.0,
                             Name = "1A",
                             Status = 1,
                             Type = 0,
-                            Width = 210.0,
-                            X = 1182.0,
-                            Y = 237.0
+                            Width = 235.0,
+                            X = 264.0,
+                            Y = 65.0
                         },
                         new
                         {
@@ -318,13 +320,13 @@ namespace Hospital_Class_Library.Migrations
                             BuildingId = "b1",
                             Floor = 1,
                             FreeBeds = 1,
-                            Height = 170.0,
+                            Height = 190.0,
                             Name = "1B",
                             Status = 1,
                             Type = 0,
-                            Width = 210.0,
-                            X = 650.0,
-                            Y = 237.0
+                            Width = 235.0,
+                            X = 859.0,
+                            Y = 65.0
                         },
                         new
                         {
@@ -332,13 +334,13 @@ namespace Hospital_Class_Library.Migrations
                             BuildingId = "b1",
                             Floor = 1,
                             FreeBeds = 1,
-                            Height = 170.0,
+                            Height = 190.0,
                             Name = "1A",
                             Status = 1,
                             Type = 1,
-                            Width = 322.0,
-                            X = 861.0,
-                            Y = 237.0
+                            Width = 360.0,
+                            X = 499.0,
+                            Y = 65.0
                         },
                         new
                         {
@@ -346,13 +348,13 @@ namespace Hospital_Class_Library.Migrations
                             BuildingId = "b1",
                             Floor = 1,
                             FreeBeds = 1,
-                            Height = 154.0,
+                            Height = 172.37,
                             Name = "1A",
                             Status = 1,
                             Type = 3,
-                            Width = 202.0,
-                            X = 1190.0,
-                            Y = 696.0
+                            Width = 226.0,
+                            X = 868.0,
+                            Y = 577.63
                         },
                         new
                         {
@@ -360,13 +362,13 @@ namespace Hospital_Class_Library.Migrations
                             BuildingId = "b1",
                             Floor = 1,
                             FreeBeds = 1,
-                            Height = 154.0,
+                            Height = 172.37,
                             Name = "1B",
                             Status = 1,
                             Type = 3,
-                            Width = 202.0,
-                            X = 1190.0,
-                            Y = 541.0
+                            Width = 226.0,
+                            X = 868.0,
+                            Y = 405.0
                         },
                         new
                         {
@@ -374,13 +376,13 @@ namespace Hospital_Class_Library.Migrations
                             BuildingId = "b1",
                             Floor = 1,
                             FreeBeds = 0,
-                            Height = 138.0,
+                            Height = 154.0,
                             Name = "Men Restroom",
                             Status = 1,
                             Type = 5,
-                            Width = 106.0,
-                            X = 422.0,
-                            Y = 407.0
+                            Width = 119.0,
+                            X = 9.0,
+                            Y = 255.0
                         },
                         new
                         {
@@ -388,13 +390,13 @@ namespace Hospital_Class_Library.Migrations
                             BuildingId = "b1",
                             Floor = 1,
                             FreeBeds = 0,
-                            Height = 138.0,
+                            Height = 154.0,
                             Name = "Women Restroom",
                             Status = 1,
                             Type = 5,
-                            Width = 106.0,
-                            X = 422.0,
-                            Y = 544.0
+                            Width = 119.0,
+                            X = 9.0,
+                            Y = 409.0
                         },
                         new
                         {
@@ -402,13 +404,13 @@ namespace Hospital_Class_Library.Migrations
                             BuildingId = "b1",
                             Floor = 1,
                             FreeBeds = 0,
-                            Height = 69.0,
+                            Height = 77.0,
                             Name = "L",
                             Status = 1,
                             Type = 6,
-                            Width = 69.0,
-                            X = 581.0,
-                            Y = 407.0
+                            Width = 77.0,
+                            X = 187.0,
+                            Y = 255.0
                         },
                         new
                         {
@@ -416,13 +418,13 @@ namespace Hospital_Class_Library.Migrations
                             BuildingId = "b1",
                             Floor = 1,
                             FreeBeds = 0,
-                            Height = 134.0,
+                            Height = 150.0,
                             Name = "S1",
                             Status = 1,
                             Type = 7,
-                            Width = 69.0,
-                            X = 581.0,
-                            Y = 548.0
+                            Width = 77.0,
+                            X = 187.0,
+                            Y = 413.0
                         });
                 });
 #pragma warning restore 612, 618
