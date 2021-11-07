@@ -27,6 +27,7 @@ namespace Hospital_API
                 options.UseNpgsql(Configuration.GetConnectionString("APIConnection"))
             );
             services.AddScoped<IBuildingRepository, BuildingRepository>();
+            services.AddScoped<IRoomRepository, RoomRepository>();
 
             services.AddCors();
         }
