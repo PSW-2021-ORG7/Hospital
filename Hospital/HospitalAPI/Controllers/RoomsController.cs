@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using HospitalClassLibrary.GraphicalEditor.Models;
-using HospitalClassLibrary.GraphicalEditor.Repositories.Interfaces;
+using HospitalClassLibrary.GraphicalEditor.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HospitalAPI.Controllers
@@ -11,18 +10,17 @@ namespace HospitalAPI.Controllers
     [ApiController]
     public class RoomsController : ControllerBase
     {
-        private readonly IRoomRepository _roomsRepo;
+        private readonly IRoomService _roomService;
 
-        public RoomsController(IRoomRepository roomsRepo)
+        public RoomsController(IRoomService roomService)
         {
-            _roomsRepo = roomsRepo;
+            _roomService = roomService;
         }
 
-        [HttpGet] // GET: Rooms
-        //public IActionResult Get([FromQuery(Name = "page")] int page)
-        public async Task<ActionResult<IEnumerable<Room>>> GetRooms([FromQuery(Name ="buildingId")] int buildingId)
+        [HttpGet] 
+        public async Task<IEnumerable<Room>> GetRooms([FromQuery(Name ="buildingId")] int buildingId)
         {
-            return await _roomsRepo.GetAllRooms();
+            return await _roomService.GetAll(buildingId);
         }
 
         [HttpPut("{id}")]
@@ -33,10 +31,7 @@ namespace HospitalAPI.Controllers
                 return BadRequest();
             }
 
-            if ((await _roomsRepo.PutRoom(id, room)) == -1)
-            {
-                return NotFound();
-            }
+            await _roomService.Update(room);
 
             return NoContent();
         }

@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using HospitalClassLibrary.GraphicalEditor.Models;
 
 namespace HospitalClassLibrary.GraphicalEditor.Repositories.Interfaces
 {
-    public interface IRoomRepository
+    public interface IRoomRepository : IGenericRepository<Room>
     {
-        Task<List<Room>> GetAllRooms();
-        Task<Room> GetRoomById(int id);
-        Task<int> PutRoom(int id, Room room);
+        Task<IEnumerable<Room>> GetAll(int buildingId);
     }
 }

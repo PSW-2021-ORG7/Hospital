@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using HospitalClassLibrary.GraphicalEditor.Models;
-using HospitalClassLibrary.GraphicalEditor.Repositories.Interfaces;
+using HospitalClassLibrary.GraphicalEditor.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HospitalAPI.Controllers
@@ -11,24 +10,23 @@ namespace HospitalAPI.Controllers
     [ApiController]
     public class BuildingsController : ControllerBase
     {
-        private readonly IBuildingRepository _buildingsRepo;
+        private readonly IBuildingService _buildingService;
 
-        public BuildingsController(IBuildingRepository buildingsRepo)
+        public BuildingsController(IBuildingService buildingService)
         {
-            _buildingsRepo = buildingsRepo;
+            _buildingService = buildingService;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Building>>> GetBuildings()
+        public async Task<IEnumerable<Building>> GetBuildings()
         {
-            return await _buildingsRepo.GetAllBuildings();
+            return await _buildingService.GetAll();
         }
 
-        // GET: api/buildings/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Building>> GetBuilding(int id)
         {
-            var building = await _buildingsRepo.GetBuildingById(id);
+            var building = await _buildingService.GetById(id);
 
             if (building == null)
             {
@@ -38,12 +36,6 @@ namespace HospitalAPI.Controllers
             return building;
         }
 
-
-
-
-        // PUT: api/buildings/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutBuilding(int id, Building building)
         {
@@ -52,13 +44,9 @@ namespace HospitalAPI.Controllers
                 return BadRequest();
             }
 
-            if ((await _buildingsRepo.PutBuilding(id, building)) == -1)
-            {
-                return NotFound();
-            }
+            await _buildingService.Update(building);
 
             return NoContent();
         }
-
     }
 }

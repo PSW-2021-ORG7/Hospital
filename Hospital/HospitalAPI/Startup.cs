@@ -1,6 +1,8 @@
 using HospitalClassLibrary.Data;
 using HospitalClassLibrary.GraphicalEditor.Repositories;
 using HospitalClassLibrary.GraphicalEditor.Repositories.Interfaces;
+using HospitalClassLibrary.GraphicalEditor.Services;
+using HospitalClassLibrary.GraphicalEditor.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -19,20 +21,20 @@ namespace HospitalAPI
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
             services.AddDbContext<AppDbContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("APIConnection"))
             );
-            services.AddScoped<IBuildingRepository, BuildingRepository>();
-            services.AddScoped<IRoomRepository, RoomRepository>();
+            services.AddTransient<IRoomRepository, RoomRepository>();
+            services.AddTransient<IBuildingRepository, BuildingRepository>();
+            services.AddTransient<IBuildingService, BuildingService>();
+            services.AddTransient<IRoomService, RoomService>();
 
             services.AddCors();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
