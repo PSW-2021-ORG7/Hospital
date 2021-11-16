@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using HospitalClassLibrary.Data;
 using HospitalClassLibrary.GraphicalEditor.Models;
 using HospitalClassLibrary.GraphicalEditor.Repositories.Interfaces;
+using HospitalClassLibrary.Shared.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace HospitalClassLibrary.GraphicalEditor.Repositories

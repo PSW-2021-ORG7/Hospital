@@ -1,4 +1,5 @@
 ﻿using HospitalClassLibrary.GraphicalEditor.Models;
+using HospitalClassLibrary.RoomEquipment.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace HospitalClassLibrary.Data
@@ -16,6 +17,145 @@ namespace HospitalClassLibrary.Data
         // only for testing purposes
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<EquipmentItem>().HasData(
+                new EquipmentItem
+                {
+                    Id = 1,
+                    Name = "Syringe"
+                },
+                new EquipmentItem
+                {
+                    Id = 2,
+                    Name = "Thermometer"
+                },
+                new EquipmentItem
+                {
+                    Id = 3,
+                    Name = "Infusion pump"
+                },
+                new EquipmentItem
+                {
+                    Id = 4,
+                    Name = "Gauze"
+                },
+                new EquipmentItem
+                {
+                    Id = 5,
+                    Name = "Operating table"
+                },
+                new EquipmentItem
+                {
+                    Id = 6,
+                    Name = "Otoscope"
+                },
+                new EquipmentItem
+                {
+                    Id = 7,
+                    Name = "Inhaler"
+                },
+                new EquipmentItem
+                {
+                    Id = 8,
+                    Name = "Scalpel"
+                },
+                new EquipmentItem
+                {
+                    Id = 9,
+                    Name = "Adhesive Plaster"
+                },
+                new EquipmentItem
+                {
+                    Id = 10,
+                    Name = "Curette"
+                }
+            );
+            modelBuilder.Entity<Equipment>().HasData(
+                new Equipment
+                {
+                    Id = 1,
+                    RoomId = 4,
+                    EquipmentItemId = 1,
+                    Quantity = 100
+                },
+                new Equipment
+                {
+                    Id = 2,
+                    RoomId = 4,
+                    EquipmentItemId = 2,
+                    Quantity = 2
+                },
+                new Equipment
+                {
+                    Id = 3,
+                    RoomId = 4,
+                    EquipmentItemId = 3,
+                    Quantity = 4
+                },
+                new Equipment
+                {
+                    Id = 4,
+                    RoomId = 4,
+                    EquipmentItemId = 4,
+                    Quantity = 200
+                },
+                new Equipment
+                {
+                    Id = 5,
+                    RoomId = 4,
+                    EquipmentItemId = 8,
+                    Quantity = 6
+                },
+                new Equipment
+                {
+                    Id = 6,
+                    RoomId = 4,
+                    EquipmentItemId = 5,
+                    Quantity = 1
+                },
+
+                new Equipment
+                {
+                    Id = 7,
+                    RoomId = 5,
+                    EquipmentItemId = 1,
+                    Quantity = 104
+                },
+                new Equipment
+                {
+                    Id = 8,
+                    RoomId = 5,
+                    EquipmentItemId = 2,
+                    Quantity = 5
+                },
+                new Equipment
+                {
+                    Id = 9,
+                    RoomId = 5,
+                    EquipmentItemId = 3,
+                    Quantity = 6
+                },
+                new Equipment
+                {
+                    Id = 10,
+                    RoomId = 5,
+                    EquipmentItemId = 4,
+                    Quantity = 150
+                },
+                new Equipment
+                {
+                    Id = 11,
+                    RoomId = 5,
+                    EquipmentItemId = 8,
+                    Quantity = 10
+                },
+                new Equipment
+                {
+                    Id = 12,
+                    RoomId = 5,
+                    EquipmentItemId = 5,
+                    Quantity = 1
+                }
+            );
             modelBuilder.Entity<Building>().HasData(
                 new Building
                 {

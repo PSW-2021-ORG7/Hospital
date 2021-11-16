@@ -3,6 +3,10 @@ using HospitalClassLibrary.GraphicalEditor.Repositories;
 using HospitalClassLibrary.GraphicalEditor.Repositories.Interfaces;
 using HospitalClassLibrary.GraphicalEditor.Services;
 using HospitalClassLibrary.GraphicalEditor.Services.Interfaces;
+using HospitalClassLibrary.RoomEquipment.Repositories;
+using HospitalClassLibrary.RoomEquipment.Repositories.Interfaces;
+using HospitalClassLibrary.RoomEquipment.Services;
+using HospitalClassLibrary.RoomEquipment.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -24,13 +28,17 @@ namespace HospitalAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
             services.AddDbContext<AppDbContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("APIConnection"))
             );
             services.AddTransient<IRoomRepository, RoomRepository>();
             services.AddTransient<IBuildingRepository, BuildingRepository>();
+            services.AddTransient<IEquipmentRepository, EquipmentRepository>();
+
             services.AddTransient<IBuildingService, BuildingService>();
             services.AddTransient<IRoomService, RoomService>();
+            services.AddTransient<IEquipmentService, EquipmentService>();
 
             services.AddCors();
         }
