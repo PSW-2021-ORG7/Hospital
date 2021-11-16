@@ -112,7 +112,7 @@ namespace HospitalClassLibrary.Data
                 new Room
                 {
                     Id = 9,
-                    BuildingId = 1, Name = "Men Restroom",
+                    BuildingId = 1, Name = "Men's",
                     Status = RoomStatus.UNOCCUPIED,
                     Type = RoomType.RESTROOM,
                     FreeBeds = 0,
@@ -122,7 +122,7 @@ namespace HospitalClassLibrary.Data
                 new Room
                 {
                     Id = 10,
-                    BuildingId = 1, Name = "Women Restroom",
+                    BuildingId = 1, Name = "Women's",
                     Status = RoomStatus.UNOCCUPIED,
                     Type = RoomType.RESTROOM,
                     FreeBeds = 0,
@@ -258,7 +258,7 @@ namespace HospitalClassLibrary.Data
                 new Room
                 {
                     Id = 21,
-                    BuildingId = 1, Name = "Men Restroom",
+                    BuildingId = 1, Name = "Men's",
                     Status = RoomStatus.UNOCCUPIED,
                     Type = RoomType.RESTROOM,
                     FreeBeds = 0,
@@ -271,7 +271,7 @@ namespace HospitalClassLibrary.Data
                 new Room
                 {
                     Id = 22,
-                    BuildingId = 1, Name = "Women Restroom",
+                    BuildingId = 1, Name = "Women's",
                     Status = RoomStatus.UNOCCUPIED,
                     Type = RoomType.RESTROOM,
                     FreeBeds = 0,

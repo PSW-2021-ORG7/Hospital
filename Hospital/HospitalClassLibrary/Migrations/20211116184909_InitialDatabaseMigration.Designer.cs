@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HospitalClassLibrary.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20211116134911_InitialDatabaseMigration")]
+    [Migration("20211116184909_InitialDatabaseMigration")]
     partial class InitialDatabaseMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -215,7 +215,7 @@ namespace HospitalClassLibrary.Migrations
                             Floor = 0,
                             FreeBeds = 0,
                             Height = 138.0,
-                            Name = "Men Restroom",
+                            Name = "Men's",
                             Status = 1,
                             Type = 5,
                             Width = 106.0,
@@ -229,7 +229,7 @@ namespace HospitalClassLibrary.Migrations
                             Floor = 0,
                             FreeBeds = 0,
                             Height = 138.0,
-                            Name = "Women Restroom",
+                            Name = "Women's",
                             Status = 1,
                             Type = 5,
                             Width = 106.0,
@@ -383,7 +383,7 @@ namespace HospitalClassLibrary.Migrations
                             Floor = 1,
                             FreeBeds = 0,
                             Height = 138.0,
-                            Name = "Men Restroom",
+                            Name = "Men's",
                             Status = 1,
                             Type = 5,
                             Width = 106.0,
@@ -397,7 +397,7 @@ namespace HospitalClassLibrary.Migrations
                             Floor = 1,
                             FreeBeds = 0,
                             Height = 138.0,
-                            Name = "Women Restroom",
+                            Name = "Women's",
                             Status = 1,
                             Type = 5,
                             Width = 106.0,

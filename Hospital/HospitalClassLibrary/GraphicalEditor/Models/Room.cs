@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace HospitalClassLibrary.GraphicalEditor.Models
+﻿namespace HospitalClassLibrary.GraphicalEditor.Models
 {
     public class Room
     {

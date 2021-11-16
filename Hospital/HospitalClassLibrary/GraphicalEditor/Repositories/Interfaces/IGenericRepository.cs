@@ -1,5 +1,4 @@
-﻿using HospitalClassLibrary.GraphicalEditor.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace HospitalClassLibrary.GraphicalEditor.Repositories.Interfaces
