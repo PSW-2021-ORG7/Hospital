@@ -8,7 +8,7 @@ namespace HospitalClassLibrary.GraphicalEditor.Repositories.Interfaces
     public interface IRoomRepository
     {
         Task<List<Room>> GetAllRooms();
-        Task<Room> GetRoomById(String id);
-        Task<int> PutRoom(String id, Room room);
+        Task<Room> GetRoomById(int id);
+        Task<int> PutRoom(int id, Room room);
     }
 }

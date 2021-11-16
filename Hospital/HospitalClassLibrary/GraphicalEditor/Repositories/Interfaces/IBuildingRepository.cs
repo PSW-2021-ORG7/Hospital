@@ -8,7 +8,7 @@ namespace HospitalClassLibrary.GraphicalEditor.Repositories.Interfaces
     public interface IBuildingRepository
     {
         Task<List<Building>> GetAllBuildings();
-        Task<Building> GetBuildingById(String id);
-        Task<int> PutBuilding(String id, Building building);
+        Task<Building> GetBuildingById(int id);
+        Task<int> PutBuilding(int id, Building building);
     }
 }

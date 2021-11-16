@@ -22,17 +22,17 @@ namespace HospitalClassLibrary.GraphicalEditor.Repositories
             return await _context.Rooms.ToListAsync();
         }
 
-        public async Task<Room> GetRoomById(string id)
+        public async Task<Room> GetRoomById(int id)
         {
             return await _context.Rooms.FindAsync(id);
         }
 
-        public async Task<List<Room>> GetRooms(string buildingId)
+        public async Task<List<Room>> GetRooms(int buildingId)
         {
             return await _context.Rooms.Where(r => r.BuildingId == buildingId).Select(r => r).ToListAsync();
         }
 
-        public async Task<int> PutRoom(string id, Room room)
+        public async Task<int> PutRoom(int id, Room room)
         {
             _context.Entry(room).State = EntityState.Modified;
 
@@ -52,7 +52,7 @@ namespace HospitalClassLibrary.GraphicalEditor.Repositories
 
             return 0;
         }
-        private bool RoomExists(String id)
+        private bool RoomExists(int id)
         {
             return _context.Rooms.Any(e => e.Id == id);
         }

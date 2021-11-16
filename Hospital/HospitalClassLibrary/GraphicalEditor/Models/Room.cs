@@ -4,7 +4,7 @@ namespace HospitalClassLibrary.GraphicalEditor.Models
 {
     public class Room
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public RoomStatus Status { get; set; }
         public RoomType Type { get; set; }
@@ -15,7 +15,7 @@ namespace HospitalClassLibrary.GraphicalEditor.Models
         public double Width { get; set; }
         public double Height { get; set; }
 
-        public string BuildingId { get; set; }
+        public int BuildingId { get; set; }
         public Building Building { get; set; }
     }
 }

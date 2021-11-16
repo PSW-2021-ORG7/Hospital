@@ -21,12 +21,12 @@ namespace HospitalClassLibrary.GraphicalEditor.Repositories
             return await _context.Buildings.ToListAsync();
         }
 
-        public async Task<Building> GetBuildingById(string id)
+        public async Task<Building> GetBuildingById(int id)
         {
             return await _context.Buildings.FindAsync(id);
         }
 
-        public async Task<int> PutBuilding(string id, Building building)
+        public async Task<int> PutBuilding(int id, Building building)
         {
             _context.Entry(building).State = EntityState.Modified;
 
@@ -46,7 +46,7 @@ namespace HospitalClassLibrary.GraphicalEditor.Repositories
 
             return 0;
         }
-        private bool BuildingExists(String id)
+        private bool BuildingExists(int id)
         {
             return _context.Buildings.Any(e => e.Id == id);
         }

@@ -23,8 +23,8 @@ namespace Hospital_Class_Library.Migrations
 
             modelBuilder.Entity("Hospital_Class_Library.Graphical_Editor.Models.Building", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
+                    b.Property<int>("Id")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
@@ -39,13 +39,13 @@ namespace Hospital_Class_Library.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b1",
+                            Id = 1,
                             Description = "The administrative center of Oasis Healthcare",
                             Name = "Oasis Main Building"
                         },
                         new
                         {
-                            Id = "b2",
+                            Id = 2,
                             Description = "The treatment facility of Oasis Healthcare",
                             Name = "Oasis Treatment Center"
                         });
@@ -53,11 +53,11 @@ namespace Hospital_Class_Library.Migrations
 
             modelBuilder.Entity("Hospital_Class_Library.Graphical_Editor.Models.Room", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
+                    b.Property<int>("Id")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("BuildingId")
-                        .HasColumnType("text");
+                    b.Property<int>("BuildingId")
+                        .HasColumnType("integer");
 
                     b.Property<int>("Floor")
                         .HasColumnType("integer");
@@ -93,8 +93,8 @@ namespace Hospital_Class_Library.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "1",
-                            BuildingId = "b1",
+                            Id = 1,
+                            BuildingId = 1,
                             Floor = 0,
                             FreeBeds = 0,
                             Height = 246.0,
@@ -107,8 +107,8 @@ namespace Hospital_Class_Library.Migrations
                         },
                         new
                         {
-                            Id = "2",
-                            BuildingId = "b1",
+                            Id = 2,
+                            BuildingId = 1,
                             Floor = 0,
                             FreeBeds = 0,
                             Height = 243.0,
@@ -121,8 +121,8 @@ namespace Hospital_Class_Library.Migrations
                         },
                         new
                         {
-                            Id = "3",
-                            BuildingId = "b1",
+                            Id = 3,
+                            BuildingId = 1,
                             Floor = 0,
                             FreeBeds = 0,
                             Height = 284.0,
@@ -135,8 +135,8 @@ namespace Hospital_Class_Library.Migrations
                         },
                         new
                         {
-                            Id = "4",
-                            BuildingId = "b1",
+                            Id = 4,
+                            BuildingId = 1,
                             Floor = 0,
                             FreeBeds = 1,
                             Height = 190.0,
@@ -149,8 +149,8 @@ namespace Hospital_Class_Library.Migrations
                         },
                         new
                         {
-                            Id = "5",
-                            BuildingId = "b1",
+                            Id = 5,
+                            BuildingId = 1,
                             Floor = 0,
                             FreeBeds = 1,
                             Height = 190.0,
@@ -163,8 +163,8 @@ namespace Hospital_Class_Library.Migrations
                         },
                         new
                         {
-                            Id = "6",
-                            BuildingId = "b1",
+                            Id = 6,
+                            BuildingId = 1,
                             Floor = 0,
                             FreeBeds = 1,
                             Height = 190.0,
@@ -177,8 +177,8 @@ namespace Hospital_Class_Library.Migrations
                         },
                         new
                         {
-                            Id = "7",
-                            BuildingId = "b1",
+                            Id = 7,
+                            BuildingId = 1,
                             Floor = 0,
                             FreeBeds = 1,
                             Height = 172.37,
@@ -191,8 +191,8 @@ namespace Hospital_Class_Library.Migrations
                         },
                         new
                         {
-                            Id = "8",
-                            BuildingId = "b1",
+                            Id = 8,
+                            BuildingId = 1,
                             Floor = 0,
                             FreeBeds = 1,
                             Height = 172.37,
@@ -205,8 +205,8 @@ namespace Hospital_Class_Library.Migrations
                         },
                         new
                         {
-                            Id = "9",
-                            BuildingId = "b1",
+                            Id = 9,
+                            BuildingId = 1,
                             Floor = 0,
                             FreeBeds = 0,
                             Height = 154.0,
@@ -219,8 +219,8 @@ namespace Hospital_Class_Library.Migrations
                         },
                         new
                         {
-                            Id = "10",
-                            BuildingId = "b1",
+                            Id = 10,
+                            BuildingId = 1,
                             Floor = 0,
                             FreeBeds = 0,
                             Height = 154.0,
@@ -233,8 +233,8 @@ namespace Hospital_Class_Library.Migrations
                         },
                         new
                         {
-                            Id = "11",
-                            BuildingId = "b1",
+                            Id = 11,
+                            BuildingId = 1,
                             Floor = 0,
                             FreeBeds = 0,
                             Height = 77.0,
@@ -247,8 +247,8 @@ namespace Hospital_Class_Library.Migrations
                         },
                         new
                         {
-                            Id = "12",
-                            BuildingId = "b1",
+                            Id = 12,
+                            BuildingId = 1,
                             Floor = 0,
                             FreeBeds = 0,
                             Height = 150.0,
@@ -261,8 +261,8 @@ namespace Hospital_Class_Library.Migrations
                         },
                         new
                         {
-                            Id = "13",
-                            BuildingId = "b1",
+                            Id = 13,
+                            BuildingId = 1,
                             Floor = 1,
                             FreeBeds = 0,
                             Height = 246.0,
@@ -275,8 +275,8 @@ namespace Hospital_Class_Library.Migrations
                         },
                         new
                         {
-                            Id = "14",
-                            BuildingId = "b1",
+                            Id = 14,
+                            BuildingId = 1,
                             Floor = 1,
                             FreeBeds = 0,
                             Height = 243.0,
@@ -289,8 +289,8 @@ namespace Hospital_Class_Library.Migrations
                         },
                         new
                         {
-                            Id = "15",
-                            BuildingId = "b1",
+                            Id = 15,
+                            BuildingId = 1,
                             Floor = 1,
                             FreeBeds = 0,
                             Height = 284.0,
@@ -303,8 +303,8 @@ namespace Hospital_Class_Library.Migrations
                         },
                         new
                         {
-                            Id = "16",
-                            BuildingId = "b1",
+                            Id = 16,
+                            BuildingId = 1,
                             Floor = 1,
                             FreeBeds = 1,
                             Height = 190.0,
@@ -317,8 +317,8 @@ namespace Hospital_Class_Library.Migrations
                         },
                         new
                         {
-                            Id = "17",
-                            BuildingId = "b1",
+                            Id = 17,
+                            BuildingId = 1,
                             Floor = 1,
                             FreeBeds = 1,
                             Height = 190.0,
@@ -331,8 +331,8 @@ namespace Hospital_Class_Library.Migrations
                         },
                         new
                         {
-                            Id = "18",
-                            BuildingId = "b1",
+                            Id = 18,
+                            BuildingId = 1,
                             Floor = 1,
                             FreeBeds = 1,
                             Height = 190.0,
@@ -345,8 +345,8 @@ namespace Hospital_Class_Library.Migrations
                         },
                         new
                         {
-                            Id = "19",
-                            BuildingId = "b1",
+                            Id = 19,
+                            BuildingId = 1,
                             Floor = 1,
                             FreeBeds = 1,
                             Height = 172.37,
@@ -359,8 +359,8 @@ namespace Hospital_Class_Library.Migrations
                         },
                         new
                         {
-                            Id = "20",
-                            BuildingId = "b1",
+                            Id = 20,
+                            BuildingId = 1,
                             Floor = 1,
                             FreeBeds = 1,
                             Height = 172.37,
@@ -373,8 +373,8 @@ namespace Hospital_Class_Library.Migrations
                         },
                         new
                         {
-                            Id = "21",
-                            BuildingId = "b1",
+                            Id = 21,
+                            BuildingId = 1,
                             Floor = 1,
                             FreeBeds = 0,
                             Height = 154.0,
@@ -387,8 +387,8 @@ namespace Hospital_Class_Library.Migrations
                         },
                         new
                         {
-                            Id = "22",
-                            BuildingId = "b1",
+                            Id = 22,
+                            BuildingId = 1,
                             Floor = 1,
                             FreeBeds = 0,
                             Height = 154.0,
@@ -401,8 +401,8 @@ namespace Hospital_Class_Library.Migrations
                         },
                         new
                         {
-                            Id = "23",
-                            BuildingId = "b1",
+                            Id = 23,
+                            BuildingId = 1,
                             Floor = 1,
                             FreeBeds = 0,
                             Height = 77.0,
@@ -415,8 +415,8 @@ namespace Hospital_Class_Library.Migrations
                         },
                         new
                         {
-                            Id = "24",
-                            BuildingId = "b1",
+                            Id = 24,
+                            BuildingId = 1,
                             Floor = 1,
                             FreeBeds = 0,
                             Height = 150.0,

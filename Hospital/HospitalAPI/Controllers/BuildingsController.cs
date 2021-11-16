@@ -26,7 +26,7 @@ namespace HospitalAPI.Controllers
 
         // GET: api/buildings/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Building>> GetBuilding(String id)
+        public async Task<ActionResult<Building>> GetBuilding(int id)
         {
             var building = await _buildingsRepo.GetBuildingById(id);
 
@@ -45,7 +45,7 @@ namespace HospitalAPI.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBuilding(String id, Building building)
+        public async Task<IActionResult> PutBuilding(int id, Building building)
         {
             if (id != building.Id)
             {

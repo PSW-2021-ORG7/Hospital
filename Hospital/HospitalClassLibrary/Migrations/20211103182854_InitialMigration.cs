@@ -10,22 +10,23 @@ namespace Hospital_Class_Library.Migrations
                 name: "Buildings",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
+                    Id = table.Column<uint>(nullable: false),
                     Name = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true)
+                    Description = table.Column<string>(nullable: true),
+                    
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Buildings", x => x.Id);
                 });
-
+            
             migrationBuilder.InsertData(
                 table: "Buildings",
                 columns: new[] { "Id", "Description", "Name" },
                 values: new object[,]
                 {
-                    { "b1", "The administrative center of Oasis Healthcare", "Oasis Main Building" },
-                    { "b2", "The treatment facility of Oasis Healthcare", "Oasis Treatment Center" }
+                    { 1, "The administrative center of Oasis Healthcare", "Oasis Main Building" },
+                    { 2, "The treatment facility of Oasis Healthcare", "Oasis Treatment Center" }
                 });
         }
 

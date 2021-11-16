@@ -23,8 +23,8 @@ namespace Hospital_Class_Library.Migrations
 
             modelBuilder.Entity("Hospital_Class_Library.Graphical_Editor.Models.Building", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
+                    b.Property<int>("Id")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
@@ -39,13 +39,13 @@ namespace Hospital_Class_Library.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b1",
+                            Id = 1,
                             Description = "The administrative center of Oasis Healthcare",
                             Name = "Oasis Main Building"
                         },
                         new
                         {
-                            Id = "b2",
+                            Id = 2,
                             Description = "The treatment facility of Oasis Healthcare",
                             Name = "Oasis Treatment Center"
                         });

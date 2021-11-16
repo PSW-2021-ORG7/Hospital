@@ -19,14 +19,14 @@ namespace HospitalAPI.Controllers
         }
 
         [HttpGet] // GET: Rooms
-        //public IActionResult Get([FromQuery(Name = "page")] string page)
-        public async Task<ActionResult<IEnumerable<Room>>> GetRooms([FromQuery(Name ="buildingId")] string buildingId)
+        //public IActionResult Get([FromQuery(Name = "page")] int page)
+        public async Task<ActionResult<IEnumerable<Room>>> GetRooms([FromQuery(Name ="buildingId")] int buildingId)
         {
             return await _roomsRepo.GetAllRooms();
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRoom(String id, Room room)
+        public async Task<IActionResult> PutRoom(int id, Room room)
         {
             if (id != room.Id)
             {
