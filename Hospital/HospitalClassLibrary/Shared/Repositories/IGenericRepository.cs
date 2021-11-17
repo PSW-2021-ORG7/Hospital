@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace HospitalClassLibrary.GraphicalEditor.Repositories.Interfaces
+namespace HospitalClassLibrary.Shared.Repositories
 {
     public interface IGenericRepository<T> where T : class
     {

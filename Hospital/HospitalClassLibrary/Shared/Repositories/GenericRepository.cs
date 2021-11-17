@@ -4,7 +4,7 @@ using HospitalClassLibrary.Data;
 using HospitalClassLibrary.GraphicalEditor.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace HospitalClassLibrary.GraphicalEditor.Repositories
+namespace HospitalClassLibrary.Shared.Repositories
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {

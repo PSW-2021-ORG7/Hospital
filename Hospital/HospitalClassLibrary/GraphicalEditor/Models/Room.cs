@@ -1,4 +1,7 @@
-﻿namespace HospitalClassLibrary.GraphicalEditor.Models
+﻿using System.Collections.Generic;
+using HospitalClassLibrary.RoomEquipment.Models;
+
+namespace HospitalClassLibrary.GraphicalEditor.Models
 {
     public class Room
     {
@@ -15,5 +18,7 @@
 
         public int BuildingId { get; set; }
         public Building Building { get; set; }
+
+        public ICollection<Equipment> Equipment { get; set; }
     }
 }
