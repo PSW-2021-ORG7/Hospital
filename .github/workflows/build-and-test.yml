@@ -1,0 +1,30 @@
+name: .NET Core Build and Test
+
+on:
+  pull_request:
+    branches: [ master, develop ]
+      
+env:
+  DOTNET_VERSION: '3.1.x'
+  PROJECT_PATH: './Hospital'
+    
+jobs:
+  build-and-test:
+    name: Build and Test Application
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/dotnet/sdk:3.1
+    
+    steps:
+    - name: Checkout GitHub actions
+      uses: actions/checkout@v2
+        
+    - name: Install dependencies
+      run: dotnet restore ${{ env.PROJECT_PATH }}
+      
+    - name: Build
+      run: dotnet build --configuration Release --no-restore ${{ env.PROJECT_PATH }}
+
+    - name: Test
+      run: dotnet test --no-restore --verbosity normal ${{ env.PROJECT_PATH }}
+
