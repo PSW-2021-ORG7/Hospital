@@ -6,6 +6,7 @@ on:
       
 env:
   DOTNET_VERSION: '3.1.x'
+  PROJECT_PATH: './Hospital'
     
 jobs:
   build-and-test:
@@ -17,15 +18,13 @@ jobs:
     steps:
     - name: Checkout GitHub actions
       uses: actions/checkout@v2
-
-    - run: cd Hospital
         
     - name: Install dependencies
-      run: dotnet restore 
+      run: dotnet restore ${{ env.PROJECT_PATH }}
       
     - name: Build
-      run: dotnet build --configuration Release --no-restore 
+      run: dotnet build --configuration Release --no-restore ${{ env.PROJECT_PATH }}
 
     - name: Test
-      run: dotnet test --no-restore --verbosity normal 
+      run: dotnet test --no-restore --verbosity normal ${{ env.PROJECT_PATH }}
 
