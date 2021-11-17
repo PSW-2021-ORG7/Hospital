@@ -9,8 +9,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HospitalClassLibrary.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20211116225755_EquipmentDataFirstMigration")]
-    partial class EquipmentDataFirstMigration
+    [Migration("20211117152833_EquipmentDataMigration")]
+    partial class EquipmentDataMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -503,6 +503,20 @@ namespace HospitalClassLibrary.Migrations
                         },
                         new
                         {
+                            Id = 13,
+                            EquipmentItemId = 14,
+                            Quantity = 4,
+                            RoomId = 4
+                        },
+                        new
+                        {
+                            Id = 14,
+                            EquipmentItemId = 15,
+                            Quantity = 1,
+                            RoomId = 4
+                        },
+                        new
+                        {
                             Id = 7,
                             EquipmentItemId = 1,
                             Quantity = 104,
@@ -542,6 +556,160 @@ namespace HospitalClassLibrary.Migrations
                             EquipmentItemId = 5,
                             Quantity = 1,
                             RoomId = 5
+                        },
+                        new
+                        {
+                            Id = 15,
+                            EquipmentItemId = 14,
+                            Quantity = 3,
+                            RoomId = 4
+                        },
+                        new
+                        {
+                            Id = 16,
+                            EquipmentItemId = 15,
+                            Quantity = 1,
+                            RoomId = 4
+                        },
+                        new
+                        {
+                            Id = 17,
+                            EquipmentItemId = 1,
+                            Quantity = 100,
+                            RoomId = 16
+                        },
+                        new
+                        {
+                            Id = 18,
+                            EquipmentItemId = 2,
+                            Quantity = 2,
+                            RoomId = 16
+                        },
+                        new
+                        {
+                            Id = 19,
+                            EquipmentItemId = 3,
+                            Quantity = 4,
+                            RoomId = 16
+                        },
+                        new
+                        {
+                            Id = 20,
+                            EquipmentItemId = 4,
+                            Quantity = 200,
+                            RoomId = 16
+                        },
+                        new
+                        {
+                            Id = 21,
+                            EquipmentItemId = 8,
+                            Quantity = 6,
+                            RoomId = 16
+                        },
+                        new
+                        {
+                            Id = 22,
+                            EquipmentItemId = 5,
+                            Quantity = 1,
+                            RoomId = 16
+                        },
+                        new
+                        {
+                            Id = 23,
+                            EquipmentItemId = 14,
+                            Quantity = 4,
+                            RoomId = 16
+                        },
+                        new
+                        {
+                            Id = 24,
+                            EquipmentItemId = 15,
+                            Quantity = 1,
+                            RoomId = 16
+                        },
+                        new
+                        {
+                            Id = 25,
+                            EquipmentItemId = 1,
+                            Quantity = 104,
+                            RoomId = 17
+                        },
+                        new
+                        {
+                            Id = 26,
+                            EquipmentItemId = 2,
+                            Quantity = 5,
+                            RoomId = 17
+                        },
+                        new
+                        {
+                            Id = 27,
+                            EquipmentItemId = 3,
+                            Quantity = 6,
+                            RoomId = 17
+                        },
+                        new
+                        {
+                            Id = 28,
+                            EquipmentItemId = 4,
+                            Quantity = 150,
+                            RoomId = 17
+                        },
+                        new
+                        {
+                            Id = 29,
+                            EquipmentItemId = 8,
+                            Quantity = 10,
+                            RoomId = 17
+                        },
+                        new
+                        {
+                            Id = 30,
+                            EquipmentItemId = 5,
+                            Quantity = 1,
+                            RoomId = 17
+                        },
+                        new
+                        {
+                            Id = 31,
+                            EquipmentItemId = 14,
+                            Quantity = 3,
+                            RoomId = 17
+                        },
+                        new
+                        {
+                            Id = 32,
+                            EquipmentItemId = 15,
+                            Quantity = 1,
+                            RoomId = 17
+                        },
+                        new
+                        {
+                            Id = 33,
+                            EquipmentItemId = 11,
+                            Quantity = 230,
+                            RoomId = 17
+                        },
+                        new
+                        {
+                            Id = 34,
+                            EquipmentItemId = 11,
+                            Quantity = 200,
+                            RoomId = 1
+                        },
+                        new
+                        {
+                            Id = 35,
+                            EquipmentItemId = 11,
+                            Quantity = 110,
+                            RoomId = 2
+                        },
+                        new
+                        {
+                            Id = 36,
+                            EquipmentItemId = 11,
+                            Quantity = 235,
+                            RoomId = 3
                         });
                 });
 
@@ -551,6 +719,9 @@ namespace HospitalClassLibrary.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
@@ -563,52 +734,92 @@ namespace HospitalClassLibrary.Migrations
                         new
                         {
                             Id = 1,
+                            Description = "A syringe is a simple reciprocating pump consisting of a plunger that fits tightly within a cylindrical tube called a barrel.",
                             Name = "Syringe"
                         },
                         new
                         {
                             Id = 2,
+                            Description = "A thermometer is a device that measures temperature or a temperature gradient.",
                             Name = "Thermometer"
                         },
                         new
                         {
                             Id = 3,
+                            Description = "An external infusion pump is a medical device used to deliver fluids into a patient’s body in a controlled manner.",
                             Name = "Infusion pump"
                         },
                         new
                         {
                             Id = 4,
+                            Description = "Gauze is a thin, translucent fabric with a loose open weave.",
                             Name = "Gauze"
                         },
                         new
                         {
                             Id = 5,
+                            Description = "An operating table, sometimes called operating room table, is the table on which the patient lies during a surgical operation.",
                             Name = "Operating table"
                         },
                         new
                         {
                             Id = 6,
+                            Description = "An otoscope or auriscope is a medical device which is used to look into the ears.",
                             Name = "Otoscope"
                         },
                         new
                         {
                             Id = 7,
+                            Description = "An inhaler is a medical device used for delivering medicines into the lungs through the work of a person's breathing.",
                             Name = "Inhaler"
                         },
                         new
                         {
                             Id = 8,
+                            Description = "A scalpel is a small and extremely sharp bladed instrument used for surgery, anatomical dissection, podiatry and various arts and crafts.",
                             Name = "Scalpel"
                         },
                         new
                         {
                             Id = 9,
+                            Description = "An adhesive bandage is a small medical dressing used for injuries not serious enough to require a full-size bandage.",
                             Name = "Adhesive Plaster"
                         },
                         new
                         {
                             Id = 10,
+                            Description = "A curette is a surgical instrument designed for scraping or debriding biological tissue or debris in a biopsy, excision, or cleaning procedure.",
                             Name = "Curette"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Description = "Medical gloves are disposable gloves used during medical examinations and procedures to help prevent cross-contamination between caregivers and patients.",
+                            Name = "Medical glove"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Description = "An oxygen tank is an oxygen storage vessel, which is either held under pressure in gas cylinders, or as liquid oxygen in a cryogenic storage tank.",
+                            Name = "Oxygen tank"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Description = "A Miller–Abbott tube is a tube used to treat obstructions in the small intestine through intubation.",
+                            Name = "Miller–Abbott tube"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Description = "The tube is inserted through a cut in the neck below the vocal cords. This allows air to enter the lungs.",
+                            Name = "Trach tube"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Description = "Surgical suture is a medical device used to hold body tissues together after an injury or surgery.",
+                            Name = "Surgical suture"
                         });
                 });
 

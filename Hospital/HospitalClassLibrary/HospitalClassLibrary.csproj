@@ -7,6 +7,12 @@
   <ItemGroup>
     <Compile Remove="Migrations\20211115220110_ChangeIdTypes.cs" />
     <Compile Remove="Migrations\20211115220110_ChangeIdTypes.Designer.cs" />
+    <Compile Remove="Migrations\20211116225755_EquipmentDataFirstMigration.cs" />
+    <Compile Remove="Migrations\20211116225755_EquipmentDataFirstMigration.Designer.cs" />
+    <Compile Remove="Migrations\20211117143831_EquipmentDataSecondMigration.cs" />
+    <Compile Remove="Migrations\20211117143831_EquipmentDataSecondMigration.Designer.cs" />
+    <Compile Remove="Migrations\20211117152519_EquipmentDataMigration.cs" />
+    <Compile Remove="Migrations\20211117152519_EquipmentDataMigration.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
