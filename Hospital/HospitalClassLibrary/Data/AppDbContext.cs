@@ -12,6 +12,7 @@ namespace HospitalClassLibrary.Data
 
         public DbSet<Building> Buildings { get; set; }
         public DbSet<Room> Rooms { get; set; }
+        public DbSet<Equipment> Equipment { get; set; }
 
 
         // only for testing purposes

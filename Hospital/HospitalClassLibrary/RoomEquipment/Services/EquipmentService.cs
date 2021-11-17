@@ -14,10 +14,12 @@ namespace HospitalClassLibrary.RoomEquipment.Services
         {
             _equipmentRepository = equipmentRepository;
         }
+
         public async Task<Equipment> GetById(int id)
         {
             return await _equipmentRepository.GetByIdAsync(id);
         }
+
         public async Task<IEnumerable<Equipment>> GetAll()
         {
             return await _equipmentRepository.GetAllAsync();
@@ -27,6 +29,7 @@ namespace HospitalClassLibrary.RoomEquipment.Services
         {
             await _equipmentRepository.CreateAsync(e);
         }
+
         public async Task Update(Equipment e)
         {
             await _equipmentRepository.UpdateAsync(e);
