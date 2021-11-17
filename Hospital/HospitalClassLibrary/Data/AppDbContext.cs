@@ -22,52 +22,92 @@ namespace HospitalClassLibrary.Data
                 new EquipmentItem
                 {
                     Id = 1,
-                    Name = "Syringe"
+                    Name = "Syringe",
+                    Description = "A syringe is a simple reciprocating pump consisting of a plunger that fits tightly within a cylindrical tube called a barrel."
                 },
                 new EquipmentItem
                 {
                     Id = 2,
-                    Name = "Thermometer"
+                    Name = "Thermometer",
+                    Description = "A thermometer is a device that measures temperature or a temperature gradient."
                 },
                 new EquipmentItem
                 {
                     Id = 3,
-                    Name = "Infusion pump"
+                    Name = "Infusion pump",
+                    Description = "An external infusion pump is a medical device used to deliver fluids into a patient’s body in a controlled manner."
                 },
                 new EquipmentItem
                 {
                     Id = 4,
-                    Name = "Gauze"
+                    Name = "Gauze",
+                    Description = "Gauze is a thin, translucent fabric with a loose open weave."
                 },
                 new EquipmentItem
                 {
                     Id = 5,
-                    Name = "Operating table"
+                    Name = "Operating table",
+                    Description = "An operating table, sometimes called operating room table, is the table on which the patient lies during a surgical operation."
                 },
                 new EquipmentItem
                 {
                     Id = 6,
-                    Name = "Otoscope"
+                    Name = "Otoscope",
+                    Description = "An otoscope or auriscope is a medical device which is used to look into the ears."
                 },
                 new EquipmentItem
                 {
                     Id = 7,
-                    Name = "Inhaler"
+                    Name = "Inhaler",
+                    Description = "An inhaler is a medical device used for delivering medicines into the lungs through the work of a person's breathing."
                 },
                 new EquipmentItem
                 {
                     Id = 8,
-                    Name = "Scalpel"
+                    Name = "Scalpel",
+                    Description = "A scalpel is a small and extremely sharp bladed instrument used for surgery, anatomical dissection, podiatry and various arts and crafts."
                 },
                 new EquipmentItem
                 {
                     Id = 9,
-                    Name = "Adhesive Plaster"
+                    Name = "Adhesive Plaster",
+                    Description = "An adhesive bandage is a small medical dressing used for injuries not serious enough to require a full-size bandage."
                 },
                 new EquipmentItem
                 {
                     Id = 10,
-                    Name = "Curette"
+                    Name = "Curette",
+                    Description = "A curette is a surgical instrument designed for scraping or debriding biological tissue or debris in a biopsy, excision, or cleaning procedure."
+                },
+                new EquipmentItem
+                {
+                    Id = 11,
+                    Name = "Medical glove",
+                    Description = "Medical gloves are disposable gloves used during medical examinations and procedures to help prevent cross-contamination between caregivers and patients."
+                },
+                new EquipmentItem
+                {
+                    Id = 12,
+                    Name = "Oxygen tank",
+                    Description = "An oxygen tank is an oxygen storage vessel, which is either held under pressure in gas cylinders, or as liquid oxygen in a cryogenic storage tank."
+                },
+                new EquipmentItem
+                {
+                    Id = 13,
+                    Name = "Miller–Abbott tube",
+                    Description = "A Miller–Abbott tube is a tube used to treat obstructions in the small intestine through intubation."
+                },
+                new EquipmentItem
+                {
+                    Id = 14,
+                    Name = "Trach tube",
+                    Description = "The tube is inserted through a cut in the neck below the vocal cords. This allows air to enter the lungs."
+                },
+                new EquipmentItem
+                {
+                    Id = 15,
+                    Name = "Surgical suture",
+                    Description = "Surgical suture is a medical device used to hold body tissues together after an injury or surgery."
                 }
             );
             modelBuilder.Entity<Equipment>().HasData(
@@ -112,8 +152,22 @@ namespace HospitalClassLibrary.Data
                     RoomId = 4,
                     EquipmentItemId = 5,
                     Quantity = 1
+                }, 
+                new Equipment
+                {
+                    Id = 13,
+                    RoomId = 4,
+                    EquipmentItemId = 14,
+                    Quantity = 4
+                }, 
+                new Equipment
+                {
+                    Id = 14,
+                    RoomId = 4,
+                    EquipmentItemId = 15,
+                    Quantity = 1
                 },
-
+                ///////////////////////////
                 new Equipment
                 {
                     Id = 7,
@@ -155,7 +209,165 @@ namespace HospitalClassLibrary.Data
                     RoomId = 5,
                     EquipmentItemId = 5,
                     Quantity = 1
+                },
+                new Equipment
+                {
+                    Id = 15,
+                    RoomId = 4,
+                    EquipmentItemId = 14,
+                    Quantity = 3
+                },
+                new Equipment
+                {
+                    Id = 16,
+                    RoomId = 4,
+                    EquipmentItemId = 15,
+                    Quantity = 1
+                },
+                ///////////////////////////////
+                new Equipment
+                {
+                    Id = 17,
+                    RoomId = 16,
+                    EquipmentItemId = 1,
+                    Quantity = 100
+                },
+                new Equipment
+                {
+                    Id = 18,
+                    RoomId = 16,
+                    EquipmentItemId = 2,
+                    Quantity = 2
+                },
+                new Equipment
+                {
+                    Id = 19,
+                    RoomId = 16,
+                    EquipmentItemId = 3,
+                    Quantity = 4
+                },
+                new Equipment
+                {
+                    Id = 20,
+                    RoomId = 16,
+                    EquipmentItemId = 4,
+                    Quantity = 200
+                },
+                new Equipment
+                {
+                    Id = 21,
+                    RoomId = 16,
+                    EquipmentItemId = 8,
+                    Quantity = 6
+                },
+                new Equipment
+                {
+                    Id = 22,
+                    RoomId = 16,
+                    EquipmentItemId = 5,
+                    Quantity = 1
+                },
+                new Equipment
+                {
+                    Id = 23,
+                    RoomId = 16,
+                    EquipmentItemId = 14,
+                    Quantity = 4
+                },
+                new Equipment
+                {
+                    Id = 24,
+                    RoomId = 16,
+                    EquipmentItemId = 15,
+                    Quantity = 1
+                },
+                //////////////////////////
+                new Equipment
+                {
+                    Id = 25,
+                    RoomId = 17,
+                    EquipmentItemId = 1,
+                    Quantity = 104
+                },
+                new Equipment
+                {
+                    Id = 26,
+                    RoomId = 17,
+                    EquipmentItemId = 2,
+                    Quantity = 5
+                },
+                new Equipment
+                {
+                    Id = 27,
+                    RoomId = 17,
+                    EquipmentItemId = 3,
+                    Quantity = 6
+                },
+                new Equipment
+                {
+                    Id = 28,
+                    RoomId = 17,
+                    EquipmentItemId = 4,
+                    Quantity = 150
+                },
+                new Equipment
+                {
+                    Id = 29,
+                    RoomId = 17,
+                    EquipmentItemId = 8,
+                    Quantity = 10
+                },
+                new Equipment
+                {
+                    Id = 30,
+                    RoomId = 17,
+                    EquipmentItemId = 5,
+                    Quantity = 1
+                },
+                new Equipment
+                {
+                    Id = 31,
+                    RoomId = 17,
+                    EquipmentItemId = 14,
+                    Quantity = 3
+                },
+                new Equipment
+                {
+                    Id = 32,
+                    RoomId = 17,
+                    EquipmentItemId = 15,
+                    Quantity = 1
+                },
+                ////////////////////////////
+                new Equipment
+                {
+                    Id = 33,
+                    RoomId = 17,
+                    EquipmentItemId = 11,
+                    Quantity = 230
+                },
+                new Equipment
+                {
+                    Id = 34,
+                    RoomId = 1,
+                    EquipmentItemId = 11,
+                    Quantity = 200
+                },
+                new Equipment
+                {
+                    Id = 35,
+                    RoomId = 2,
+                    EquipmentItemId = 11,
+                    Quantity = 110
+                },
+                new Equipment
+                {
+                    Id = 36,
+                    RoomId = 3,
+                    EquipmentItemId = 11,
+                    Quantity = 235
                 }
+
             );
             modelBuilder.Entity<Building>().HasData(
                 new Building
