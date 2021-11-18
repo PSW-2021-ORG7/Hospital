@@ -1,3 +1,4 @@
+using System.Linq;
 using AutoMapper;
 using HospitalAPI.DTOs.MappingProfile;
 using HospitalClassLibrary.Data;
@@ -48,6 +49,12 @@ namespace HospitalAPI
 
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
+
+            services.AddAutoMapper(config =>
+            {
+                var enumMapper = config.Mappers.Single(m => m is AutoMapper.Mappers.EnumToEnumMapper);
+                config.Mappers.Remove(enumMapper);
+            }, typeof(Startup));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -7,7 +7,7 @@ namespace HospitalAPI.DTOs
         public int Id { get; set; }
         public int RoomId { get; set; }
         public string RoomName { get; set; }
-        public RoomType Type { get; set; }
+        public RoomType RoomType { get; set; }
         public int RoomFloor { get; set; }
         public int EquipmentItemId { get; set; }
         public string EquipmentItemName { get; set; }

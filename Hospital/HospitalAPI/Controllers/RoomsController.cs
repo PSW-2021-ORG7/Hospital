@@ -28,10 +28,10 @@ namespace HospitalAPI.Controllers
         }
 
         [HttpGet("{id}/equipment")]
-        public async Task<IEnumerable<RoomDto>> GetRoomsWithEquipment(int id)
+        public async Task<RoomDto> GetRoomWithEquipment(int id)
         {
-            var rooms = await _roomService.GetRoomsWithEquipment(id);
-            return _mapper.Map<IEnumerable<RoomDto>>(rooms);
+            var room = await _roomService.GetRoomWithEquipment(id);
+            return _mapper.Map<RoomDto>(room);
         }
 
         [HttpPut("{id}")]

@@ -8,6 +8,6 @@ namespace HospitalClassLibrary.GraphicalEditor.Repositories.Interfaces
     public interface IRoomRepository : IGenericRepository<Room>
     {
         Task<IEnumerable<Room>> GetAll(int buildingId);
-        Task<IEnumerable<Room>> GetRoomsWithEquipment(int id);
+        Task<Room> GetRoomWithEquipment(int id);
     }
 }

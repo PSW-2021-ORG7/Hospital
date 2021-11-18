@@ -30,9 +30,9 @@ namespace HospitalClassLibrary.GraphicalEditor.Services
             return await _roomRepository.GetAll(buildingId);
         }
 
-        public async Task<IEnumerable<Room>> GetRoomsWithEquipment(int id)
+        public async Task<Room> GetRoomWithEquipment(int id)
         {
-            return await _roomRepository.GetRoomsWithEquipment(id);
+            return await _roomRepository.GetRoomWithEquipment(id);
         }
 
         public async Task Create(Room r)
