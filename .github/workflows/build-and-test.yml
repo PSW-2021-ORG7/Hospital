@@ -42,6 +42,6 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: opencover-results-${{ matrix.test_project }}
-        path: ${{ matrix.test_project }}/coverage.opencover.xml
+        path: ${{ env.PROJECT_PATH }}/${{ matrix.test_project }}/coverage.opencover.xml
       if: ${{ always() }} 
 
