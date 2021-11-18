@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
+using HospitalAPI.DTOs;
 using HospitalClassLibrary.RoomEquipment.Models;
 using Microsoft.AspNetCore.Mvc;
 using HospitalClassLibrary.RoomEquipment.Services.Interfaces;
@@ -11,16 +13,19 @@ namespace HospitalAPI.Controllers
     public class EquipmentController : ControllerBase
     {
         private readonly IEquipmentService _equipmentService;
+        private readonly IMapper _mapper;
 
-        public EquipmentController(IEquipmentService equipmentService)
+        public EquipmentController(IEquipmentService equipmentService, IMapper mapper)
         {
             _equipmentService = equipmentService;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<IEnumerable<Equipment>> GetEquipment()
+        public async Task<IEnumerable<RoomEquipmentDto>> GetEquipment()
         {
-            return await _equipmentService.GetAll();
+            var equipment = await _equipmentService.GetAll();
+            return _mapper.Map<IEnumerable<RoomEquipmentDto>>(equipment);
         }
     }
 }

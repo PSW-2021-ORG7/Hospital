@@ -1,3 +1,5 @@
+using AutoMapper;
+using HospitalAPI.DTOs.MappingProfile;
 using HospitalClassLibrary.Data;
 using HospitalClassLibrary.GraphicalEditor.Repositories;
 using HospitalClassLibrary.GraphicalEditor.Repositories.Interfaces;
@@ -41,6 +43,11 @@ namespace HospitalAPI
             services.AddTransient<IEquipmentService, EquipmentService>();
 
             services.AddCors();
+
+            var mapperConfig = new MapperConfiguration(mc => { mc.AddProfile(new MappingProfile()); });
+
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
