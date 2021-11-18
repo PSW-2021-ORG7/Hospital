@@ -29,7 +29,7 @@ jobs:
       run: dotnet build --configuration Release --no-restore ${{ env.PROJECT_PATH }}
 
     - name: Test
-      run: dotnet test --no-restore ${{ matrix.test_project }} /p:CollectCoverage=true /p:CoverletOutputFormat=opencover --logger "trx;LogFileName=${{ matrix.test_project }}.trx" --results-directory "./TestResults-${{ matrix.test_project }}"
+      run: dotnet test --no-restore ${{ env.PROJECT_PATH }}/${{ matrix.test_project }} /p:CollectCoverage=true /p:CoverletOutputFormat=opencover --logger "trx;LogFileName=${{ matrix.test_project }}.trx" --results-directory "./TestResults-${{ matrix.test_project }}"
 
     - name: Upload dotnet test results
       uses: actions/upload-artifact@v2
