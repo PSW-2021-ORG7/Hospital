@@ -30,6 +30,11 @@ namespace HospitalClassLibrary.GraphicalEditor.Services
             return await _roomRepository.GetAll(buildingId);
         }
 
+        public async Task<Room> GetRoomWithEquipment(int id)
+        {
+            return await _roomRepository.GetRoomWithEquipment(id);
+        }
+
         public async Task Create(Room r)
         {
             await _roomRepository.CreateAsync(r);
@@ -44,5 +49,6 @@ namespace HospitalClassLibrary.GraphicalEditor.Services
         {
             await _roomRepository.DeleteAsync(r);
         }
+
     }
 }

@@ -16,7 +16,7 @@ namespace HospitalClassLibrary.RoomEquipment.Repositories
 
         public new async Task<IEnumerable<Equipment>> GetAllAsync()
         {
-            return await Context.Equipment.Include(e => e.EquipmentItem).ToListAsync();
+            return await Context.Equipment.Include(e => e.EquipmentItem).Include(e=>e.Room).ToListAsync();
         }
     }
 }
