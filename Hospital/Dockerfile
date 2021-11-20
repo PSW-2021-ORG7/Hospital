@@ -3,15 +3,13 @@
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
 WORKDIR /app
 EXPOSE 80
-EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
 COPY ["HospitalAPI/HospitalAPI.csproj", "HospitalAPI/"]
-COPY ["HospitalClassLibrary/HospitalClassLibrary.csproj", "HospitalClassLibrary/"]
 RUN dotnet restore "HospitalAPI/HospitalAPI.csproj"
-COPY . .
 WORKDIR "/src/HospitalAPI"
+COPY "/HospitalAPI" .
 RUN dotnet build "HospitalAPI.csproj" -c Release -o /app/build
 
 FROM build AS publish
