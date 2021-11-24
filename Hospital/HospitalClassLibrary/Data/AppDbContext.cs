@@ -17,6 +17,7 @@ namespace HospitalClassLibrary.Data
         public DbSet<Equipment> Equipment { get; set; }
         public DbSet<Doctor> Doctor { get; set; }
         public DbSet<Workday> Workday { get; set; }
+        public DbSet<EquipmentTransfer> EquipmentTransfer { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -479,56 +480,64 @@ namespace HospitalClassLibrary.Data
                     Id = 1,
                     RoomId = 4,
                     EquipmentItemId = 1,
-                    Quantity = 100
+                    Quantity = 100,
+                    ReservedQuantity = 0
                 },
                 new Equipment
                 {
                     Id = 2,
                     RoomId = 4,
                     EquipmentItemId = 2,
-                    Quantity = 2
+                    Quantity = 2,
+                    ReservedQuantity = 0
                 },
                 new Equipment
                 {
                     Id = 3,
                     RoomId = 4,
                     EquipmentItemId = 3,
-                    Quantity = 4
+                    Quantity = 4,
+                    ReservedQuantity = 0
                 },
                 new Equipment
                 {
                     Id = 4,
                     RoomId = 4,
                     EquipmentItemId = 4,
-                    Quantity = 200
+                    Quantity = 200,
+                    ReservedQuantity = 0
                 },
                 new Equipment
                 {
                     Id = 5,
                     RoomId = 4,
                     EquipmentItemId = 8,
-                    Quantity = 6
+                    Quantity = 6,
+                    ReservedQuantity = 0
                 },
                 new Equipment
                 {
                     Id = 6,
                     RoomId = 4,
                     EquipmentItemId = 5,
-                    Quantity = 1
+                    Quantity = 1,
+                    ReservedQuantity = 0
                 },
                 new Equipment
                 {
                     Id = 13,
                     RoomId = 4,
                     EquipmentItemId = 14,
-                    Quantity = 4
+                    Quantity = 4,
+                    ReservedQuantity = 0
                 },
                 new Equipment
                 {
                     Id = 14,
                     RoomId = 4,
                     EquipmentItemId = 15,
-                    Quantity = 1
+                    Quantity = 1,
+                    ReservedQuantity = 0
                 },
                 ///////////////////////////
                 new Equipment
@@ -536,56 +545,64 @@ namespace HospitalClassLibrary.Data
                     Id = 7,
                     RoomId = 5,
                     EquipmentItemId = 1,
-                    Quantity = 104
+                    Quantity = 104,
+                    ReservedQuantity = 0
                 },
                 new Equipment
                 {
                     Id = 8,
                     RoomId = 5,
                     EquipmentItemId = 2,
-                    Quantity = 5
+                    Quantity = 5,
+                    ReservedQuantity = 0
                 },
                 new Equipment
                 {
                     Id = 9,
                     RoomId = 5,
                     EquipmentItemId = 3,
-                    Quantity = 6
+                    Quantity = 6,
+                    ReservedQuantity = 0
                 },
                 new Equipment
                 {
                     Id = 10,
                     RoomId = 5,
                     EquipmentItemId = 4,
-                    Quantity = 150
+                    Quantity = 150,
+                    ReservedQuantity = 0
                 },
                 new Equipment
                 {
                     Id = 11,
                     RoomId = 5,
                     EquipmentItemId = 8,
-                    Quantity = 10
+                    Quantity = 10,
+                    ReservedQuantity = 0
                 },
                 new Equipment
                 {
                     Id = 12,
                     RoomId = 5,
                     EquipmentItemId = 5,
-                    Quantity = 1
+                    Quantity = 1,
+                    ReservedQuantity = 0
                 },
                 new Equipment
                 {
                     Id = 15,
                     RoomId = 4,
                     EquipmentItemId = 14,
-                    Quantity = 3
+                    Quantity = 3,
+                    ReservedQuantity = 0
                 },
                 new Equipment
                 {
                     Id = 16,
                     RoomId = 4,
                     EquipmentItemId = 15,
-                    Quantity = 1
+                    Quantity = 1,
+                    ReservedQuantity = 0
                 },
                 ///////////////////////////////
                 new Equipment
@@ -593,56 +610,64 @@ namespace HospitalClassLibrary.Data
                     Id = 17,
                     RoomId = 16,
                     EquipmentItemId = 1,
-                    Quantity = 100
+                    Quantity = 100,
+                    ReservedQuantity = 0
                 },
                 new Equipment
                 {
                     Id = 18,
                     RoomId = 16,
                     EquipmentItemId = 2,
-                    Quantity = 2
+                    Quantity = 2,
+                    ReservedQuantity = 0
                 },
                 new Equipment
                 {
                     Id = 19,
                     RoomId = 16,
                     EquipmentItemId = 3,
-                    Quantity = 4
+                    Quantity = 4,
+                    ReservedQuantity = 0
                 },
                 new Equipment
                 {
                     Id = 20,
                     RoomId = 16,
                     EquipmentItemId = 4,
-                    Quantity = 200
+                    Quantity = 200,
+                    ReservedQuantity = 0
                 },
                 new Equipment
                 {
                     Id = 21,
                     RoomId = 16,
                     EquipmentItemId = 8,
-                    Quantity = 6
+                    Quantity = 6,
+                    ReservedQuantity = 0
                 },
                 new Equipment
                 {
                     Id = 22,
                     RoomId = 16,
                     EquipmentItemId = 5,
-                    Quantity = 1
+                    Quantity = 1,
+                    ReservedQuantity = 0
                 },
                 new Equipment
                 {
                     Id = 23,
                     RoomId = 16,
                     EquipmentItemId = 14,
-                    Quantity = 4
+                    Quantity = 4,
+                    ReservedQuantity = 0
                 },
                 new Equipment
                 {
                     Id = 24,
                     RoomId = 16,
                     EquipmentItemId = 15,
-                    Quantity = 1
+                    Quantity = 1,
+                    ReservedQuantity = 0
                 },
                 //////////////////////////
                 new Equipment
@@ -650,56 +675,64 @@ namespace HospitalClassLibrary.Data
                     Id = 25,
                     RoomId = 17,
                     EquipmentItemId = 1,
-                    Quantity = 104
+                    Quantity = 104,
+                    ReservedQuantity = 0
                 },
                 new Equipment
                 {
                     Id = 26,
                     RoomId = 17,
                     EquipmentItemId = 2,
-                    Quantity = 5
+                    Quantity = 5,
+                    ReservedQuantity = 0
                 },
                 new Equipment
                 {
                     Id = 27,
                     RoomId = 17,
                     EquipmentItemId = 3,
-                    Quantity = 6
+                    Quantity = 6,
+                    ReservedQuantity = 0
                 },
                 new Equipment
                 {
                     Id = 28,
                     RoomId = 17,
                     EquipmentItemId = 4,
-                    Quantity = 150
+                    Quantity = 150,
+                    ReservedQuantity = 0
                 },
                 new Equipment
                 {
                     Id = 29,
                     RoomId = 17,
                     EquipmentItemId = 8,
-                    Quantity = 10
+                    Quantity = 10,
+                    ReservedQuantity = 0
                 },
                 new Equipment
                 {
                     Id = 30,
                     RoomId = 17,
                     EquipmentItemId = 5,
-                    Quantity = 1
+                    Quantity = 1,
+                    ReservedQuantity = 0
                 },
                 new Equipment
                 {
                     Id = 31,
                     RoomId = 17,
                     EquipmentItemId = 14,
-                    Quantity = 3
+                    Quantity = 3,
+                    ReservedQuantity = 0
                 },
                 new Equipment
                 {
                     Id = 32,
                     RoomId = 17,
                     EquipmentItemId = 15,
-                    Quantity = 1
+                    Quantity = 1,
+                    ReservedQuantity = 0
                 },
                 ////////////////////////////
                 new Equipment
@@ -707,28 +740,32 @@ namespace HospitalClassLibrary.Data
                     Id = 33,
                     RoomId = 17,
                     EquipmentItemId = 11,
-                    Quantity = 230
+                    Quantity = 230,
+                    ReservedQuantity = 0
                 },
                 new Equipment
                 {
                     Id = 34,
                     RoomId = 1,
                     EquipmentItemId = 11,
-                    Quantity = 200
+                    Quantity = 200,
+                    ReservedQuantity = 0
                 },
                 new Equipment
                 {
                     Id = 35,
                     RoomId = 2,
                     EquipmentItemId = 11,
-                    Quantity = 110
+                    Quantity = 110,
+                    ReservedQuantity = 0
                 },
                 new Equipment
                 {
                     Id = 36,
                     RoomId = 3,
                     EquipmentItemId = 11,
-                    Quantity = 235
+                    Quantity = 235,
+                    ReservedQuantity = 0
                 }
             );
 

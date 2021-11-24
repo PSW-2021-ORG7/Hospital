@@ -1,7 +1,5 @@
 ﻿using HospitalClassLibrary.GraphicalEditor.Models;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HospitalClassLibrary.Schedule.Models
 {

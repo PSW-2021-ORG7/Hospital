@@ -13,5 +13,6 @@ namespace HospitalAPI.DTOs
         public string EquipmentItemName { get; set; }
         public string EquipmentItemDescription { get; set; }
         public int Quantity { get; set; }
+        public int ReservedQuantity { get; set; }
     }
 }
