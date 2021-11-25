@@ -1,9 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using HospitalClassLibrary.Data;
 using HospitalClassLibrary.RoomEquipment.Models;
 using HospitalClassLibrary.Schedule.Services.Interfaces;
 using HospitalClassLibrary.Shared.Models;

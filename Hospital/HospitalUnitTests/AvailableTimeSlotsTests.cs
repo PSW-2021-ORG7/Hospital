@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.ServiceModel.Description;
 using HospitalClassLibrary.GraphicalEditor.Repositories.Interfaces;
 using HospitalClassLibrary.RoomEquipment.Models;
-using HospitalClassLibrary.RoomEquipment.Repositories;
 using HospitalClassLibrary.RoomEquipment.Repositories.Interfaces;
 using HospitalClassLibrary.Schedule.Models;
 using HospitalClassLibrary.Schedule.Repositories.Interfaces;
@@ -17,7 +15,7 @@ using static HospitalClassLibrary.Shared.Constants;
 
 namespace HospitalUnitTests
 {
-    public class EquipmentTransferTests
+    public class AvailableTimeSlotsTests
     {
         [Theory]
         [MemberData(nameof(Data))]
@@ -33,7 +31,7 @@ namespace HospitalUnitTests
         [Fact]
         public void Checks_if_time_slots_fit_date_range()
         {
-            var requirements = new EquipmentTransferRequirements(){ Start = new DateTime(2021, 11, 26, 0, 0, 0), End = new DateTime(2021, 11, 30, 0,0,0), Duration = 60, SrcRoomId = 1, DstRoomId = 2};
+            var requirements = GetEquipmentTransferRequirements();
             var service = CreateWorkdayService(requirements);
 
             var timeSlots = service.GetAvailableTimeSlots(requirements);
@@ -44,8 +42,8 @@ namespace HospitalUnitTests
         [Fact]
         public void Checks_if_time_slots_overlap_appointment()
         {
-            var requirements = new EquipmentTransferRequirements() { Start = new DateTime(2021, 11, 26, 0, 0, 0), End = new DateTime(2021, 11, 30, 0, 0, 0), Duration = 60, SrcRoomId = 1, DstRoomId = 2 };
-            var appointment = new Appointment(){StartTime = new DateTime(2021, 11, 26, 9, 0, 0), EndTime = new DateTime(2021, 11, 26, 9, 30, 0)};
+            var requirements = GetEquipmentTransferRequirements();
+            var appointment = GetAppointment();
             var service = CreateWorkdayService(requirements);
 
             var timeSlots = service.GetAvailableTimeSlots(requirements);
@@ -56,12 +54,8 @@ namespace HospitalUnitTests
         [Fact]
         public void Checks_if_time_slots_overlap_transfer()
         {
-            var requirements = new EquipmentTransferRequirements() { Start = new DateTime(2021, 11, 26, 0, 0, 0), End = new DateTime(2021, 11, 30, 0, 0, 0), Duration = 60, SrcRoomId = 1, DstRoomId = 2 };
-            var transfer = new EquipmentTransfer()
-            {
-                DestinationRoomId = 7, SourceRoomId = 17, EquipmentId = 12, Id = 1, Quantity = 17,
-                TransferDate = new DateTime(2021, 11, 29, 18, 0, 0), TransferDuration = 60
-            };
+            var requirements = GetEquipmentTransferRequirements();
+            var transfer = GetTransfer();
             var service = CreateWorkdayService(requirements);
 
             var timeSlots = service.GetAvailableTimeSlots(requirements);
@@ -69,16 +63,6 @@ namespace HospitalUnitTests
             timeSlots.All(ts =>
                 ts.Start < transfer.TransferDate.AddMinutes(transfer.TransferDuration) &&
                 transfer.TransferDate < ts.End).ShouldBe(false);
-        }
-
-        public static IEnumerable<object[]> Data()
-        {
-            var retVal = new List<object[]>();
-
-            retVal.Add(new object[] {new EquipmentTransferRequirements() { Start = new DateTime(2021, 11, 27, 0, 0, 0), End = new DateTime(2021, 11, 28, 0, 0, 0), Duration = 60, SrcRoomId = 1, DstRoomId = 2 }, 30});
-            //retVal.Add(new object[] { new EquipmentTransferRequirements() { Start = new DateTime(2021, 11, 27, 0, 0, 0), End = new DateTime(2021, 11, 30, 0, 0, 0), Duration = 60, SrcRoomId = 1, DstRoomId = 2}, 0 });
-
-            return retVal;
         }
 
         private static WorkdayService CreateWorkdayService(EquipmentTransferRequirements requirements)
@@ -119,6 +103,51 @@ namespace HospitalUnitTests
             
             WorkdayService service = new WorkdayService(workdayStubRepository.Object, transferStubRepository.Object, roomStubRepository.Object);
             return service;
+        }
+
+        private static EquipmentTransferRequirements GetEquipmentTransferRequirements()
+        {
+            var requirements = new EquipmentTransferRequirements()
+            {
+                Start = new DateTime(2021, 11, 26, 0, 0, 0),
+                End = new DateTime(2021, 11, 30, 0, 0, 0),
+                Duration = 60,
+                SrcRoomId = 1,
+                DstRoomId = 2
+            };
+            return requirements;
+        }
+
+        private static Appointment GetAppointment()
+        {
+            var appointment = new Appointment()
+                { StartTime = new DateTime(2021, 11, 26, 9, 0, 0), EndTime = new DateTime(2021, 11, 26, 9, 30, 0) };
+            return appointment;
+        }
+
+        private static EquipmentTransfer GetTransfer()
+        {
+            var transfer = new EquipmentTransfer()
+            {
+                Id = 0,
+                SourceRoomId = 7,
+                DestinationRoomId = 17,
+                EquipmentId = 12,
+                Quantity = 17,
+                TransferDate = new DateTime(2021, 11, 29, 18, 0, 0),
+                TransferDuration = 60
+            };
+            return transfer;
+        }
+
+        public static IEnumerable<object[]> Data()
+        {
+            var retVal = new List<object[]>();
+
+            retVal.Add(new object[] { new EquipmentTransferRequirements() { Start = new DateTime(2021, 11, 27, 0, 0, 0), End = new DateTime(2021, 11, 28, 0, 0, 0), Duration = 60, SrcRoomId = 1, DstRoomId = 2 }, 30 });
+            retVal.Add(new object[] { new EquipmentTransferRequirements() { Start = new DateTime(2021, 11, 27, 0, 0, 0), End = new DateTime(2021, 11, 26, 0, 0, 0), Duration = 60, SrcRoomId = 1, DstRoomId = 2 }, 0 });
+
+            return retVal;
         }
     }
 }
