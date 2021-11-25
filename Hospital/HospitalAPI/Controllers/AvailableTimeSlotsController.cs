@@ -18,7 +18,7 @@ namespace HospitalAPI.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<DateTimeRange> GetRooms([FromQuery] EquipmentTransferRequirements requirements)
+        public IEnumerable<DateTimeRange> GetAvailableTimeSlots([FromQuery] EquipmentTransferRequirements requirements)
         {
             return _workdayService.GetAvailableTimeSlots(requirements);
         }
