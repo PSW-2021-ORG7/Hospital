@@ -8,5 +8,6 @@ namespace HospitalClassLibrary.Shared
         public const int WorkHoursStart = 8;
         public const int WorkHoursEnd = 23;
         public const int NonWorkingHours = 9;
+        public const int TwelveHours = 12 * 60 * 60 * 1000;
     }
 }

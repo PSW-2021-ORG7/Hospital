@@ -16,6 +16,14 @@ namespace HospitalClassLibrary.RoomEquipment.Repositories
         {
         }
 
+        public new async Task<IEnumerable<EquipmentTransfer>> GetAllAsync()
+        {
+            return await Context.EquipmentTransfer.Include(t => t.SourceRoom).ThenInclude(src => src.Equipment)
+                .Include(t => t.DestinationRoom).ThenInclude(dst => dst.Equipment).ThenInclude(e => e.EquipmentItem)
+                .Include(t => t.Equipment).ThenInclude(e => e.EquipmentItem)
+                .ToListAsync();
+        }
+
         public IEnumerable<EquipmentTransfer> GetAll(DateTimeRange dateTimeRange)
         {
             return Context.EquipmentTransfer.Where(t =>

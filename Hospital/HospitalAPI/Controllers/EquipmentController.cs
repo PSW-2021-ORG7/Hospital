@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using HospitalAPI.DTOs;
-using HospitalClassLibrary.RoomEquipment.Models;
 using Microsoft.AspNetCore.Mvc;
 using HospitalClassLibrary.RoomEquipment.Services.Interfaces;
 
@@ -27,5 +26,6 @@ namespace HospitalAPI.Controllers
             var equipment = await _equipmentService.GetAll();
             return _mapper.Map<IEnumerable<RoomEquipmentDto>>(equipment);
         }
+
     }
 }
