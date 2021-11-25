@@ -17,14 +17,14 @@ namespace HospitalClassLibrary.Schedule.Repositories
         }
         public async Task<IEnumerable<Workday>> GetWorkdays(DateTimeRange dateTimeRange, int doctorId)
         {
-            return await Context.Workday.Where(w => w.DoctorId == doctorId && w.Shift.Start >= dateTimeRange.Start && w.Shift.End <= dateTimeRange.End).ToListAsync();
+            return await Context.Workday.Where(w => w.DoctorId == doctorId && w.Shift.Start >= dateTimeRange.Start && w.Shift.End <= dateTimeRange.End).Include(w => w.Appointments).ToListAsync();
         }
 
         public IEnumerable<Appointment> GetAppointments(DateTimeRange dateTimeRange, int srcRoomDoctorId, int dstRoomDoctorId)
         {
             var srcRoomDoctorWorkdays = GetWorkdays(dateTimeRange, srcRoomDoctorId).Result;
-            var dstRoomDoctorWorkdays = GetWorkdays(dateTimeRange, srcRoomDoctorId).Result;
-            var allWorkdays = (srcRoomDoctorWorkdays ?? Enumerable.Empty<Workday>()).Concat(dstRoomDoctorWorkdays ?? Enumerable.Empty<Workday>());
+            var dstRoomDoctorWorkdays = GetWorkdays(dateTimeRange, dstRoomDoctorId).Result;
+            var allWorkdays = (srcRoomDoctorWorkdays ?? Enumerable.Empty<Workday>()).Concat(dstRoomDoctorWorkdays ?? Enumerable.Empty<Workday>()).ToList();
 
             return  allWorkdays.SelectMany(w => w.Appointments);
         }
