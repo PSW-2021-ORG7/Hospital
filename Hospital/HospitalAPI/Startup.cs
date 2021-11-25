@@ -1,6 +1,7 @@
 using System.Linq;
 using AutoMapper;
 using HospitalAPI.DTOs.MappingProfile;
+using HospitalAPI.HostedServices;
 using HospitalClassLibrary.Data;
 using HospitalClassLibrary.GraphicalEditor.Repositories;
 using HospitalClassLibrary.GraphicalEditor.Repositories.Interfaces;
@@ -74,6 +75,8 @@ namespace HospitalAPI
             services.AddTransient<IEquipmentService, EquipmentService>();
             services.AddTransient<IWorkdayService, WorkdayService>();
             services.AddTransient<IEquipmentTransferService, EquipmentTransferService>();
+            services.AddHostedService<HostedService>();
+            services.AddScoped<ITransferCheckerService, TransferCheckerService>();
         }
 
         private static void RegisterRepositories(IServiceCollection services)

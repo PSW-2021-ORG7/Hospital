@@ -21,7 +21,7 @@ namespace HospitalClassLibrary.RoomEquipment.Services
             await _equipmentTransferRepository.CreateAsync(e);
 
             var equipment = await _equipmentRepository.GetByIdAsync(e.EquipmentId);
-            equipment.ReservedQuantity = e.Quantity;
+            equipment.ReservedQuantity += e.Quantity;
             await _equipmentRepository.UpdateAsync(equipment);
         }
     }
