@@ -13,5 +13,6 @@ namespace HospitalClassLibrary.RoomEquipment.Models
         public EquipmentItem EquipmentItem { get; set; }
 
         public int Quantity { get; set; }
+        public int ReservedQuantity { get; set; }
     }
 }

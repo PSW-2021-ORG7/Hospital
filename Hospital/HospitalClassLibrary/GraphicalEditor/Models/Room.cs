@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using HospitalClassLibrary.RoomEquipment.Models;
+using HospitalClassLibrary.Schedule.Models;
 
 namespace HospitalClassLibrary.GraphicalEditor.Models
 {
@@ -20,5 +21,7 @@ namespace HospitalClassLibrary.GraphicalEditor.Models
         public Building Building { get; set; }
 
         public ICollection<Equipment> Equipment { get; set; }
+
+        public Doctor Doctor { get; set; }
     }
 }
