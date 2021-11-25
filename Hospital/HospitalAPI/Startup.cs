@@ -73,6 +73,7 @@ namespace HospitalAPI
             services.AddTransient<IRoomService, RoomService>();
             services.AddTransient<IEquipmentService, EquipmentService>();
             services.AddTransient<IWorkdayService, WorkdayService>();
+            services.AddTransient<IEquipmentTransferService, EquipmentTransferService>();
         }
 
         private static void RegisterRepositories(IServiceCollection services)
@@ -80,8 +81,8 @@ namespace HospitalAPI
             services.AddTransient<IRoomRepository, RoomRepository>();
             services.AddTransient<IBuildingRepository, BuildingRepository>();
             services.AddTransient<IEquipmentRepository, EquipmentRepository>();
-            services.AddTransient<IEquipmentTransferRepository, EquipmentTransferRepository>();
             services.AddTransient<IWorkdayRepository, WorkdayRepository>();
+            services.AddTransient<IEquipmentTransferRepository, EquipmentTransferRepository>();
         }
 
         private static void ConfigureMapper(IServiceCollection services)

@@ -11,20 +11,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="Views\Buildings\Create.cshtml" />
-    <None Include="Views\Buildings\Delete.cshtml" />
-    <None Include="Views\Buildings\Details.cshtml" />
-    <None Include="Views\Buildings\Edit.cshtml" />
-    <None Include="Views\Buildings\Index.cshtml" />
-    <None Include="Views\Rooms\Create.cshtml" />
-    <None Include="Views\Rooms\Delete.cshtml" />
-    <None Include="Views\Rooms\Details.cshtml" />
-    <None Include="Views\Rooms\Edit.cshtml" />
-    <None Include="Views\Rooms\Index.cshtml" />
-    <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="HospitalClassLibrary" Version="1.1.0" />
