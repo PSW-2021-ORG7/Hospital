@@ -2,10 +2,10 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using HospitalClassLibrary.GraphicalEditor.Repositories.Interfaces;
 using HospitalClassLibrary.RoomEquipment.Models;
 using HospitalClassLibrary.RoomEquipment.Repositories.Interfaces;
 using HospitalClassLibrary.RoomEquipment.Services.Interfaces;
+using static HospitalClassLibrary.Shared.Constants;
 
 namespace HospitalClassLibrary.RoomEquipment.Services
 {
@@ -26,7 +26,7 @@ namespace HospitalClassLibrary.RoomEquipment.Services
             {
                 await CheckTransfers();
 
-                await Task.Delay(10000, stoppingToken); // TODO: trigger every 12 hours (12 * 60 * 60 * 1000)
+                await Task.Delay(TwelveHours, stoppingToken);
             }
         }
 
