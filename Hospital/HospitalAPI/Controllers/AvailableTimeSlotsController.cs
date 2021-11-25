@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HospitalClassLibrary.Data;
-using HospitalClassLibrary.Schedule.Models;
-using HospitalClassLibrary.Schedule.Repositories;
+using HospitalClassLibrary.RoomEquipment.Models;
+using HospitalClassLibrary.Schedule.Services.Interfaces;
+using HospitalClassLibrary.Shared.Models;
 
 namespace HospitalAPI.Controllers
 {
@@ -13,6 +14,17 @@ namespace HospitalAPI.Controllers
     [ApiController]
     public class AvailableTimeSlotsController : ControllerBase
     {
+        private readonly IWorkdayService _workdayService;
 
+        public AvailableTimeSlotsController(IWorkdayService workdayService)
+        {
+            _workdayService = workdayService;
+        }
+
+        [HttpGet]
+        public IEnumerable<DateTimeRange> GetRooms([FromQuery] EquipmentTransferRequirements requirements)
+        {
+            return _workdayService.GetAvailableTimeSlots(requirements);
+        }
     }
 }
