@@ -20,6 +20,13 @@ namespace HospitalClassLibrary.GraphicalEditor.Repositories
             return await Context.Room.Where(r => r.BuildingId == buildingId).Select(r => r).ToListAsync();
         }
 
+        public int GetDoctorId(int roomId)
+        {
+            var rooms = Context.Room.Where(r => r.Id == roomId).Include(r => r.Doctor).ToList();
+
+            return rooms.First().Doctor.Id;
+        }
+
         public async Task<Room> GetRoomWithEquipment(int id)
         {
             var rooms = await Context.Room.Where(r => r.Id == id).Include(r => r.Equipment)
