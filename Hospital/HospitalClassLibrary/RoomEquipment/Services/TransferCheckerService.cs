@@ -20,13 +20,13 @@ namespace HospitalClassLibrary.RoomEquipment.Services
             _equipmentRepository = equipmentRepository;
         }
 
-        public async Task DoWork(CancellationToken cancellationToken)
+        public async Task DoWork(CancellationToken stoppingToken)
         {
-            while (!cancellationToken.IsCancellationRequested)
+            while (!stoppingToken.IsCancellationRequested)
             {
                 await CheckTransfers();
 
-                await Task.Delay(TwelveHours, cancellationToken);
+                await Task.Delay(TwelveHours, stoppingToken);
             }
         }
 

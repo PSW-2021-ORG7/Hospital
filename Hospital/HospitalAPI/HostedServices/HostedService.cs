@@ -19,14 +19,14 @@ namespace HospitalAPI.HostedServices
             _logger = logger;
         }
 
-        protected override async Task ExecuteAsync(CancellationToken cancellationToken)
+        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             _logger.LogInformation("Hosted Service running.");
 
-            await DoWork(cancellationToken);
+            await DoWork(stoppingToken);
         }
 
-        private async Task DoWork(CancellationToken cancellationToken)
+        private async Task DoWork(CancellationToken stoppingToken)
         {
             _logger.LogInformation("Hosted Service is working.");
 
@@ -36,16 +36,16 @@ namespace HospitalAPI.HostedServices
                     scope.ServiceProvider
                         .GetRequiredService<ITransferCheckerService>();
 
-                await scopedProcessingService.DoWork(cancellationToken);
+                await scopedProcessingService.DoWork(stoppingToken);
             }
 
         }
 
-        public override async Task StopAsync(CancellationToken cancellationToken)
+        public override async Task StopAsync(CancellationToken stoppingToken)
         {
             _logger.LogInformation("Hosted Service is stopping.");
 
-            await base.StopAsync(cancellationToken);
+            await base.StopAsync(stoppingToken);
         }
 
     }
