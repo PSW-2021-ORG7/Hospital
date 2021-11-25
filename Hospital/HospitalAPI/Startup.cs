@@ -10,6 +10,10 @@ using HospitalClassLibrary.RoomEquipment.Repositories;
 using HospitalClassLibrary.RoomEquipment.Repositories.Interfaces;
 using HospitalClassLibrary.RoomEquipment.Services;
 using HospitalClassLibrary.RoomEquipment.Services.Interfaces;
+using HospitalClassLibrary.Schedule.Repositories;
+using HospitalClassLibrary.Schedule.Repositories.Interfaces;
+using HospitalClassLibrary.Schedule.Services;
+using HospitalClassLibrary.Schedule.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -35,31 +39,18 @@ namespace HospitalAPI
             services.AddDbContext<AppDbContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("APIConnection"))
             );
-            services.AddTransient<IRoomRepository, RoomRepository>();
-            services.AddTransient<IBuildingRepository, BuildingRepository>();
-            services.AddTransient<IEquipmentRepository, EquipmentRepository>();
 
-            services.AddTransient<IBuildingService, BuildingService>();
-            services.AddTransient<IRoomService, RoomService>();
-            services.AddTransient<IEquipmentService, EquipmentService>();
+            RegisterRepositories(services);
+
+            RegisterServices(services);
+
+            ConfigureMapper(services);
 
             services.AddCors();
-
-            var mapperConfig = new MapperConfiguration(mc => { mc.AddProfile(new MappingProfile()); });
-
-            IMapper mapper = mapperConfig.CreateMapper();
-            services.AddSingleton(mapper);
-
-            services.AddAutoMapper(config =>
-            {
-                var enumMapper = config.Mappers.Single(m => m is AutoMapper.Mappers.EnumToEnumMapper);
-                config.Mappers.Remove(enumMapper);
-            }, typeof(Startup));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-
             app.UseCors(options => options.WithOrigins("http://localhost:4200")
                 .AllowAnyMethod()
                 .AllowAnyHeader());
@@ -70,15 +61,41 @@ namespace HospitalAPI
             }
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+        }
+
+        private static void RegisterServices(IServiceCollection services)
+        {
+            services.AddTransient<IBuildingService, BuildingService>();
+            services.AddTransient<IRoomService, RoomService>();
+            services.AddTransient<IEquipmentService, EquipmentService>();
+            services.AddTransient<IWorkdayService, WorkdayService>();
+        }
+
+        private static void RegisterRepositories(IServiceCollection services)
+        {
+            services.AddTransient<IRoomRepository, RoomRepository>();
+            services.AddTransient<IBuildingRepository, BuildingRepository>();
+            services.AddTransient<IEquipmentRepository, EquipmentRepository>();
+            services.AddTransient<IEquipmentTransferRepository, EquipmentTransferRepository>();
+            services.AddTransient<IWorkdayRepository, WorkdayRepository>();
+        }
+
+        private static void ConfigureMapper(IServiceCollection services)
+        {
+            var mapperConfig = new MapperConfiguration(mc => { mc.AddProfile(new MappingProfile()); });
+
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
+
+            services.AddAutoMapper(config =>
             {
-                endpoints.MapControllers();
-            });
+                var enumMapper = config.Mappers.Single(m => m is AutoMapper.Mappers.EnumToEnumMapper);
+                config.Mappers.Remove(enumMapper);
+            }, typeof(Startup));
         }
     }
 }
