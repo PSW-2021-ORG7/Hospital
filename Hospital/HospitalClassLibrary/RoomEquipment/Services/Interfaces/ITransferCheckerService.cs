@@ -5,6 +5,6 @@ namespace HospitalClassLibrary.RoomEquipment.Services.Interfaces
 {
     public interface ITransferCheckerService
     {
-        Task DoWork(CancellationToken stoppingToken);
+        Task DoWork(CancellationToken cancellationToken);
     }
 }
