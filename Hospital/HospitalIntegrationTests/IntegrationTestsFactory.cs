@@ -65,7 +65,7 @@ namespace HospitalIntegrationTests
                 Id = 1,
                 Name = "Syringe"
             };
-            var equipment = new Equipment()
+            var srcRoomEquipment1 = new Equipment()
             {
                 Id = 1,
                 RoomId = 1,
@@ -74,7 +74,16 @@ namespace HospitalIntegrationTests
                 Quantity = 100,
                 ReservedQuantity = 0
             };
-            var sourceRoom = new Room()
+            var srcRoomEquipment2 = new Equipment()
+            {
+                Id = 2,
+                RoomId = 2,
+                EquipmentItemId = 1,
+                EquipmentItem = equipmentItem,
+                Quantity = 100,
+                ReservedQuantity = 0
+            };
+            var srcRoom1 = new Room()
             {
                 Id = 1,
                 BuildingId = 1,
@@ -83,11 +92,42 @@ namespace HospitalIntegrationTests
                 Type = RoomType.DOCTOR_OFFICE,
                 FreeBeds = 0,
                 Floor = 0,
-                Equipment = new List<Equipment> { equipment }
+                Equipment = new List<Equipment> { srcRoomEquipment1 }
             };
-            var destinationRoom = new Room()
+            var srcRoom2 = new Room()
             {
                 Id = 2,
+                BuildingId = 1,
+                Name = "0D",
+                Status = RoomStatus.UNOCCUPIED,
+                Type = RoomType.DOCTOR_OFFICE,
+                FreeBeds = 0,
+                Floor = 0,
+                Equipment = new List<Equipment> { srcRoomEquipment2 }
+            };
+            var dstRoomEquipment = new Equipment()
+            {
+                Id = 3,
+                RoomId = 3,
+                EquipmentItemId = 1,
+                EquipmentItem = equipmentItem,
+                Quantity = 100,
+                ReservedQuantity = 0
+            };
+            var dstRoomWithEquipment = new Room()
+            {
+                Id = 3,
+                BuildingId = 1,
+                Name = "0C",
+                Status = RoomStatus.UNOCCUPIED,
+                Type = RoomType.DOCTOR_OFFICE,
+                FreeBeds = 0,
+                Floor = 0,
+                Equipment = new List<Equipment> { dstRoomEquipment }
+            };
+            var dstRoomWithNoEquipment = new Room()
+            {
+                Id = 4,
                 BuildingId = 1,
                 Name = "0B",
                 Status = RoomStatus.UNOCCUPIED,
@@ -96,9 +136,13 @@ namespace HospitalIntegrationTests
                 Floor = 0
             };
 
-            context.Room.Add(sourceRoom);
-            context.Room.Add(destinationRoom);
-            context.Equipment.Add(equipment);
+            context.Room.Add(srcRoom1);
+            context.Room.Add(srcRoom2);
+            context.Room.Add(dstRoomWithEquipment);
+            context.Room.Add(dstRoomWithNoEquipment);
+            context.Equipment.Add(srcRoomEquipment1);
+            context.Equipment.Add(srcRoomEquipment2);
+            context.Equipment.Add(dstRoomEquipment);
         }
 
     }
