@@ -11,6 +11,8 @@ using HospitalClassLibrary.Renovations.Repositories;
 using HospitalClassLibrary.Renovations.Repositories.Interfaces;
 using HospitalClassLibrary.Renovations.Services;
 using HospitalClassLibrary.Renovations.Services.Interfaces;
+using HospitalClassLibrary.Medicine.Repositories;
+using HospitalClassLibrary.Medicine.Repositories.Interfaces;
 using HospitalClassLibrary.RoomEquipment.Repositories;
 using HospitalClassLibrary.RoomEquipment.Repositories.Interfaces;
 using HospitalClassLibrary.RoomEquipment.Services;
@@ -84,6 +86,7 @@ namespace HospitalAPI
             services.AddScoped<ITransferCheckerService, TransferCheckerService>();
             services.AddHostedService<RenovationsHostedService>();
             services.AddScoped<IRenovationCheckerService, RenovationCheckerService>();
+
         }
 
         private static void RegisterRepositories(IServiceCollection services)
@@ -95,6 +98,11 @@ namespace HospitalAPI
             services.AddTransient<IEquipmentTransferRepository, EquipmentTransferRepository>();
             services.AddTransient<ISplitRenovationRepository, SplitRenovationRepository>();
             services.AddTransient<IDoctorRepository, DoctorRepository>();
+
+            services.AddScoped<IMedicineRepository, MedicineRepository>();
+            services.AddScoped<IMedicineInventoryRepository, MedicineInventoryRepository>();
+            services.AddScoped<IIngredientRepository, IngredientRepository>();
+            services.AddScoped<IMedicineCombinationRepository, MedicineCombinationRepository>();
         }
 
         private static void ConfigureMapper(IServiceCollection services)
