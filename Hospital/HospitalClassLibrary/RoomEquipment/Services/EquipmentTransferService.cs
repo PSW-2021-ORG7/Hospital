@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using HospitalClassLibrary.RoomEquipment.Models;
 using HospitalClassLibrary.RoomEquipment.Repositories.Interfaces;
 using HospitalClassLibrary.RoomEquipment.Services.Interfaces;
@@ -23,6 +24,11 @@ namespace HospitalClassLibrary.RoomEquipment.Services
             var equipment = await _equipmentRepository.GetByIdAsync(e.EquipmentId);
             equipment.ReservedQuantity += e.Quantity;
             await _equipmentRepository.UpdateAsync(equipment);
+        }
+
+        public async Task<IEnumerable<EquipmentTransfer>> GetAll()
+        {
+            return await _equipmentTransferRepository.GetAllAsync();
         }
     }
 }

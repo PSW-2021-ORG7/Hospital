@@ -15,10 +15,12 @@ namespace HospitalAPI.DTOs.MappingProfile
             CreateMap<EquipmentDto, Equipment>();
             CreateMap<RoomEquipmentDto, Equipment>();
             CreateMap<RoomDto, Room>();
+            CreateMap<EquipmentTransferDto, EquipmentTransfer>();
 
             CreateMap<Equipment, EquipmentDto>();
             CreateMap<Equipment, RoomEquipmentDto>();
             CreateMap<Room, RoomDto>();
+            CreateMap<EquipmentTransfer, EquipmentTransferDto>();
         }
     }
 }

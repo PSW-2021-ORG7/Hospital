@@ -30,7 +30,7 @@ namespace HospitalClassLibrary.RoomEquipment.Services
             }
         }
 
-        private async Task CheckTransfers()
+        public async Task CheckTransfers()
         {
             foreach (var transfer in _equipmentTransferRepository.GetAllAsync().Result)
             {
