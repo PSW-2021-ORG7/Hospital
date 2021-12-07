@@ -1,4 +1,5 @@
 ﻿using HospitalClassLibrary.GraphicalEditor.Models;
+using HospitalClassLibrary.Medicine.Models;
 using HospitalClassLibrary.RoomEquipment.Models;
 using HospitalClassLibrary.Schedule.Models;
 using Microsoft.EntityFrameworkCore;
@@ -19,11 +20,17 @@ namespace HospitalClassLibrary.Data
         public DbSet<Workday> Workday { get; set; }
         public DbSet<EquipmentTransfer> EquipmentTransfer { get; set; }
 
+        public DbSet<Ingredient> Ingredient { get; set; }
+        public DbSet<MedicineCombination> MedicineCombination { get; set; }
+        public DbSet<Medicine.Models.Medicine> Medicine { get; set; }
+        public DbSet<MedicineInventory> MedicineInventory { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Ingredient>()
+                .HasIndex(i => i.Name)
+                .IsUnique();
 
-            
 
             modelBuilder.Entity<Building>().HasData(
                new Building
