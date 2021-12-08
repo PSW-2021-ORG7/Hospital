@@ -15,6 +15,11 @@ namespace HospitalClassLibrary.RoomEquipment.Repositories
         {
         }
 
+        public new async Task<Room> GetByIdAsync(int id)
+        {
+            return await Context.Room.Where(r => r.Id == id).Include(r => r.RoomDimensions).FirstOrDefaultAsync();
+        }
+
         public async Task<IEnumerable<Room>> GetAll(int buildingId)
         {
             return await Context.Room.Where(r => r.BuildingId == buildingId).Select(r => r).Include(r => r.RoomDimensions).ToListAsync();

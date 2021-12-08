@@ -22,6 +22,13 @@ namespace HospitalAPI.Controllers
             _mapper = mapper;
         }
 
+        [HttpGet("{id}")]
+        public async Task<RoomDto> GetRoom(int id)
+        {
+            var room = await _roomService.GetById(id);
+            return _mapper.Map<RoomDto>(room);
+        }
+
         [HttpGet] 
         public async Task<IEnumerable<RoomDto>> GetRooms([FromQuery(Name ="buildingId")] int buildingId)
         {
