@@ -1,10 +1,10 @@
-﻿using HospitalClassLibrary.GraphicalEditor.Models;
-using HospitalClassLibrary.GraphicalEditor.Services.Interfaces;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using HospitalClassLibrary.GraphicalEditor.Repositories.Interfaces;
+using HospitalClassLibrary.RoomEquipment.Models;
+using HospitalClassLibrary.RoomEquipment.Repositories.Interfaces;
+using HospitalClassLibrary.RoomEquipment.Services.Interfaces;
 
-namespace HospitalClassLibrary.GraphicalEditor.Services
+namespace HospitalClassLibrary.RoomEquipment.Services
 {
     public class RoomService : IRoomService
     {

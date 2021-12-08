@@ -90,7 +90,6 @@ namespace HospitalIntegrationTests
                 Name = "0A",
                 Status = RoomStatus.UNOCCUPIED,
                 Type = RoomType.DOCTOR_OFFICE,
-                FreeBeds = 0,
                 Floor = 0,
                 Equipment = new List<Equipment> { srcRoomEquipment1 }
             };
@@ -101,7 +100,6 @@ namespace HospitalIntegrationTests
                 Name = "0D",
                 Status = RoomStatus.UNOCCUPIED,
                 Type = RoomType.DOCTOR_OFFICE,
-                FreeBeds = 0,
                 Floor = 0,
                 Equipment = new List<Equipment> { srcRoomEquipment2 }
             };
@@ -121,7 +119,6 @@ namespace HospitalIntegrationTests
                 Name = "0C",
                 Status = RoomStatus.UNOCCUPIED,
                 Type = RoomType.DOCTOR_OFFICE,
-                FreeBeds = 0,
                 Floor = 0,
                 Equipment = new List<Equipment> { dstRoomEquipment }
             };
@@ -132,7 +129,6 @@ namespace HospitalIntegrationTests
                 Name = "0B",
                 Status = RoomStatus.UNOCCUPIED,
                 Type = RoomType.DOCTOR_OFFICE,
-                FreeBeds = 0,
                 Floor = 0
             };
 

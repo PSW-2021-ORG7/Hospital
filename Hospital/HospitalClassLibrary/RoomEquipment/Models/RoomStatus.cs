@@ -1,4 +1,4 @@
-﻿namespace HospitalClassLibrary.GraphicalEditor.Models
+﻿namespace HospitalClassLibrary.RoomEquipment.Models
 {
     public enum RoomStatus
     {

@@ -2,8 +2,9 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using HospitalAPI.DTOs;
-using HospitalClassLibrary.GraphicalEditor.Models;
 using HospitalClassLibrary.GraphicalEditor.Services.Interfaces;
+using HospitalClassLibrary.RoomEquipment.Models;
+using HospitalClassLibrary.RoomEquipment.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HospitalAPI.Controllers
@@ -22,9 +23,10 @@ namespace HospitalAPI.Controllers
         }
 
         [HttpGet] 
-        public async Task<IEnumerable<Room>> GetRooms([FromQuery(Name ="buildingId")] int buildingId)
+        public async Task<IEnumerable<RoomDto>> GetRooms([FromQuery(Name ="buildingId")] int buildingId)
         {
-            return await _roomService.GetAll(buildingId);
+            var rooms = await _roomService.GetAll(buildingId);
+            return _mapper.Map<IEnumerable<RoomDto>>(rooms);
         }
 
         [HttpGet("{id}/equipment")]

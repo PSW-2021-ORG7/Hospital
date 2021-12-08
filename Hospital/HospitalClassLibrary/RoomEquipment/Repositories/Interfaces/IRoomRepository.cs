@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using HospitalClassLibrary.GraphicalEditor.Models;
+using HospitalClassLibrary.RoomEquipment.Models;
 using HospitalClassLibrary.Shared.Repositories;
 
-namespace HospitalClassLibrary.GraphicalEditor.Repositories.Interfaces
+namespace HospitalClassLibrary.RoomEquipment.Repositories.Interfaces
 {
     public interface IRoomRepository : IGenericRepository<Room>
     {
