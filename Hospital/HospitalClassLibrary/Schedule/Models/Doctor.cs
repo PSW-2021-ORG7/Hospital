@@ -1,5 +1,6 @@
 ﻿using HospitalClassLibrary.GraphicalEditor.Models;
 using System;
+using HospitalClassLibrary.RoomEquipment.Models;
 
 namespace HospitalClassLibrary.Schedule.Models
 {
@@ -7,11 +8,11 @@ namespace HospitalClassLibrary.Schedule.Models
     {
 
         public int Id { get; set; }
-        public String Name { get; set; }
-        public String Surname { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public String Phone { get; set; }
-        public String Email { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
         public Gender Gender { get; set; }
         public Specialization Specialization { get; set; }
 

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using HospitalClassLibrary.GraphicalEditor.Models;
+using HospitalClassLibrary.RoomEquipment.Models;
 
-namespace HospitalClassLibrary.GraphicalEditor.Services.Interfaces
+namespace HospitalClassLibrary.RoomEquipment.Services.Interfaces
 {
     public interface IRoomService
     {

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using HospitalClassLibrary.RoomEquipment.Models;
 
 namespace HospitalClassLibrary.GraphicalEditor.Models
 {

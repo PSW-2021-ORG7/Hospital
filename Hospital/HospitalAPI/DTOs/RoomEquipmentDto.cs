@@ -1,4 +1,4 @@
-﻿using HospitalClassLibrary.GraphicalEditor.Models;
+﻿using HospitalClassLibrary.RoomEquipment.Models;
 
 namespace HospitalAPI.DTOs
 {

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using HospitalClassLibrary.GraphicalEditor.Models;
 using HospitalClassLibrary.RoomEquipment.Models;
 
@@ -19,7 +15,8 @@ namespace HospitalAPI.DTOs.MappingProfile
 
             CreateMap<Equipment, EquipmentDto>();
             CreateMap<Equipment, RoomEquipmentDto>();
-            CreateMap<Room, RoomDto>();
+            CreateMap<Room, RoomDto>().IncludeMembers(r => r.RoomDimensions);
+            CreateMap<RoomDimensions, RoomDto>();
             CreateMap<EquipmentTransfer, EquipmentTransferDto>();
         }
     }

@@ -2,12 +2,12 @@
 using System.Linq;
 using System.Threading.Tasks;
 using HospitalClassLibrary.Data;
-using HospitalClassLibrary.GraphicalEditor.Models;
-using HospitalClassLibrary.GraphicalEditor.Repositories.Interfaces;
+using HospitalClassLibrary.RoomEquipment.Models;
+using HospitalClassLibrary.RoomEquipment.Repositories.Interfaces;
 using HospitalClassLibrary.Shared.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-namespace HospitalClassLibrary.GraphicalEditor.Repositories
+namespace HospitalClassLibrary.RoomEquipment.Repositories
 {
     public class RoomRepository : GenericRepository<Room>, IRoomRepository
     {
@@ -15,9 +15,14 @@ namespace HospitalClassLibrary.GraphicalEditor.Repositories
         {
         }
 
+        public new async Task<Room> GetByIdAsync(int id)
+        {
+            return await Context.Room.Where(r => r.Id == id).Include(r => r.RoomDimensions).FirstOrDefaultAsync();
+        }
+
         public async Task<IEnumerable<Room>> GetAll(int buildingId)
         {
-            return await Context.Room.Where(r => r.BuildingId == buildingId).Select(r => r).ToListAsync();
+            return await Context.Room.Where(r => r.BuildingId == buildingId).Select(r => r).Include(r => r.RoomDimensions).ToListAsync();
         }
 
         public int GetDoctorId(int roomId)
