@@ -19,6 +19,8 @@
     <Compile Remove="Migrations\20211117152833_EquipmentDataMigration.Designer.cs" />
     <Compile Remove="Migrations\20211123161209_TestMigration.cs" />
     <Compile Remove="Migrations\20211123161209_TestMigration.Designer.cs" />
+    <Compile Remove="Migrations\20211209144311_AddSplitRenovationClass.cs" />
+    <Compile Remove="Migrations\20211209144311_AddSplitRenovationClass.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,6 +37,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Renovations\Repositories\Interfaces\" />
+    <Folder Include="Renovations\Services\Interfaces\" />
     <Folder Include="Shared\Services\" />
   </ItemGroup>
 

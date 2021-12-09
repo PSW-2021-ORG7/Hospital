@@ -1,4 +1,5 @@
 ﻿using HospitalClassLibrary.GraphicalEditor.Models;
+using HospitalClassLibrary.Renovations.Models;
 using HospitalClassLibrary.RoomEquipment.Models;
 using HospitalClassLibrary.Schedule.Models;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,8 @@ namespace HospitalClassLibrary.Data
         public DbSet<Workday> Workday { get; set; }
         public DbSet<EquipmentTransfer> EquipmentTransfer { get; set; }
         public DbSet<RoomDimensions> RoomDimension { get; set; }
+        public DbSet<NewRoomInfo> NewRoomInfo { get; set; }
+        public DbSet<SplitRenovation> SplitRenovation { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
