@@ -7,6 +7,10 @@ using HospitalClassLibrary.GraphicalEditor.Repositories;
 using HospitalClassLibrary.GraphicalEditor.Repositories.Interfaces;
 using HospitalClassLibrary.GraphicalEditor.Services;
 using HospitalClassLibrary.GraphicalEditor.Services.Interfaces;
+using HospitalClassLibrary.Renovations.Repositories;
+using HospitalClassLibrary.Renovations.Repositories.Interfaces;
+using HospitalClassLibrary.Renovations.Services;
+using HospitalClassLibrary.Renovations.Services.Interfaces;
 using HospitalClassLibrary.RoomEquipment.Repositories;
 using HospitalClassLibrary.RoomEquipment.Repositories.Interfaces;
 using HospitalClassLibrary.RoomEquipment.Services;
@@ -75,6 +79,7 @@ namespace HospitalAPI
             services.AddTransient<IEquipmentService, EquipmentService>();
             services.AddTransient<IWorkdayService, WorkdayService>();
             services.AddTransient<IEquipmentTransferService, EquipmentTransferService>();
+            services.AddTransient<IRenovationService, RenovationService>();
             services.AddHostedService<HostedService>();
             services.AddScoped<ITransferCheckerService, TransferCheckerService>();
         }
@@ -86,6 +91,7 @@ namespace HospitalAPI
             services.AddTransient<IEquipmentRepository, EquipmentRepository>();
             services.AddTransient<IWorkdayRepository, WorkdayRepository>();
             services.AddTransient<IEquipmentTransferRepository, EquipmentTransferRepository>();
+            services.AddTransient<ISplitRenovationRepository, SplitRenovationRepository>();
         }
 
         private static void ConfigureMapper(IServiceCollection services)
