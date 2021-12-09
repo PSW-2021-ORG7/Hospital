@@ -42,7 +42,7 @@ namespace HospitalAPI
             services.AddControllers();
 
             services.AddDbContext<AppDbContext>(options =>
-                options.UseNpgsql(Configuration.GetConnectionString("APIConnection"))
+                options.UseNpgsql(Configuration.GetConnectionString("APIConnection"), providerOptions => providerOptions.EnableRetryOnFailure())
             );
 
             RegisterRepositories(services);
@@ -80,8 +80,10 @@ namespace HospitalAPI
             services.AddTransient<IWorkdayService, WorkdayService>();
             services.AddTransient<IEquipmentTransferService, EquipmentTransferService>();
             services.AddTransient<IRenovationService, RenovationService>();
-            services.AddHostedService<HostedService>();
+            services.AddHostedService<TransfersHostedService>();
             services.AddScoped<ITransferCheckerService, TransferCheckerService>();
+            services.AddHostedService<RenovationsHostedService>();
+            services.AddScoped<IRenovationCheckerService, RenovationCheckerService>();
         }
 
         private static void RegisterRepositories(IServiceCollection services)
@@ -92,6 +94,7 @@ namespace HospitalAPI
             services.AddTransient<IWorkdayRepository, WorkdayRepository>();
             services.AddTransient<IEquipmentTransferRepository, EquipmentTransferRepository>();
             services.AddTransient<ISplitRenovationRepository, SplitRenovationRepository>();
+            services.AddTransient<IDoctorRepository, DoctorRepository>();
         }
 
         private static void ConfigureMapper(IServiceCollection services)

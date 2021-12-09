@@ -26,7 +26,7 @@ namespace HospitalClassLibrary.RoomEquipment.Services
             {
                 await CheckTransfers();
 
-                await Task.Delay(TwelveHours, stoppingToken);
+                await Task.Delay(TwoHours, stoppingToken);
             }
         }
 
