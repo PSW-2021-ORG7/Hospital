@@ -37,8 +37,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Renovations\Repositories\Interfaces\" />
-    <Folder Include="Renovations\Services\Interfaces\" />
     <Folder Include="Shared\Services\" />
   </ItemGroup>
 
