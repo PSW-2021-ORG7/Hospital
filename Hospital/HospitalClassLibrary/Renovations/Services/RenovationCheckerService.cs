@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using HospitalClassLibrary.GraphicalEditor.Models;
@@ -17,14 +16,12 @@ namespace HospitalClassLibrary.Renovations.Services
     {
         private readonly ISplitRenovationRepository _splitRenovationRepository;
         private readonly IRoomRepository _roomRepository;
-        private readonly IEquipmentRepository _equipmentRepository;
         private readonly IDoctorRepository _doctorRepository;
 
-        public RenovationCheckerService(ISplitRenovationRepository splitRenovationRepository, IRoomRepository roomRepository, IEquipmentRepository equipmentRepository, IDoctorRepository doctorRepository)
+        public RenovationCheckerService(ISplitRenovationRepository splitRenovationRepository, IRoomRepository roomRepository, IDoctorRepository doctorRepository)
         {
             _splitRenovationRepository = splitRenovationRepository;
             _roomRepository = roomRepository;
-            _equipmentRepository = equipmentRepository;
             _doctorRepository = doctorRepository;
         }
 
