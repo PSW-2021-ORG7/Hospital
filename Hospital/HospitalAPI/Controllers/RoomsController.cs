@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using HospitalAPI.DTOs;
-using HospitalClassLibrary.GraphicalEditor.Services.Interfaces;
 using HospitalClassLibrary.RoomEquipment.Models;
 using HospitalClassLibrary.RoomEquipment.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;

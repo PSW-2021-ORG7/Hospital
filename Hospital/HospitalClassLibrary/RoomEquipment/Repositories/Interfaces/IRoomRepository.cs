@@ -10,5 +10,6 @@ namespace HospitalClassLibrary.RoomEquipment.Repositories.Interfaces
         Task<IEnumerable<Room>> GetAll(int buildingId);
         Task<Room> GetRoomWithEquipment(int id);
         int GetDoctorId(int roomId);
+        Task<int> GetRoomId(string name);
     }
 }

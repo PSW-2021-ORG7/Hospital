@@ -8,12 +8,12 @@ using Microsoft.Extensions.Logging;
 
 namespace HospitalAPI.HostedServices
 {
-    public class HostedService : BackgroundService
+    public class TransfersHostedService : BackgroundService
     {
-        private readonly ILogger<HostedService> _logger;
+        private readonly ILogger<TransfersHostedService> _logger;
         public IServiceProvider Services { get; }
         
-        public HostedService(IServiceProvider services, ILogger<HostedService> logger)
+        public TransfersHostedService(IServiceProvider services, ILogger<TransfersHostedService> logger)
         {
             Services = services;
             _logger = logger;
@@ -21,14 +21,14 @@ namespace HospitalAPI.HostedServices
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            _logger.LogInformation("Hosted Service running.");
+            _logger.LogInformation("Hosted Service for transfers running.");
 
             await DoWork(stoppingToken);
         }
 
         private async Task DoWork(CancellationToken stoppingToken)
         {
-            _logger.LogInformation("Hosted Service is working.");
+            _logger.LogInformation("Hosted Service for transfers is working.");
 
             using (var scope = Services.CreateScope())
             {
@@ -43,7 +43,7 @@ namespace HospitalAPI.HostedServices
 
         public override async Task StopAsync(CancellationToken stoppingToken)
         {
-            _logger.LogInformation("Hosted Service is stopping.");
+            _logger.LogInformation("Hosted Service for transfers is stopping.");
 
             await base.StopAsync(stoppingToken);
         }
