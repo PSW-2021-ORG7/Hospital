@@ -9,13 +9,15 @@ namespace HospitalClassLibrary.Renovations.Services
     public class RenovationService : IRenovationService
     {
         private readonly ISplitRenovationRepository _splitRenovationRepository;
+        private readonly IMergeRenovationRepository _mergeRenovationRepository;
 
-        public RenovationService(ISplitRenovationRepository splitRenovationRepository)
+        public RenovationService(ISplitRenovationRepository splitRenovationRepository, IMergeRenovationRepository mergeRenovationRepository)
         {
             _splitRenovationRepository = splitRenovationRepository;
+            _mergeRenovationRepository = mergeRenovationRepository;
         }
 
-        public async Task<IEnumerable<SplitRenovation>> GetAll()
+        public async Task<IEnumerable<SplitRenovation>> GetAllSplitRenovations()
         {
             return await _splitRenovationRepository.GetAllAsync();
         }
@@ -30,5 +32,19 @@ namespace HospitalClassLibrary.Renovations.Services
             await _splitRenovationRepository.DeleteAsync(r);
         }
 
+        public async Task<IEnumerable<MergeRenovation>> GetAllMergeRenovations()
+        {
+            return await _mergeRenovationRepository.GetAllAsync();
+        }
+
+        public async Task Create(MergeRenovation r)
+        {
+            await _mergeRenovationRepository.CreateAsync(r);
+        }
+
+        public async Task Delete(MergeRenovation r)
+        {
+            await _mergeRenovationRepository.CreateAsync(r);
+        }
     }
 }

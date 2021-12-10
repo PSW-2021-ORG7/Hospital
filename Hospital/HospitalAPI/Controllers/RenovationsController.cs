@@ -34,5 +34,22 @@ namespace HospitalAPI.Controllers
             return NoContent();
         }
 
+
+        [HttpPost("mergeRenovations")]
+        public async Task<IActionResult> PostMergeRenovation(MergeRenovation renovation)
+        {
+            if (renovation == null)
+            {
+                return BadRequest();
+            }
+
+            //TODO: Check if room name already exists
+
+            await _renovationService.Create(renovation);
+
+            return NoContent();
+        }
+
+
     }
 }
