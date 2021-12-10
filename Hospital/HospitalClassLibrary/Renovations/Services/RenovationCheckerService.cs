@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using HospitalClassLibrary.GraphicalEditor.Models;
@@ -61,11 +62,12 @@ namespace HospitalClassLibrary.Renovations.Services
 
                 await CreateSecondNewRoom(splitRenovation, room);
 
-                //await UpdateEquipment(room, splitRenovation);
+                await UpdateEquipment(room, splitRenovation);
 
                 await UpdateDoctorsRoom(room, splitRenovation);
 
                 await _roomRepository.DeleteAsync(room);
+                await _splitRenovationRepository.DeleteAsync(splitRenovation);
             }
         }
 
@@ -129,8 +131,9 @@ namespace HospitalClassLibrary.Renovations.Services
                 foreach (var equipment in room.Equipment)
                 {
                     equipment.RoomId = roomId;
-                    await _equipmentRepository.UpdateAsync(equipment);
                 }
+
+                await _roomRepository.UpdateAsync(room);
             }
         }
 
@@ -153,5 +156,6 @@ namespace HospitalClassLibrary.Renovations.Services
                 doctor.RoomId = await _roomRepository.GetRoomId(splitRenovation.FirstNewRoomInfo.RoomName);
             }
         }
+
     }
 }
