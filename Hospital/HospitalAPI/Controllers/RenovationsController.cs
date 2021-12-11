@@ -45,6 +45,11 @@ namespace HospitalAPI.Controllers
 
             //TODO: Check if room name already exists
 
+            if (!await _renovationService.CanBeMerged(renovation))
+            {
+                return BadRequest("Chosen rooms cannot be merged");
+            }
+
             await _renovationService.Create(renovation);
 
             return NoContent();

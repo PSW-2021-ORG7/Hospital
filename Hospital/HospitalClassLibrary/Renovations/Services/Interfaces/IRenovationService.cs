@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using HospitalClassLibrary.Renovations.Models;
 
@@ -13,5 +14,6 @@ namespace HospitalClassLibrary.Renovations.Services.Interfaces
         Task<IEnumerable<MergeRenovation>> GetAllMergeRenovations();
         Task Create(MergeRenovation r);
         Task Delete(MergeRenovation r);
+        Task<bool> CanBeMerged(MergeRenovation r);
     }
 }
