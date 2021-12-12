@@ -29,11 +29,13 @@ namespace HospitalClassLibrary.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
             modelBuilder.Entity<Ingredient>()
                 .HasIndex(i => i.Name)
                 .IsUnique();
 
+            modelBuilder.Entity<Ingredient>()
+                .HasIndex(i => i.Name)
+                .IsUnique();
 
             modelBuilder.Entity<Building>().HasData(
                new Building

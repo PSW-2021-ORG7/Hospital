@@ -98,7 +98,6 @@ namespace HospitalAPI
             services.AddTransient<IEquipmentTransferRepository, EquipmentTransferRepository>();
             services.AddTransient<ISplitRenovationRepository, SplitRenovationRepository>();
             services.AddTransient<IDoctorRepository, DoctorRepository>();
-
             services.AddScoped<IMedicineRepository, MedicineRepository>();
             services.AddScoped<IMedicineInventoryRepository, MedicineInventoryRepository>();
             services.AddScoped<IIngredientRepository, IngredientRepository>();
