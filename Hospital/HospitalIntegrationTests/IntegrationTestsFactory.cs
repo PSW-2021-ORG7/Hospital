@@ -60,6 +60,7 @@ namespace HospitalIntegrationTests
         private void SeedData(AppDbContext context)
         {
             context.Database.EnsureDeleted();
+
             var equipmentItem = new EquipmentItem()
             {
                 Id = 1,
@@ -132,6 +133,45 @@ namespace HospitalIntegrationTests
                 Floor = 0
             };
 
+            var equipmentItemForSplitRenovation = new EquipmentItem()
+            {
+                Id = 2,
+                Name = "Thermometer"
+            };
+
+            var equipmentForSplitRenovation = new Equipment()
+            {
+                Id = 5,
+                RoomId = 5,
+                EquipmentItemId = 2,
+                EquipmentItem  = equipmentItemForSplitRenovation,
+                Quantity = 22,
+                ReservedQuantity = 0
+                
+            };
+
+            var roomForSplitRenovation = new Room()
+            {
+                Id = 5,
+                BuildingId = 1,
+                Name = "SplitRoom",
+                RoomDimensionsId = 5,
+                Status = RoomStatus.UNOCCUPIED,
+                Type = RoomType.DOCTOR_OFFICE,
+                Floor = 0,
+                Equipment = new List<Equipment> { equipmentForSplitRenovation }
+
+            };
+
+            var roomDimensionForSplitRenovation = new RoomDimensions()
+            {
+                Id = 5,
+                X = 650,
+                Y = 237,
+                Width = 210,
+                Height = 170
+            };
+
             context.Room.Add(srcRoom1);
             context.Room.Add(srcRoom2);
             context.Room.Add(dstRoomWithEquipment);
@@ -139,6 +179,10 @@ namespace HospitalIntegrationTests
             context.Equipment.Add(srcRoomEquipment1);
             context.Equipment.Add(srcRoomEquipment2);
             context.Equipment.Add(dstRoomEquipment);
+
+            context.Room.Add(roomForSplitRenovation);
+            context.RoomDimension.Add(roomDimensionForSplitRenovation);
+            context.Equipment.Add(equipmentForSplitRenovation);
         }
 
     }

@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using AutoMapper;
 using HospitalClassLibrary.Renovations.Models;
 using HospitalClassLibrary.Renovations.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +12,7 @@ namespace HospitalAPI.Controllers
     public class RenovationsController : ControllerBase
     {
         private readonly IRenovationService _renovationService;
+        private readonly IMapper _mapper;
 
         public RenovationsController(IRenovationService renovationService)
         {
@@ -55,6 +58,12 @@ namespace HospitalAPI.Controllers
             return NoContent();
         }
 
+
+        [HttpGet("splitRenovations")]
+        public async Task<IEnumerable<SplitRenovation>> GetSplitRenovations()
+        {
+            return await _renovationService.GetAll();
+        }
 
     }
 }
