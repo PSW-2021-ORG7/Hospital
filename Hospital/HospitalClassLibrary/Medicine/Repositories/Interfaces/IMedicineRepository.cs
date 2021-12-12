@@ -7,5 +7,6 @@ namespace HospitalClassLibrary.Medicine.Repositories.Interfaces
          bool MedicineExists(MedicineQuantityCheck DTO);
          Models.Medicine GetByName(string name);
          Models.Medicine GetByID(int id);
+         Models.Medicine GetByNameAndDose(string name, int dose);
     }
 }

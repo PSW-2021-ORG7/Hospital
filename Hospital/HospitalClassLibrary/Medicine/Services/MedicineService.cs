@@ -23,12 +23,21 @@ namespace HospitalClassLibrary.Medicine.Services
             return false;
         }
 
-        public bool CheckMedicineQuantity(MedicineQuantityCheck DTO)
+        public bool CheckMedicineQuantity(MedicineQuantityCheck medicineQuantityCheck)
         {
-            if (medicineRepository.MedicineExists(DTO))
-               if(medicineInventoryRepository.CheckMedicineQuantity(new MedicineInventory(DTO.MedicineId,DTO.Quantity)))
+            if (medicineRepository.MedicineExists(medicineQuantityCheck))
+            {
+                Models.Medicine foundMedicine = GetByNameAndDose(medicineQuantityCheck.Name, medicineQuantityCheck.DosageInMg);
+                if (medicineInventoryRepository.CheckMedicineQuantity(new MedicineInventory(foundMedicine.Id, medicineQuantityCheck.Quantity)))
                     return true;
+            }
+
             return false;
+        }
+
+        public Models.Medicine GetByNameAndDose(string name, int dose)
+        {
+            return medicineRepository.GetByNameAndDose(name, dose);
         }
 
         public Models.Medicine GetByName(string name)
