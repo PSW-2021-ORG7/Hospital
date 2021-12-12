@@ -66,7 +66,7 @@ namespace HospitalClassLibrary.Renovations.Services
 
                 await UpdateEquipment(room, splitRenovation);
 
-                await UpdateDoctorsRoom(room, splitRenovation);
+                await UpdateDoctorsRoom(room, splitRenovation.FirstNewRoomInfo.RoomName);
 
                 await _roomRepository.DeleteAsync(room);
                 await _splitRenovationRepository.DeleteAsync(splitRenovation);
@@ -138,13 +138,14 @@ namespace HospitalClassLibrary.Renovations.Services
             return await _roomRepository.GetRoomId(splitRenovation.SecondNewRoomInfo.RoomName);
         }
 
-        private async Task UpdateDoctorsRoom(Room room, SplitRenovation splitRenovation)
+        private async Task UpdateDoctorsRoom(Room room, string roomName)
         {
             var doctorId = _roomRepository.GetDoctorId(room.Id);
             if (doctorId != -1)
             {
                 var doctor = await _doctorRepository.GetByIdAsync(doctorId);
-                doctor.RoomId = await _roomRepository.GetRoomId(splitRenovation.FirstNewRoomInfo.RoomName);
+                doctor.RoomId = await _roomRepository.GetRoomId(roomName);
+                await _doctorRepository.UpdateAsync(doctor);
             }
         }
 
@@ -173,6 +174,9 @@ namespace HospitalClassLibrary.Renovations.Services
 
                 await UpdateEquipment(firstOldRoom, mergeRenovation);
                 await UpdateEquipment(secondOldRoom, mergeRenovation);
+
+                await RemoveDoctor(firstOldRoom);
+                await RemoveDoctor(secondOldRoom);
 
                 await _roomRepository.DeleteAsync(firstOldRoom);
                 await _roomRepository.DeleteAsync(secondOldRoom);
@@ -233,6 +237,17 @@ namespace HospitalClassLibrary.Renovations.Services
                 }
 
                 await _roomRepository.UpdateAsync(room);
+            }
+        }
+
+        private async Task RemoveDoctor(Room room)
+        {
+            var doctorId = _roomRepository.GetDoctorId(room.Id);
+            if (doctorId != -1)
+            {
+                var doctor = await _doctorRepository.GetByIdAsync(doctorId);
+                doctor.RoomId = null;
+                await _doctorRepository.UpdateAsync(doctor);
             }
         }
 

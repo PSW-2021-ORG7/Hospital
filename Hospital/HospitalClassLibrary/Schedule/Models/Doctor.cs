@@ -16,7 +16,7 @@ namespace HospitalClassLibrary.Schedule.Models
         public Gender Gender { get; set; }
         public Specialization Specialization { get; set; }
 
-        public int RoomId { get; set; }
+        public int? RoomId { get; set; }
         public Room Room { get; set; }
     }
 }
