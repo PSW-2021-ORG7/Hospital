@@ -67,8 +67,8 @@ namespace HospitalClassLibrary.Renovations.Services
             if (roomDimensions1.AreVerticallyAligned(roomDimensions2) &&
                 roomDimensions1.Width.Equals(roomDimensions2.Width))
             {
-                double distance1 = (roomDimensions1.X + roomDimensions1.Width + 5) - roomDimensions2.X;
-                double distance2 = (roomDimensions2.X + roomDimensions2.Width + 5) - roomDimensions1.X;
+                double distance1 = (roomDimensions1.Y + roomDimensions1.Height + 5) - roomDimensions2.Y;
+                double distance2 = (roomDimensions2.Y + roomDimensions2.Height + 5) - roomDimensions1.Y;
                 if (distance1 > 0 && distance1 < 10 || distance2 > 0 && distance2 < 10)
                     return true;
             }
@@ -81,8 +81,8 @@ namespace HospitalClassLibrary.Renovations.Services
             if (roomDimensions1.AreHorizontallyAligned(roomDimensions2) &&
                 roomDimensions2.Height.Equals(roomDimensions2.Height))
             {
-                double distance1 = (roomDimensions1.Y + roomDimensions1.Height + 5) - roomDimensions2.Y;
-                double distance2 = (roomDimensions2.Y + roomDimensions2.Height + 5) - roomDimensions1.Y;
+                double distance1 = (roomDimensions1.X + roomDimensions1.Width + 5) - roomDimensions2.X;
+                double distance2 = (roomDimensions2.X + roomDimensions2.Width + 5) - roomDimensions1.X;
                 if (distance1 > 0 && distance1 < 10 || distance2 > 0 && distance2 < 10)
                     return true;
             }

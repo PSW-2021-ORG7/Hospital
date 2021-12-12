@@ -62,7 +62,13 @@ namespace HospitalAPI.Controllers
         [HttpGet("splitRenovations")]
         public async Task<IEnumerable<SplitRenovation>> GetSplitRenovations()
         {
-            return await _renovationService.GetAll();
+            return await _renovationService.GetAllSplitRenovations();
+        }
+
+        [HttpGet("mergeRenovations")]
+        public async Task<IEnumerable<MergeRenovation>> GetMergeRenovations()
+        {
+            return await _renovationService.GetAllMergeRenovations();
         }
 
     }
