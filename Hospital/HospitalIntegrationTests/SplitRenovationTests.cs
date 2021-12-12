@@ -53,19 +53,19 @@ namespace HospitalIntegrationTests
             var actualOriginRoomAsString = await actualOriginRoom.Content.ReadAsStringAsync();
             var actualOriginRoomAsJson = JsonConvert.DeserializeObject<RoomDto>(actualOriginRoomAsString);
 
-            var actualFirstNewRoom = await _client.GetAsync($"/api/rooms/{splitRenovation.FirstNewRoomInfo.Id}");
+            var actualFirstNewRoom = await _client.GetAsync("/api/rooms/12");
             var actualFirstNewRoomAsString = await actualFirstNewRoom.Content.ReadAsStringAsync();
             var actualFirstNewRoomAsJson = JsonConvert.DeserializeObject<RoomDto>(actualFirstNewRoomAsString);
 
-            var actualSecondNewRoom = await _client.GetAsync($"/api/rooms/{splitRenovation.SecondNewRoomInfo.Id}");
+            var actualSecondNewRoom = await _client.GetAsync("/api/rooms/13");
             var actualSecondNewRoomAsString = await actualSecondNewRoom.Content.ReadAsStringAsync();
             var actualSecondNewRoomIAsJson = JsonConvert.DeserializeObject<RoomDto>(actualSecondNewRoomAsString);
-           
-            var actualFirstNewRoomEquipment = await _client.GetAsync($"/api/rooms/{splitRenovation.FirstNewRoomInfo.Id}/equipment");
+            
+            var actualFirstNewRoomEquipment = await _client.GetAsync("/api/rooms/12/equipment");
             var actualFirstNewRoomEquipmentAsString = await actualFirstNewRoomEquipment.Content.ReadAsStringAsync();
             var actualFirstNewRoomEquipmentAsJson = JsonConvert.DeserializeObject<RoomDto>(actualFirstNewRoomEquipmentAsString);
 
-            var actualSecondNewRoomEquipment = await _client.GetAsync($"/api/rooms/{splitRenovation.SecondNewRoomInfo.Id}/equipment");
+            var actualSecondNewRoomEquipment = await _client.GetAsync("/api/rooms/13/equipment");
             var actualSecondNewRoomEquipmentAsString = await actualSecondNewRoomEquipment.Content.ReadAsStringAsync();
             var actualSecondNewRoomEquipmentAsJson = JsonConvert.DeserializeObject<RoomDto>(actualSecondNewRoomEquipmentAsString);
          
@@ -85,7 +85,7 @@ namespace HospitalIntegrationTests
             actualFirstNewRoomEquipmentAsJson.Equipment.First().Quantity.ShouldBe(22);
             actualFirstNewRoomEquipmentAsJson.Equipment.First().EquipmentItemId.ShouldBe(2);
             actualSecondNewRoomEquipmentAsJson.Equipment.ShouldBeEmpty();
-
+            
         }
 
         public static IEnumerable<object[]> Data()
@@ -100,7 +100,7 @@ namespace HospitalIntegrationTests
                     RoomId = 5,
                     FirstNewRoomInfo = new NewRoomInfo()
                     {
-                        Id = 6,
+                        Id = 12,
                         RoomName = "SplitRoom-1",
                         RoomType = HospitalClassLibrary.RoomEquipment.Models.RoomType.EMERGENCY_ROOM,
                         RoomStatus = HospitalClassLibrary.RoomEquipment.Models.RoomStatus.NOT_ACITVE
@@ -108,7 +108,7 @@ namespace HospitalIntegrationTests
 
                     SecondNewRoomInfo = new NewRoomInfo()
                     {
-                        Id = 7,
+                        Id = 13,
                         RoomName = "SplitRoom-2",
                         RoomType = HospitalClassLibrary.RoomEquipment.Models.RoomType.EMERGENCY_ROOM,
                         RoomStatus = HospitalClassLibrary.RoomEquipment.Models.RoomStatus.NOT_ACITVE

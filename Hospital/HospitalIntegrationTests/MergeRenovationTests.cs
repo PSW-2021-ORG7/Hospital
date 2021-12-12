@@ -54,11 +54,11 @@ namespace HospitalIntegrationTests
             var actualSecondOldRoomAsString = await actualSecondOldRoom.Content.ReadAsStringAsync();
             var actualSecondOldRoomAsJson = JsonConvert.DeserializeObject<RoomDto>(actualSecondOldRoomAsString);
 
-            var actualNewRoom = await _client.GetAsync($"/api/rooms/{mergeRenovation.NewRoomInfo.Id}");
+            var actualNewRoom = await _client.GetAsync($"/api/rooms/12");
             var actualNewRoomAsString = await actualNewRoom.Content.ReadAsStringAsync();
             var actualNewRoomAsJson = JsonConvert.DeserializeObject<RoomDto>(actualNewRoomAsString);
 
-            var actualNewRoomEquipment = await _client.GetAsync($"/api/rooms/{mergeRenovation.NewRoomInfo.Id}/equipment");
+            var actualNewRoomEquipment = await _client.GetAsync($"/api/rooms/12/equipment");
             var actualNewRoomEquipmentAsString = await actualNewRoomEquipment.Content.ReadAsStringAsync();
             var actualNewRoomEquipmentAsJson = JsonConvert.DeserializeObject<RoomDto>(actualNewRoomEquipmentAsString);
 
