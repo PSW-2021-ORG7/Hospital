@@ -1,11 +1,10 @@
+using HospitalClassLibrary.Data;
 using HospitalClassLibrary.Medicine.DTOs;
 using HospitalClassLibrary.Medicine.Models;
 using HospitalClassLibrary.Medicine.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace HospitalClassLibrary.Medicine.Repositories
 {

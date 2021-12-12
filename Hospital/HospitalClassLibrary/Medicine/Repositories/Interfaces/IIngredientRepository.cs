@@ -1,10 +1,7 @@
-﻿using backend.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using HospitalClassLibrary.Medicine.Models;
+using HospitalClassLibrary.Medicine.Repositories.Interfaces;
 
-namespace backend.Repositories.Interfaces
+namespace HospitalClassLibrary.Medicine.Repositories.Interfaces
 {
     public interface IIngredientRepository : IGenericRepository<Ingredient>
     {

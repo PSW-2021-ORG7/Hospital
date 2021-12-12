@@ -1,15 +1,16 @@
-﻿using System;
+﻿using HospitalClassLibrary.Data;
+using HospitalClassLibrary.Medicine.Models;
+using HospitalClassLibrary.Medicine.Repositories.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace HospitalClassLibrary.Medicine.Repositories
 {
     public class MedicineInventoryRepository : IMedicineInventoryRepository
     {
-        private readonly DrugStoreContext _dataContext;
+        private readonly AppDbContext _dataContext;
 
-        public MedicineInventoryRepository(DrugStoreContext dataContext) => _dataContext = dataContext;
+        public MedicineInventoryRepository(AppDbContext dataContext) => _dataContext = dataContext;
 
         public bool CheckMedicineQuantity(MedicineInventory medicineInventory)
         {
@@ -62,8 +63,6 @@ namespace HospitalClassLibrary.Medicine.Repositories
             }
             return false;
         }
-
-
 
     }
 }

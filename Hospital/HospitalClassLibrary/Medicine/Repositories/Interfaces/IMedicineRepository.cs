@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using HospitalClassLibrary.Medicine.DTOs;
 
 namespace HospitalClassLibrary.Medicine.Repositories.Interfaces
 {

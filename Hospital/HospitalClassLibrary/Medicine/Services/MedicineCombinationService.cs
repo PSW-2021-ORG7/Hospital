@@ -1,9 +1,6 @@
-﻿using backend.Model;
-using backend.Repositories.Interfaces;
-using System;
+﻿using HospitalClassLibrary.Medicine.Models;
+using HospitalClassLibrary.Medicine.Repositories.Interfaces;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace backend.Services
 {
@@ -18,7 +15,7 @@ namespace backend.Services
 
         public bool Save(int id, int m)
         {
-            return _medicineCombinationRepository.Save(new Model.MedicineCombination(id, m));
+            return _medicineCombinationRepository.Save(new MedicineCombination(id, m));
         }
 
         public List<MedicineCombination> GetMedicinesCombination(int firstMedicineId)
