@@ -21,6 +21,7 @@ namespace HospitalClassLibrary.Data
         public DbSet<RoomDimensions> RoomDimension { get; set; }
         public DbSet<NewRoomInfo> NewRoomInfo { get; set; }
         public DbSet<SplitRenovation> SplitRenovation { get; set; }
+        public DbSet<MergeRenovation> MergeRenovation { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -94,6 +94,7 @@ namespace HospitalAPI
             services.AddTransient<IWorkdayRepository, WorkdayRepository>();
             services.AddTransient<IEquipmentTransferRepository, EquipmentTransferRepository>();
             services.AddTransient<ISplitRenovationRepository, SplitRenovationRepository>();
+            services.AddTransient<IMergeRenovationRepository, MergeRenovationRepository>();
             services.AddTransient<IDoctorRepository, DoctorRepository>();
         }
 

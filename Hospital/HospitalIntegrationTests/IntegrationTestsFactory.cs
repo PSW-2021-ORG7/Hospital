@@ -60,6 +60,7 @@ namespace HospitalIntegrationTests
         private void SeedData(AppDbContext context)
         {
             context.Database.EnsureDeleted();
+
             var equipmentItem = new EquipmentItem()
             {
                 Id = 1,
@@ -132,6 +133,121 @@ namespace HospitalIntegrationTests
                 Floor = 0
             };
 
+            var equipmentItemForSplitRenovation = new EquipmentItem()
+            {
+                Id = 2,
+                Name = "Thermometer"
+            };
+
+            var equipmentForSplitRenovation = new Equipment()
+            {
+                Id = 5,
+                RoomId = 5,
+                EquipmentItemId = 2,
+                EquipmentItem  = equipmentItemForSplitRenovation,
+                Quantity = 22,
+                ReservedQuantity = 0
+                
+            };
+
+            var roomForSplitRenovation = new Room()
+            {
+                Id = 5,
+                BuildingId = 1,
+                Name = "SplitRoom",
+                RoomDimensionsId = 5,
+                Status = RoomStatus.UNOCCUPIED,
+                Type = RoomType.DOCTOR_OFFICE,
+                Floor = 0,
+                Equipment = new List<Equipment> { equipmentForSplitRenovation }
+
+            };
+
+            var roomDimensionForSplitRenovation = new RoomDimensions()
+            {
+                Id = 5,
+                X = 650,
+                Y = 237,
+                Width = 210,
+                Height = 170
+            };
+
+            var equipmentItemForMergeRenovation1 = new EquipmentItem()
+            {
+                Id = 3,
+                Name = "Infusion pump",
+                Description = "An external infusion pump is a medical device used to deliver fluids into a patient’s body in a controlled manner."
+            };
+
+            var equipmentItemForMergeRenovation2 = new EquipmentItem()
+            {
+                Id = 4,
+                Name = "Gauze",
+                Description = "Gauze is a thin, translucent fabric with a loose open weave."
+            };
+
+            var equipmentForMergeRenovation1 = new Equipment()
+            {
+                Id = 6,
+                RoomId = 10,
+                EquipmentItemId = 3,
+                EquipmentItem = equipmentItemForMergeRenovation1,
+                Quantity = 50,
+                ReservedQuantity = 0
+            };
+
+            var equipmentForMergeRenovation2 = new Equipment()
+            {
+                Id = 7,
+                RoomId = 11,
+                EquipmentItemId = 4,
+                EquipmentItem = equipmentItemForMergeRenovation2,
+                Quantity = 100,
+                ReservedQuantity = 0
+            };
+
+            var roomForMergeRenovation1 = new Room()
+            {
+                Id = 10,
+                BuildingId = 1,
+                Name = "MergeRoom1",
+                RoomDimensionsId = 6,
+                Status = RoomStatus.UNOCCUPIED,
+                Type = RoomType.SURGERY_ROOM,
+                Floor = 0,
+                Equipment = new List<Equipment> { equipmentForMergeRenovation1 }
+            };
+
+            var roomForMergeRenovation2 = new Room()
+            {
+                Id = 11,
+                BuildingId = 1,
+                Name = "MergeRoom2",
+                RoomDimensionsId = 7,
+                Status = RoomStatus.UNOCCUPIED,
+                Type = RoomType.OPERATING_ROOM,
+                Floor = 0,
+                Equipment = new List<Equipment> { equipmentForMergeRenovation2 }
+            };
+
+            var roomDimensionForMergeRenovation1 = new RoomDimensions()
+            {
+                Id = 6,
+                X = 861,
+                Y = 237,
+                Width = 322,
+                Height = 170
+            };
+
+            var roomDimensionForMergeRenovation2 = new RoomDimensions()
+            {
+                Id = 7,
+                X = 1182,
+                Y = 237,
+                Width = 210,
+                Height = 170
+            };
+
             context.Room.Add(srcRoom1);
             context.Room.Add(srcRoom2);
             context.Room.Add(dstRoomWithEquipment);
@@ -139,6 +255,17 @@ namespace HospitalIntegrationTests
             context.Equipment.Add(srcRoomEquipment1);
             context.Equipment.Add(srcRoomEquipment2);
             context.Equipment.Add(dstRoomEquipment);
+
+            context.Room.Add(roomForSplitRenovation);
+            context.RoomDimension.Add(roomDimensionForSplitRenovation);
+            context.Equipment.Add(equipmentForSplitRenovation);
+
+            context.Room.Add(roomForMergeRenovation1);
+            context.Room.Add(roomForMergeRenovation2);
+            context.RoomDimension.Add(roomDimensionForMergeRenovation1);
+            context.RoomDimension.Add(roomDimensionForMergeRenovation2);
+            context.Equipment.Add(equipmentForMergeRenovation1);
+            context.Equipment.Add(equipmentForMergeRenovation2);
         }
 
     }

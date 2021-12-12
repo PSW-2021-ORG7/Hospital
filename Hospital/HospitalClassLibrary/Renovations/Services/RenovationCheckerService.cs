@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using HospitalClassLibrary.GraphicalEditor.Models;
@@ -15,12 +17,14 @@ namespace HospitalClassLibrary.Renovations.Services
     public class RenovationCheckerService : IRenovationCheckerService
     {
         private readonly ISplitRenovationRepository _splitRenovationRepository;
+        private readonly IMergeRenovationRepository _mergeRenovationRepository;
         private readonly IRoomRepository _roomRepository;
         private readonly IDoctorRepository _doctorRepository;
 
-        public RenovationCheckerService(ISplitRenovationRepository splitRenovationRepository, IRoomRepository roomRepository, IDoctorRepository doctorRepository)
+        public RenovationCheckerService(ISplitRenovationRepository splitRenovationRepository, IMergeRenovationRepository mergeRenovationRepository, IRoomRepository roomRepository, IDoctorRepository doctorRepository)
         {
             _splitRenovationRepository = splitRenovationRepository;
+            _mergeRenovationRepository = mergeRenovationRepository;
             _roomRepository = roomRepository;
             _doctorRepository = doctorRepository;
         }
@@ -38,6 +42,7 @@ namespace HospitalClassLibrary.Renovations.Services
         public async Task CheckRenovations()
         {
             await CheckSplitRenovations();
+            await CheckMergeRenovations();
         }
 
         private async Task CheckSplitRenovations()
@@ -66,17 +71,6 @@ namespace HospitalClassLibrary.Renovations.Services
                 await _roomRepository.DeleteAsync(room);
                 await _splitRenovationRepository.DeleteAsync(splitRenovation);
             }
-        }
-
-        private static bool IsUpdated(Room room)
-        {
-            return room.Status == RoomStatus.IS_BEING_RENOVATED;
-        }
-
-        private async Task Update(Room room)
-        {
-            room.Status = RoomStatus.IS_BEING_RENOVATED;
-            await _roomRepository.UpdateAsync(room);
         }
 
         private async Task CreateFirstNewRoom(SplitRenovation splitRenovation, Room room)
@@ -151,6 +145,94 @@ namespace HospitalClassLibrary.Renovations.Services
             {
                 var doctor = await _doctorRepository.GetByIdAsync(doctorId);
                 doctor.RoomId = await _roomRepository.GetRoomId(splitRenovation.FirstNewRoomInfo.RoomName);
+            }
+        }
+
+        private async Task CheckMergeRenovations()
+        {
+            foreach (var mergeRenovation in _mergeRenovationRepository.GetAllAsync().Result)
+            {
+                if (mergeRenovation.Start > DateTime.Now) continue;
+
+                var firstOldRoom = await _roomRepository.GetByIdAsync(mergeRenovation.FirstOldRoomId);
+                var secondOldRoom = await _roomRepository.GetByIdAsync(mergeRenovation.SecondOldRoomId);
+
+                if (!IsUpdated(firstOldRoom))
+                {
+                    await Update(firstOldRoom);
+                }
+
+                if (!IsUpdated(secondOldRoom))
+                {
+                    await Update(secondOldRoom);
+                }
+
+                if (mergeRenovation.End > DateTime.Now) continue;
+
+                await CreateNewRoom(mergeRenovation, firstOldRoom, secondOldRoom);
+
+                await UpdateEquipment(firstOldRoom, mergeRenovation);
+                await UpdateEquipment(secondOldRoom, mergeRenovation);
+
+                await _roomRepository.DeleteAsync(firstOldRoom);
+                await _roomRepository.DeleteAsync(secondOldRoom);
+                await _mergeRenovationRepository.DeleteAsync(mergeRenovation);
+            }
+        }
+
+        private static bool IsUpdated(Room room)
+        {
+            return room.Status == RoomStatus.IS_BEING_RENOVATED;
+        }
+
+        private async Task Update(Room room)
+        {
+            room.Status = RoomStatus.IS_BEING_RENOVATED;
+            await _roomRepository.UpdateAsync(room);
+        }
+
+        private async Task CreateNewRoom(MergeRenovation mergeRenovation, Room firstOldRoom, Room secondOldRoom)
+        {
+            var dimensions = new List<RoomDimensions> {firstOldRoom.RoomDimensions, secondOldRoom.RoomDimensions};
+            var x = dimensions.OrderBy(d => d.X).First().X;
+            var y = dimensions.OrderBy(d => d.Y).First().Y;
+            var width = firstOldRoom.RoomDimensions.AreHorizontallyAligned(secondOldRoom.RoomDimensions)
+                ? firstOldRoom.RoomDimensions.Width + secondOldRoom.RoomDimensions.Width
+                : firstOldRoom.RoomDimensions.Width;
+            var height = firstOldRoom.RoomDimensions.AreVerticallyAligned(secondOldRoom.RoomDimensions)
+                ? firstOldRoom.RoomDimensions.Height + secondOldRoom.RoomDimensions.Height
+                : firstOldRoom.RoomDimensions.Height;
+
+            var newRoom = new Room()
+            {
+                Name = mergeRenovation.NewRoomInfo.RoomName,
+                Type = mergeRenovation.NewRoomInfo.RoomType,
+                Status = mergeRenovation.NewRoomInfo.RoomStatus,
+                Floor = firstOldRoom.Floor,
+                RoomDimensions = new RoomDimensions()
+                {
+                    X = x,
+                    Y = y,
+                    Width = width,
+                    Height = height
+                },
+                BuildingId = firstOldRoom.BuildingId
+            };
+            await _roomRepository.CreateAsync(newRoom);
+        }
+
+        private async Task UpdateEquipment(Room room, MergeRenovation mergeRenovation)
+        {
+            if (room.Equipment.Count > 0)
+            {
+                var roomId = await _roomRepository.GetRoomId(mergeRenovation.NewRoomInfo.RoomName);
+
+                foreach (var equipment in room.Equipment)
+                {
+                    equipment.RoomId = roomId;
+                }
+
+                await _roomRepository.UpdateAsync(room);
             }
         }
 
