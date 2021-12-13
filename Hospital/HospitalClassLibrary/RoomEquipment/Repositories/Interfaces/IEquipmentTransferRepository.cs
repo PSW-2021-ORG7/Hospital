@@ -10,5 +10,6 @@ namespace HospitalClassLibrary.RoomEquipment.Repositories.Interfaces
     {
         IEnumerable<EquipmentTransfer> GetAll(DateTimeRange dateTimeRange);
         Task<IEnumerable<EquipmentTransfer>> GetAllByRoomIdAsync(int roomId);
+        Task<IEnumerable<DateTimeRange>> GetAllDates(DateTimeRange dateTimeRange, int firstRoomId, int secondRoomId);
     }
 }

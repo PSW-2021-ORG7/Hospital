@@ -9,6 +9,6 @@ namespace HospitalClassLibrary.Schedule.Repositories.Interfaces
     public interface IWorkdayRepository : IGenericRepository<Workday>
     {
         Task<IEnumerable<Workday>> GetWorkdays(DateTimeRange dateTimeRange, int doctorId);
-        IEnumerable<Appointment> GetAppointments(DateTimeRange dateTimeRange, int srcRoomDoctorId, int dstRoomDoctorId);
+        Task<IEnumerable<Appointment>> GetAppointments(DateTimeRange dateTimeRange, int srcRoomDoctorId, int dstRoomDoctorId);
     }
 }

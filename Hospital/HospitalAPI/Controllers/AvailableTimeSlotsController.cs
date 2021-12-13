@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using HospitalClassLibrary.RoomEquipment.Models;
+using HospitalClassLibrary.Schedule.Models;
 using HospitalClassLibrary.Schedule.Services.Interfaces;
 using HospitalClassLibrary.Shared.Models;
 
@@ -18,7 +18,7 @@ namespace HospitalAPI.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<DateTimeRange> GetAvailableTimeSlots([FromQuery] EquipmentTransferRequirements requirements)
+        public IEnumerable<DateTimeRange> GetAvailableTimeSlots([FromQuery] TimeSlotsRequirements requirements)
         {
             return _workdayService.GetAvailableTimeSlots(requirements);
         }
