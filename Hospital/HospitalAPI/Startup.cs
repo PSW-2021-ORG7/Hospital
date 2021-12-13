@@ -25,6 +25,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace HospitalAPI
 {
@@ -41,8 +42,10 @@ namespace HospitalAPI
         {
             services.AddControllers();
 
+            string connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING_H");
+            if (connectionString == null) connectionString = Configuration.GetConnectionString("APIConnection");
             services.AddDbContext<AppDbContext>(options =>
-                options.UseNpgsql(Configuration.GetConnectionString("APIConnection"), providerOptions => providerOptions.EnableRetryOnFailure())
+                options.UseNpgsql(connectionString, providerOptions => providerOptions.EnableRetryOnFailure())
             );
 
             RegisterRepositories(services);
