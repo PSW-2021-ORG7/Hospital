@@ -49,8 +49,6 @@ namespace HospitalClassLibrary.Schedule.Services
 
             while (end <= finalDateTime && availableTimeSlots.Count <= MaxNumOfTimeSlots)
             {
-                if (start >= startOfFirstRenovation) break;
-
                 if (HasReachedEndOfWorkHours(start, requirements.Duration) && !dayLongDuration)
                 {
                     start = start.AddHours(NonWorkingHours + WorkHoursEnd - start.Hour);
@@ -59,6 +57,8 @@ namespace HospitalClassLibrary.Schedule.Services
                 var timeSlot = new DateTimeRange() {Start = start, End = end};
                 start = dayLongDuration ? start.AddDays(1) : timeSlot.End;
                 end = start.Add(requirements.Duration);
+
+                if (start >= startOfFirstRenovation) break;
 
                 if (Overlaps(timeSlot, appointments, transfers)) continue;
 

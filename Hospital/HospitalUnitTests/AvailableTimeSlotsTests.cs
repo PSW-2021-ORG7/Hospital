@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using HospitalClassLibrary.Renovations.Models;
 using HospitalClassLibrary.Renovations.Repositories.Interfaces;
 using HospitalClassLibrary.RoomEquipment.Models;
 using HospitalClassLibrary.RoomEquipment.Repositories.Interfaces;
@@ -63,6 +64,18 @@ namespace HospitalUnitTests
             timeSlots.All(ts => !ts.Overlaps(transfer.TransferDate, transfer.TransferDate.AddMinutes(transfer.TransferDuration))).ShouldBe(true);
         }
 
+        [Fact]
+        public void Checks_if_time_slots_overlap_renovation()
+        {
+            var requirements = GetRenovationRequirements();
+            var splitRenovation = GetRenovation();
+            var service = CreateWorkdayService(requirements);
+
+            var timeSlots = service.GetAvailableTimeSlots(requirements);
+
+            timeSlots.All(ts => ts.End < splitRenovation.Start).ShouldBe(true);
+        }
+
         private static WorkdayService CreateWorkdayService(TimeSlotsRequirements requirements)
         {
             var roomStubRepository = new Mock<IRoomRepository>();
@@ -92,12 +105,21 @@ namespace HospitalUnitTests
                     End = new DateTime(2021, 11, 29, 19, 0, 0)
                 }
             };
+            var splitRenovationDates = new List<DateTimeRange>
+            {
+                new DateTimeRange()
+                {
+                    Start = new DateTime(2021, 12, 23, 0, 0, 0),
+                    End = new DateTime(2021, 12, 23, 21, 0, 0)
+                }
+            };
 
             var workdayStubRepository = new Mock<IWorkdayRepository>();
             workdayStubRepository.Setup(m => m.GetAppointments(It.IsAny<DateTimeRange>(), 1, 2)).ReturnsAsync(appointments);
             var transferStubRepository = new Mock<IEquipmentTransferRepository>();
             transferStubRepository.Setup(m => m.GetAllDates(It.IsAny<DateTimeRange>(), 1, 2)).ReturnsAsync(transfers);
             var splitRenovationStubRepository = new Mock<ISplitRenovationRepository>();
+            splitRenovationStubRepository.Setup(m => m.GetAllDates(4, 0)).ReturnsAsync(splitRenovationDates);
             var mergeRenovationStubRepository = new Mock<IMergeRenovationRepository>();
             
             WorkdayService service = new WorkdayService(workdayStubRepository.Object, transferStubRepository.Object, roomStubRepository.Object, splitRenovationStubRepository.Object, mergeRenovationStubRepository.Object);
@@ -113,6 +135,19 @@ namespace HospitalUnitTests
                 Duration = new TimeSpan(0, 60 ,0),
                 FirstRoomId = 1,
                 SecondRoomId = 2
+            };
+            return requirements;
+        }
+
+        private static TimeSlotsRequirements GetRenovationRequirements()
+        {
+            var requirements = new TimeSlotsRequirements()
+            {
+                Start = new DateTime(2021, 12, 19, 0, 0, 0),
+                End = new DateTime(2021, 12, 25, 0, 0, 0),
+                Duration = new TimeSpan(0, 60, 0),
+                FirstRoomId = 4,
+                SecondRoomId = 0
             };
             return requirements;
         }
@@ -137,6 +172,17 @@ namespace HospitalUnitTests
                 TransferDuration = 60
             };
             return transfer;
+        }
+
+        private static SplitRenovation GetRenovation()
+        {
+            var renovation = new SplitRenovation()
+            {
+                RoomId = 4,
+                Start = new DateTime(2021, 12, 23, 0, 0, 0),
+                End = new DateTime(2021, 12, 23, 21, 0, 0)
+            };
+            return renovation;
         }
 
         public static IEnumerable<object[]> Data()
