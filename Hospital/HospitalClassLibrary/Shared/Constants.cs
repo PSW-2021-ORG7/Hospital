@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace HospitalClassLibrary.Shared
+﻿namespace HospitalClassLibrary.Shared
 {
     public static class Constants
     {

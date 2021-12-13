@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using HospitalClassLibrary.GraphicalEditor.Models;
 using HospitalClassLibrary.Renovations.Models;
@@ -57,12 +57,12 @@ namespace HospitalClassLibrary.Renovations.Services
         {
             Room room1 = await _roomRepository.GetByIdAsync(r.FirstOldRoomId);
             Room room2 = await _roomRepository.GetByIdAsync(r.SecondOldRoomId);
-            bool canMergeVertically = checkVerticalMerge(room1.RoomDimensions, room2.RoomDimensions);
-            bool canMergeHorizontally = checkHorizontalMerge(room1.RoomDimensions, room2.RoomDimensions);
+            bool canMergeVertically = CheckVerticalMerge(room1.RoomDimensions, room2.RoomDimensions);
+            bool canMergeHorizontally = CheckHorizontalMerge(room1.RoomDimensions, room2.RoomDimensions);
             return canMergeVertically || canMergeHorizontally;
         }
 
-        private bool checkVerticalMerge(RoomDimensions roomDimensions1, RoomDimensions roomDimensions2)
+        private bool CheckVerticalMerge(RoomDimensions roomDimensions1, RoomDimensions roomDimensions2)
         {
             if (roomDimensions1.AreVerticallyAligned(roomDimensions2) &&
                 roomDimensions1.Width.Equals(roomDimensions2.Width))
@@ -76,7 +76,7 @@ namespace HospitalClassLibrary.Renovations.Services
             return false;
         }
 
-        private bool checkHorizontalMerge(RoomDimensions roomDimensions1, RoomDimensions roomDimensions2)
+        private bool CheckHorizontalMerge(RoomDimensions roomDimensions1, RoomDimensions roomDimensions2)
         {
             if (roomDimensions1.AreHorizontallyAligned(roomDimensions2) &&
                 roomDimensions2.Height.Equals(roomDimensions2.Height))
@@ -98,6 +98,14 @@ namespace HospitalClassLibrary.Renovations.Services
         public async Task<IEnumerable<MergeRenovation>> GetAllMergeRenovationsByRoomId(int id)
         {
             return await _mergeRenovationRepository.GetAllByRoomIdAsync(id);
+        }
+
+        public async Task<bool> HasScheduledRenovations(int roomId)
+        {
+            var splitRenovations = await _splitRenovationRepository.GetAllByRoomIdAsync(roomId);
+            var mergeRenovations = await _mergeRenovationRepository.GetAllByRoomIdAsync(roomId);
+
+            return splitRenovations.ToList().Count > 0 || mergeRenovations.ToList().Count > 0;
         }
 
     }

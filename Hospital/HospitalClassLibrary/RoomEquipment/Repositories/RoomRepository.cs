@@ -29,11 +29,13 @@ namespace HospitalClassLibrary.RoomEquipment.Repositories
         {
             var rooms = Context.Room.Where(r => r.Id == roomId).Include(r => r.Doctor).ToList();
 
+            if (rooms.Count <= 0) return -1;
             if (rooms.First().Doctor == null)
             {
                 return -1;
             }
             return rooms.First().Doctor.Id;
+
         }
 
         public async Task<int> GetRoomId(string name)

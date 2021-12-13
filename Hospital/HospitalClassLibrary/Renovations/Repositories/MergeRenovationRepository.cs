@@ -3,9 +3,10 @@ using HospitalClassLibrary.Renovations.Models;
 using HospitalClassLibrary.Renovations.Repositories.Interfaces;
 using HospitalClassLibrary.Shared.Repositories;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Threading.Tasks;
+using HospitalClassLibrary.Shared.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace HospitalClassLibrary.Renovations.Repositories
 {
@@ -27,5 +28,12 @@ namespace HospitalClassLibrary.Renovations.Repositories
                 r.SecondOldRoomId == roomId)
                 .ToListAsync();
         }
+        
+        public async Task<IEnumerable<DateTimeRange>> GetAllDates(int firstRoomId, int secondRoomId)
+        {
+            return await Context.MergeRenovation.Where(r => r.FirstOldRoomId == firstRoomId || r.FirstOldRoomId == secondRoomId || r.SecondOldRoomId == firstRoomId || r.SecondOldRoomId == secondRoomId)
+                .Select(r => new DateTimeRange(){Start = r.Start, End = r.End}).ToListAsync();
+        }
+
     }
 }

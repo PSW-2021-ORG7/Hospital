@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using HospitalClassLibrary.Data;
 using HospitalClassLibrary.Renovations.Models;
 using HospitalClassLibrary.Renovations.Repositories.Interfaces;
+using HospitalClassLibrary.Shared.Models;
 using HospitalClassLibrary.Shared.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,6 +24,11 @@ namespace HospitalClassLibrary.Renovations.Repositories
         public async Task<IEnumerable<SplitRenovation>> GetAllByRoomIdAsync(int roomId)
         {
             return await Context.SplitRenovation.Where(r => r.RoomId == roomId).ToListAsync();
+        }
+        
+        public async Task<IEnumerable<DateTimeRange>> GetAllDates(int firstRoomId, int secondRoomId)
+        {
+            return await Context.SplitRenovation.Where(r => r.RoomId == firstRoomId || r.RoomId == secondRoomId).Select(r => new DateTimeRange() { Start = r.Start, End = r.End }).ToListAsync();
         }
     }
 }

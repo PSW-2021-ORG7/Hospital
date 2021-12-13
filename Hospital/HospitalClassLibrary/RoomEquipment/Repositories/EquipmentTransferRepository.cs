@@ -24,11 +24,14 @@ namespace HospitalClassLibrary.RoomEquipment.Repositories
                 .ToListAsync();
         }
 
-        public IEnumerable<EquipmentTransfer> GetAll(DateTimeRange dateTimeRange)
+        public async Task<IEnumerable<DateTimeRange>> GetAllDates(DateTimeRange dateTimeRange, int firstRoomId, int secondRoomId)
         {
-            return Context.EquipmentTransfer.Where(t =>
+            return await Context.EquipmentTransfer.Where(t =>
                 t.TransferDate >= dateTimeRange.Start &&
-                t.TransferDate.AddMinutes(t.TransferDuration) <= dateTimeRange.End).ToList();
+                t.TransferDate.AddMinutes(t.TransferDuration) <= dateTimeRange.End &&
+                (t.SourceRoomId == firstRoomId || t.DestinationRoomId == firstRoomId || t.SourceRoomId == secondRoomId || t.DestinationRoomId == secondRoomId))
+                .Select(t => new DateTimeRange() {Start = t.TransferDate, End = t.TransferDate.AddMinutes(t.TransferDuration)})
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<EquipmentTransfer>> GetAllByRoomIdAsync(int roomId)

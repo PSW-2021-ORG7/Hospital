@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using AutoMapper;
 using HospitalClassLibrary.Renovations.Models;
 using HospitalClassLibrary.Renovations.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +11,6 @@ namespace HospitalAPI.Controllers
     public class RenovationsController : ControllerBase
     {
         private readonly IRenovationService _renovationService;
-        private readonly IMapper _mapper;
 
         public RenovationsController(IRenovationService renovationService)
         {
@@ -25,6 +23,11 @@ namespace HospitalAPI.Controllers
             if (renovation == null)
             {
                 return BadRequest();
+            }
+
+            if (_renovationService.HasScheduledRenovations(renovation.RoomId).Result)
+            {
+                return BadRequest($"Room with id {renovation.RoomId} already has a scheduled renovation");
             }
 
             if (renovation.FirstNewRoomInfo.RoomName == renovation.SecondNewRoomInfo.RoomName)
@@ -46,7 +49,15 @@ namespace HospitalAPI.Controllers
                 return BadRequest();
             }
 
-            //TODO: Check if room name already exists
+            if (_renovationService.HasScheduledRenovations(renovation.FirstOldRoomId).Result)
+            {
+                return BadRequest($"Room with id {renovation.FirstOldRoomId} already has a scheduled renovation");
+            }
+
+            if (_renovationService.HasScheduledRenovations(renovation.SecondOldRoomId).Result)
+            {
+                return BadRequest($"Room with id {renovation.SecondOldRoomId} already has a scheduled renovation");
+            }
 
             if (!await _renovationService.CanBeMerged(renovation))
             {
