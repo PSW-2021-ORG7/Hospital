@@ -50,14 +50,17 @@ namespace HospitalAPI.Controllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteTransfer(EquipmentTransfer e)
+        public async Task<IActionResult> DeleteTransfer(EquipmentTransferDto e)
         {
-            if (e.TransferDate.Subtract(DateTime.Now).Days < 1)
+            var transfer = _mapper.Map<EquipmentTransfer>(e);
+            
+            if (transfer.TransferDate.Subtract(DateTime.Now).Days < 1)
             {
                 return BadRequest("Chosen equipment transfer cannot be canceled");
             }
+            
 
-            await _equipmentTransferService.Delete(e);
+            await _equipmentTransferService.Delete(transfer);
 
             return NoContent();
         }
