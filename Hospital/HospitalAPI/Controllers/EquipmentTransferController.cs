@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -51,6 +52,11 @@ namespace HospitalAPI.Controllers
         [HttpDelete]
         public async Task<IActionResult> DeleteTransfer(EquipmentTransfer e)
         {
+            if (e.TransferDate.Subtract(DateTime.Now).Days < 1)
+            {
+                return BadRequest("Chosen equipment transfer cannot be canceled");
+            }
+
             await _equipmentTransferService.Delete(e);
 
             return NoContent();

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using HospitalClassLibrary.Renovations.Models;
 using HospitalClassLibrary.Renovations.Services.Interfaces;
@@ -97,6 +98,11 @@ namespace HospitalAPI.Controllers
         [HttpDelete("splitRenovations")]
         public async Task<IActionResult> DeleteSplitRenovation(SplitRenovation renovation)
         {
+            if (renovation.Start.Subtract(DateTime.Now).Days < 1)
+            {
+                return BadRequest("Chosen renovation cannot be canceled");
+            }
+
             await _renovationService.Delete(renovation);
 
             return NoContent();
@@ -105,6 +111,11 @@ namespace HospitalAPI.Controllers
         [HttpDelete("mergeRenovations")]
         public async Task<IActionResult> DeleteMergeRenovation(MergeRenovation renovation)
         {
+            if (renovation.Start.Subtract(DateTime.Now).Days < 1)
+            {
+                return BadRequest("Chosen renovation cannot be canceled");
+            }
+
             await _renovationService.Delete(renovation);
 
             return NoContent();
