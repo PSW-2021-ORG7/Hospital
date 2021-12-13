@@ -8,7 +8,6 @@ namespace HospitalClassLibrary.RoomEquipment.Repositories.Interfaces
 {
     public interface IEquipmentTransferRepository : IGenericRepository<EquipmentTransfer>
     {
-        IEnumerable<EquipmentTransfer> GetAll(DateTimeRange dateTimeRange);
         Task<IEnumerable<EquipmentTransfer>> GetAllByRoomIdAsync(int roomId);
         Task<IEnumerable<DateTimeRange>> GetAllDates(DateTimeRange dateTimeRange, int firstRoomId, int secondRoomId);
     }
