@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using HospitalClassLibrary.Data;
 using HospitalClassLibrary.Renovations.Models;
@@ -17,6 +18,11 @@ namespace HospitalClassLibrary.Renovations.Repositories
         public new async Task<IEnumerable<SplitRenovation>> GetAllAsync()
         {
             return await Context.SplitRenovation.Include(r => r.FirstNewRoomInfo).Include(r => r.SecondNewRoomInfo).ToListAsync();
+        }
+
+        public async Task<IEnumerable<SplitRenovation>> GetAllByRoomIdAsync(int roomId)
+        {
+            return await Context.SplitRenovation.Where(r => r.RoomId == roomId).ToListAsync();
         }
     }
 }

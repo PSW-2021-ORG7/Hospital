@@ -71,5 +71,17 @@ namespace HospitalAPI.Controllers
             return await _renovationService.GetAllMergeRenovations();
         }
 
+        [HttpGet("splitRenovations/{id}")]
+        public async Task<IEnumerable<SplitRenovation>> GetSplitRenovationsForRoom(int id)
+        {
+            return await _renovationService.GetAllSplitRenovationsByRoomId(id);
+        }
+
+        [HttpGet("mergeRenovations/{id}")]
+        public async Task<IEnumerable<MergeRenovation>> GetMergeRenovationsForRoom(int id)
+        {
+            return await _renovationService.GetAllMergeRenovationsByRoomId(id);
+        }
+
     }
 }

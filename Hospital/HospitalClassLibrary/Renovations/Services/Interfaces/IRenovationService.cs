@@ -15,5 +15,8 @@ namespace HospitalClassLibrary.Renovations.Services.Interfaces
         Task Create(MergeRenovation r);
         Task Delete(MergeRenovation r);
         Task<bool> CanBeMerged(MergeRenovation r);
+        Task<IEnumerable<SplitRenovation>> GetAllSplitRenovationsByRoomId(int id);
+        Task<IEnumerable<MergeRenovation>> GetAllMergeRenovationsByRoomId(int id);
+
     }
 }

@@ -90,5 +90,15 @@ namespace HospitalClassLibrary.Renovations.Services
             return false;
         }
 
+        public async Task<IEnumerable<SplitRenovation>> GetAllSplitRenovationsByRoomId(int id)
+        {
+            return await _splitRenovationRepository.GetAllByRoomIdAsync(id);
+        }
+
+        public async Task<IEnumerable<MergeRenovation>> GetAllMergeRenovationsByRoomId(int id)
+        {
+            return await _mergeRenovationRepository.GetAllByRoomIdAsync(id);
+        }
+
     }
 }

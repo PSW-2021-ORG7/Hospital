@@ -30,5 +30,12 @@ namespace HospitalClassLibrary.RoomEquipment.Repositories
                 t.TransferDate >= dateTimeRange.Start &&
                 t.TransferDate.AddMinutes(t.TransferDuration) <= dateTimeRange.End).ToList();
         }
+
+        public async Task<IEnumerable<EquipmentTransfer>> GetAllByRoomIdAsync(int roomId)
+        {
+            return await Context.EquipmentTransfer.Where(t =>
+                t.SourceRoomId == roomId ||
+                t.DestinationRoomId == roomId).Include(t => t.SourceRoom).Include(t => t.DestinationRoom).ToListAsync();
+        }
     }
 }
