@@ -26,6 +26,11 @@ namespace HospitalClassLibrary.RoomEquipment.Services
             await _equipmentRepository.UpdateAsync(equipment);
         }
 
+        public async Task Delete(EquipmentTransfer e)
+        {
+            await _equipmentTransferRepository.DeleteAsync(e);
+        }
+
         public async Task<IEnumerable<EquipmentTransfer>> GetAll()
         {
             return await _equipmentTransferRepository.GetAllAsync();

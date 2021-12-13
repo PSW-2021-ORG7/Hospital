@@ -50,7 +50,7 @@ namespace HospitalClassLibrary.Renovations.Services
 
         public async Task Delete(MergeRenovation r)
         {
-            await _mergeRenovationRepository.CreateAsync(r);
+            await _mergeRenovationRepository.DeleteAsync(r);
         }
 
         public async Task<bool> CanBeMerged(MergeRenovation r)
