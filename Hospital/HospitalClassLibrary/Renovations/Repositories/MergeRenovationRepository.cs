@@ -5,6 +5,7 @@ using HospitalClassLibrary.Shared.Repositories;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace HospitalClassLibrary.Renovations.Repositories
 {
@@ -19,5 +20,12 @@ namespace HospitalClassLibrary.Renovations.Repositories
             return await Context.MergeRenovation.Include(r => r.NewRoomInfo).ToListAsync();
         }
 
+        public async Task<IEnumerable<MergeRenovation>> GetAllByRoomIdAsync(int roomId)
+        {
+            return await Context.MergeRenovation.Where(
+                r => r.FirstOldRoomId == roomId ||
+                r.SecondOldRoomId == roomId)
+                .ToListAsync();
+        }
     }
 }

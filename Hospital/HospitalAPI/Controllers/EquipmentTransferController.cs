@@ -40,5 +40,12 @@ namespace HospitalAPI.Controllers
             var transfers = await _equipmentTransferService.GetAll();
             return _mapper.Map<IEnumerable<EquipmentTransferDto>>(transfers);
         }
+
+        [HttpGet("room/{id}")]
+        public async Task<IEnumerable<EquipmentTransferDto>> GetTransfersForRoom(int id)
+        {
+            var transfers = await _equipmentTransferService.GetAllByRoomId(id);
+            return _mapper.Map<IEnumerable<EquipmentTransferDto>>(transfers);
+        }
     }
 }

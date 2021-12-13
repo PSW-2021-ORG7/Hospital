@@ -30,5 +30,10 @@ namespace HospitalClassLibrary.RoomEquipment.Services
         {
             return await _equipmentTransferRepository.GetAllAsync();
         }
+
+        public async Task<IEnumerable<EquipmentTransfer>> GetAllByRoomId(int roomId)
+        {
+            return await _equipmentTransferRepository.GetAllByRoomIdAsync(roomId);
+        }
     }
 }
