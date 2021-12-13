@@ -7,7 +7,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using HospitalClassLibrary.Shared.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace HospitalClassLibrary.Renovations.Repositories
 {
