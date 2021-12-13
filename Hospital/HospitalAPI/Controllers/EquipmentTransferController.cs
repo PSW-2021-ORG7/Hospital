@@ -47,5 +47,13 @@ namespace HospitalAPI.Controllers
             var transfers = await _equipmentTransferService.GetAllByRoomId(id);
             return _mapper.Map<IEnumerable<EquipmentTransferDto>>(transfers);
         }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteTransfer(EquipmentTransfer e)
+        {
+            await _equipmentTransferService.Delete(e);
+
+            return NoContent();
+        }
     }
 }

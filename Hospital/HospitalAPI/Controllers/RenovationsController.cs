@@ -94,5 +94,20 @@ namespace HospitalAPI.Controllers
             return await _renovationService.GetAllMergeRenovationsByRoomId(id);
         }
 
+        [HttpDelete("splitRenovations")]
+        public async Task<IActionResult> DeleteSplitRenovation(SplitRenovation renovation)
+        {
+            await _renovationService.Delete(renovation);
+
+            return NoContent();
+        }
+
+        [HttpDelete("mergeRenovations")]
+        public async Task<IActionResult> DeleteMergeRenovation(MergeRenovation renovation)
+        {
+            await _renovationService.Delete(renovation);
+
+            return NoContent();
+        }
     }
 }

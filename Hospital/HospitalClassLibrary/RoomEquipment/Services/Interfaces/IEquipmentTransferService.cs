@@ -9,5 +9,6 @@ namespace HospitalClassLibrary.RoomEquipment.Services.Interfaces
         Task Create(EquipmentTransfer e);
         Task<IEnumerable<EquipmentTransfer>> GetAll();
         Task<IEnumerable<EquipmentTransfer>> GetAllByRoomId(int roomId);
+        Task Delete(EquipmentTransfer e);
     }
 }
