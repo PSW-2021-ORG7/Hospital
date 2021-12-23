@@ -21,6 +21,8 @@
     <Compile Remove="Migrations\20211123161209_TestMigration.Designer.cs" />
     <Compile Remove="Migrations\20211209144311_AddSplitRenovationClass.cs" />
     <Compile Remove="Migrations\20211209144311_AddSplitRenovationClass.Designer.cs" />
+    <Compile Remove="Migrations\20211223184537_MedicineMigration.cs" />
+    <Compile Remove="Migrations\20211223184537_MedicineMigration.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

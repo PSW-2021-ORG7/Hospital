@@ -23,17 +23,6 @@ namespace HospitalClassLibrary.Medicine.Services
             return false;
         }
 
-        public bool CheckMedicineQuantity(MedicineQuantityCheck medicineQuantityCheck)
-        {
-            if (medicineRepository.MedicineExists(medicineQuantityCheck))
-            {
-                Models.Medicine foundMedicine = GetByNameAndDose(medicineQuantityCheck.Name, medicineQuantityCheck.DosageInMg);
-                if (medicineInventoryRepository.CheckMedicineQuantity(new MedicineInventory(foundMedicine.Id, medicineQuantityCheck.Quantity)))
-                    return true;
-            }
-
-            return false;
-        }
 
         public Models.Medicine GetByNameAndDose(string name, int dose)
         {
@@ -59,19 +48,9 @@ namespace HospitalClassLibrary.Medicine.Services
                                                  .ToList();
         }
 
-        //public List<Models.Medicine> MedicineFilterDosageResults(MedicineDosageFilter option)
-        //{
-        //    int from;
-        //    int to;
-        //    switch((int)option)
-        //    {
-        //        case 0: from = 0; to = 200; break;
-        //        case 1: from = 200; to = 400; break;
-        //        case 2: from = 400; to = 600; break;
-        //        default: from = 600; to = int.MaxValue; break;
-        //    }
-
-        //    return medicineRepository.GetAll().Where(m => m.DosageInMilligrams >= from && m.DosageInMilligrams <= to).ToList();
-        //}
+        public bool MedicineExists(Models.Medicine medicine)
+        {
+            return medicineRepository.MedicineExists(medicine);
+        }
     }
 }

@@ -10,21 +10,19 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HospitalAPI.Controllers
 {
-
-    [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
+    [ApiController] 
     public class MedicineController : Controller
     {
-        private readonly IConfiguration _configuration;
         private readonly IMapper _mapper;
         private MedicineService _medicineService;
         private MedicineInventoryService _medicineInventoryService;
         private MedicineCombinationService _medicineCombinationService;
 
-        public MedicineController(IConfiguration configuration, IMapper mapper, IMedicineRepository medicineRepository,
+        public MedicineController(IMapper mapper, IMedicineRepository medicineRepository,
             IMedicineInventoryRepository medicineInventoryRepository, IMedicineCombinationRepository medicineCombinationRepository)
         {
-            _configuration = configuration;
+       
             _mapper = mapper;
             _medicineService = new MedicineService(medicineRepository, medicineInventoryRepository);
             _medicineInventoryService = new MedicineInventoryService(medicineInventoryRepository);
@@ -83,24 +81,23 @@ namespace HospitalAPI.Controllers
         */
 
 
-        // INVENTORY
-
-        [HttpPost]
-        [Route("/inventory/check")]
-        public IActionResult CheckIfAvailable([FromBody] MedicineQuantityCheck medicineQuantityCheck)
+  
+        [HttpPut("inventory/order/{quantity}")]
+        public IActionResult ProcessOrder([FromBody] Medicine medicine, int quantity)
         {
-            if (_medicineService.CheckMedicineQuantity(medicineQuantityCheck))
-                return Ok(true);
+
+            if (_medicineService.MedicineExists(medicine))
+            {
+                Medicine foundMedicine = _medicineService.GetByNameAndDose(medicine.Name, medicine.DosageInMilligrams);
+                return Ok(_medicineInventoryService.Update(new MedicineInventory(foundMedicine.Id, quantity)));
+            }
+            else
+                if (_medicineService.Save(medicine))
+                return Ok(_medicineInventoryService.Save(new MedicineInventory(medicine.Id, quantity)));
+
 
             return BadRequest(false);
-        }
 
-
-        [HttpPut]
-        [Route("/inventory/{id}")]
-        public IActionResult UpdateInventory([FromBody] MedicineInventory medicineInventory)
-        {
-            return Ok(_medicineInventoryService.Update(medicineInventory));
         }
 
     }

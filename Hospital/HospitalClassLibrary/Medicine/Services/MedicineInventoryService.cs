@@ -12,9 +12,9 @@ namespace backend.Services
             this.medicineInventoryRepository = medicineInventoryRepository;
         }
 
-        public void Save(MedicineInventory medicineInventory)
+        public bool Save(MedicineInventory medicineInventory)
         {
-            medicineInventoryRepository.Save(medicineInventory);
+            return medicineInventoryRepository.Save(medicineInventory);
         }
 
         public bool Update(MedicineInventory medicineInventory)

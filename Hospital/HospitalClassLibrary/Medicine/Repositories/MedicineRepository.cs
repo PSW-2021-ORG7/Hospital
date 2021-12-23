@@ -14,9 +14,9 @@ namespace HospitalClassLibrary.Medicine.Repositories
 
         public MedicineRepository(AppDbContext dataContext) => _dataContext = dataContext;
 
-        public bool MedicineExists(MedicineQuantityCheck medicineQuantityCheck)
+        public bool MedicineExists(Models.Medicine medicine)
         {
-            if (_dataContext.Medicine.Any(m => m.Name.ToLower().Equals(medicineQuantityCheck.Name.ToLower()) && m.DosageInMilligrams.Equals(medicineQuantityCheck.DosageInMg))) return true;
+            if (_dataContext.Medicine.Any(m => m.Name.ToLower().Equals(medicine.Name.ToLower()) && m.DosageInMilligrams.Equals(medicine.DosageInMilligrams))) return true;
             return false;
         }
 
@@ -44,7 +44,7 @@ namespace HospitalClassLibrary.Medicine.Repositories
         public bool Save(Models.Medicine medicine)
         {
             if (_dataContext.Medicine.Any(m => m.Name == medicine.Name && m.DosageInMilligrams == medicine.DosageInMilligrams)) return false;
-            ExcludeIngredientDuplicates(medicine);
+            //ExcludeIngredientDuplicates(medicine);
             _dataContext.Add(medicine);
             _dataContext.SaveChanges();
             return true;
@@ -81,5 +81,6 @@ namespace HospitalClassLibrary.Medicine.Repositories
         {
             return _dataContext.Medicine.Include(m => m.Ingredients).SingleOrDefault(m => m.Id.Equals(id));
         }
+
     }
 }
