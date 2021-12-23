@@ -36,7 +36,9 @@ namespace HospitalClassLibrary.Data
                 .HasIndex(i => i.Name)
                 .IsUnique();
 
+            modelBuilder.Ignore<Ingredient>();
 
+      
             modelBuilder.Entity<Building>().HasData(
                new Building
                {
