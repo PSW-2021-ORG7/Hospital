@@ -10,7 +10,7 @@ namespace HospitalClassLibrary.Shared.Services
     {
         public Task<bool> CanBeCancelled(DateTime dateTime)
         {
-            return Task.FromResult(!(dateTime.Subtract(DateTime.Now).Days < 1));
+            return Task.FromResult(dateTime.Subtract(DateTime.Now).Days >= 1);
         }
     }
 }
