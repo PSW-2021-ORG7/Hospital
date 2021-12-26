@@ -57,7 +57,7 @@ namespace HospitalAPI.Controllers
         {
             var transfer = _mapper.Map<EquipmentTransfer>(e);
             
-            if (await _cancellationService.CanBeCancelled(transfer.TransferDate))
+            if (!await _cancellationService.CanBeCancelled(transfer.TransferDate))
             {
                 return BadRequest("Chosen equipment transfer cannot be canceled");
             }

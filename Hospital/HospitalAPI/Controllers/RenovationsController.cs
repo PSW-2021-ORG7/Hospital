@@ -101,7 +101,7 @@ namespace HospitalAPI.Controllers
         [HttpDelete("splitRenovations")]
         public async Task<IActionResult> DeleteSplitRenovation(SplitRenovation renovation)
         {
-            if (await _cancellationService.CanBeCancelled(renovation.Start))
+            if (!await _cancellationService.CanBeCancelled(renovation.Start))
             {
                 return BadRequest("Chosen renovation cannot be canceled");
             }
@@ -114,7 +114,7 @@ namespace HospitalAPI.Controllers
         [HttpDelete("mergeRenovations")]
         public async Task<IActionResult> DeleteMergeRenovation(MergeRenovation renovation)
         {
-            if (await _cancellationService.CanBeCancelled(renovation.Start))
+            if (!await _cancellationService.CanBeCancelled(renovation.Start))
             {
                 return BadRequest("Chosen renovation cannot be canceled");
             }
