@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using HospitalClassLibrary.Renovations.Models;
 using HospitalClassLibrary.Renovations.Services.Interfaces;
+using HospitalClassLibrary.Shared.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HospitalAPI.Controllers
@@ -12,10 +13,12 @@ namespace HospitalAPI.Controllers
     public class RenovationsController : ControllerBase
     {
         private readonly IRenovationService _renovationService;
+        private readonly ICancellationService _cancellationService;
 
-        public RenovationsController(IRenovationService renovationService)
+        public RenovationsController(IRenovationService renovationService, ICancellationService cancellationService)
         {
             _renovationService = renovationService;
+            _cancellationService = cancellationService;
         }
 
         [HttpPost("splitRenovations")]
@@ -98,7 +101,7 @@ namespace HospitalAPI.Controllers
         [HttpDelete("splitRenovations")]
         public async Task<IActionResult> DeleteSplitRenovation(SplitRenovation renovation)
         {
-            if (renovation.Start.Subtract(DateTime.Now).Days < 1)
+            if (await _cancellationService.CanBeCancelled(renovation.Start))
             {
                 return BadRequest("Chosen renovation cannot be canceled");
             }
@@ -111,7 +114,7 @@ namespace HospitalAPI.Controllers
         [HttpDelete("mergeRenovations")]
         public async Task<IActionResult> DeleteMergeRenovation(MergeRenovation renovation)
         {
-            if (renovation.Start.Subtract(DateTime.Now).Days < 1)
+            if (await _cancellationService.CanBeCancelled(renovation.Start))
             {
                 return BadRequest("Chosen renovation cannot be canceled");
             }

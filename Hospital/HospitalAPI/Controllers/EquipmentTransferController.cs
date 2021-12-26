@@ -6,6 +6,7 @@ using AutoMapper;
 using HospitalAPI.DTOs;
 using HospitalClassLibrary.RoomEquipment.Models;
 using HospitalClassLibrary.RoomEquipment.Services.Interfaces;
+using HospitalClassLibrary.Shared.Services.Interfaces;
 
 namespace HospitalAPI.Controllers
 {
@@ -14,11 +15,13 @@ namespace HospitalAPI.Controllers
     public class EquipmentTransferController : ControllerBase
     {
         private readonly IEquipmentTransferService _equipmentTransferService;
+        private readonly ICancellationService _cancellationService;
         private readonly IMapper _mapper;
 
-        public EquipmentTransferController(IEquipmentTransferService equipmentTransferService, IMapper mapper)
+        public EquipmentTransferController(IEquipmentTransferService equipmentTransferService, ICancellationService cancellationService, IMapper mapper)
         {
             _equipmentTransferService = equipmentTransferService;
+            _cancellationService = cancellationService;
             _mapper = mapper;
         }
 
@@ -54,7 +57,7 @@ namespace HospitalAPI.Controllers
         {
             var transfer = _mapper.Map<EquipmentTransfer>(e);
             
-            if (transfer.TransferDate.Subtract(DateTime.Now).Days < 1)
+            if (await _cancellationService.CanBeCancelled(transfer.TransferDate))
             {
                 return BadRequest("Chosen equipment transfer cannot be canceled");
             }

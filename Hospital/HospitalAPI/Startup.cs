@@ -26,6 +26,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using HospitalClassLibrary.Shared.Services;
+using HospitalClassLibrary.Shared.Services.Interfaces;
 
 namespace HospitalAPI
 {
@@ -87,6 +89,7 @@ namespace HospitalAPI
             services.AddScoped<ITransferCheckerService, TransferCheckerService>();
             services.AddHostedService<RenovationsHostedService>();
             services.AddScoped<IRenovationCheckerService, RenovationCheckerService>();
+            services.AddScoped<ICancellationService, CancellationService>();
         }
 
         private static void RegisterRepositories(IServiceCollection services)
