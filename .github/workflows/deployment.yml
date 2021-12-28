@@ -43,5 +43,6 @@ jobs:
           git pull
           git checkout bugfix/frontend
           cd docker-compose
-          docker-compose build
+          docker-compose build --no-cache
+          docker-compose pull
           docker-compose up -d
