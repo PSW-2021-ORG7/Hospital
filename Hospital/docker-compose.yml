@@ -1,0 +1,23 @@
+version: '3.3'
+
+services:
+    hospital-db:
+      image: postgres:14.1
+      restart: always
+      networks:
+        - database
+      environment:
+        POSTGRES_PASSWORD: hospital
+        POSTGRES_USER: postgres
+        POSTGRES_DB: hospital
+      volumes:
+        - type: bind
+          source: /init.sql
+          target: /docker-entrypoint-initdb.d/
+      ports:
+        - 5432:5432
+
+networks:
+    database:
+      name: database
+      driver: bridge

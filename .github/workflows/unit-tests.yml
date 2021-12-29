@@ -1,4 +1,4 @@
-name: Hospital Build and Test
+name: Hospital Build and Test (Unit)
 
 on:
   push:
