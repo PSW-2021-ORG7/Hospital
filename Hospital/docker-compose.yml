@@ -12,7 +12,7 @@ services:
         POSTGRES_DB: hospital
       volumes:
         - type: bind
-          source: /init.sql
+          source: ./init.sql
           target: /docker-entrypoint-initdb.d/
       ports:
         - 5432:5432
