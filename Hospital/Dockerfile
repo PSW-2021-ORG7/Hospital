@@ -6,7 +6,7 @@ RUN groupadd -r user -g 443 && \
 USER newuser
 
 WORKDIR /app
-EXPOSE 8080
+EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
 COPY ["init.sql", "app/scripts/"]
