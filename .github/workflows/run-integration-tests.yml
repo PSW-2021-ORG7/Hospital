@@ -1,0 +1,40 @@
+name: Run Integration Tests
+on:
+  pull_request:
+    branches: [ master, develop ]
+  workflow_dispatch:
+
+env:
+  DOTNET_VERSION: '3.1.x'
+  PROJECT_PATH: './Hospital'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+    
+      - name: Start dependencies (docker-compose)
+        run: |
+              cd ${{ env.PROJECT_PATH }}
+              docker-compose up -d  
+
+      - name: Wait for SQL Server container
+        uses: jakejarvis/wait-action@master
+        with:
+          time: '5s'
+
+      - name: Install .NET Core SDK
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '3.1.x'
+    
+      - name: Restore NuGet packages
+        run: dotnet restore ${{ env.PROJECT_PATH }}
+
+      - name: Build
+        run: dotnet build -c Release --no-restore ${{ env.PROJECT_PATH }}
+    
+      - name: Test
+        run: dotnet test -c Release --no-build ${{ env.PROJECT_PATH }}/HospitalIntegrationTests
