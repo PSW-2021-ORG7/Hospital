@@ -1,4 +1,6 @@
-﻿using HospitalClassLibrary.GraphicalEditor.Models;
+﻿using HospitalClassLibrary.Events;
+using HospitalClassLibrary.Events.EventRoomSelection;
+using HospitalClassLibrary.GraphicalEditor.Models;
 using HospitalClassLibrary.Renovations.Models;
 using HospitalClassLibrary.RoomEquipment.Models;
 using HospitalClassLibrary.Schedule.Models;
@@ -22,7 +24,8 @@ namespace HospitalClassLibrary.Data
         public DbSet<NewRoomInfo> NewRoomInfo { get; set; }
         public DbSet<SplitRenovation> SplitRenovation { get; set; }
         public DbSet<MergeRenovation> MergeRenovation { get; set; }
-
+        public DbSet<BuildingSelection> BuildingSelection { get; set; }
+        public DbSet<RoomSelection> RoomSelection { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
