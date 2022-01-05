@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HospitalClassLibrary.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220104211051_Events")]
+    [Migration("20220105121724_Events")]
     partial class Events
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,17 +28,48 @@ namespace HospitalClassLibrary.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int?>("BuildingId")
+                    b.Property<DateTime>("TimeStamp")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("buildingId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BuildingSelection","Events");
+                });
+
+            modelBuilder.Entity("HospitalClassLibrary.Events.EventEquipmentTransfer.EquipmentTransferEvent", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("DestinationRoomId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("EquipmentId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("SourceRoomId")
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("TimeStamp")
                         .HasColumnType("timestamp without time zone");
 
+                    b.Property<DateTime>("TransferDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("TransferDuration")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("BuildingId");
-
-                    b.ToTable("BuildingSelection","Events");
+                    b.ToTable("EquipmentTransferEvent","Events");
                 });
 
             modelBuilder.Entity("HospitalClassLibrary.Events.EventRoomSelection.RoomSelection", b =>
@@ -48,15 +79,13 @@ namespace HospitalClassLibrary.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int?>("RoomId")
+                    b.Property<int>("RoomId")
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("TimeStamp")
                         .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("RoomId");
 
                     b.ToTable("RoomSelection","Events");
                 });
@@ -1750,20 +1779,6 @@ namespace HospitalClassLibrary.Migrations
                             DoctorId = 4,
                             ShiftId = 8
                         });
-                });
-
-            modelBuilder.Entity("HospitalClassLibrary.Events.BuildingSelection", b =>
-                {
-                    b.HasOne("HospitalClassLibrary.GraphicalEditor.Models.Building", "Building")
-                        .WithMany()
-                        .HasForeignKey("BuildingId");
-                });
-
-            modelBuilder.Entity("HospitalClassLibrary.Events.EventRoomSelection.RoomSelection", b =>
-                {
-                    b.HasOne("HospitalClassLibrary.RoomEquipment.Models.Room", "Room")
-                        .WithMany()
-                        .HasForeignKey("RoomId");
                 });
 
             modelBuilder.Entity("HospitalClassLibrary.Renovations.Models.MergeRenovation", b =>

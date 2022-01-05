@@ -28,6 +28,10 @@ using Microsoft.Extensions.Hosting;
 using System;
 using HospitalClassLibrary.Shared.Services;
 using HospitalClassLibrary.Shared.Services.Interfaces;
+using HospitalClassLibrary.Events.EventBuildingSelection;
+using HospitalClassLibrary.Events.EventEquipmentTransfer;
+using HospitalClassLibrary.Events.EventRoomSelection;
+using HospitalClassLibrary.Events.LogEvent;
 
 namespace HospitalAPI
 {
@@ -90,6 +94,10 @@ namespace HospitalAPI
             services.AddHostedService<RenovationsHostedService>();
             services.AddScoped<IRenovationCheckerService, RenovationCheckerService>();
             services.AddScoped<ICancellationService, CancellationService>();
+            //Events
+            services.AddScoped<ILogEventService<BuildingSelectionEventParams>, BuildingSelectionEventService>();
+            services.AddScoped<ILogEventService<RoomSelectionEventParams>, RoomSelectionEventService>();
+            services.AddScoped<ILogEventService<EquipmentTransferEventParams>, EquipmentTransferEventService>();
         }
 
         private static void RegisterRepositories(IServiceCollection services)
@@ -102,6 +110,10 @@ namespace HospitalAPI
             services.AddTransient<ISplitRenovationRepository, SplitRenovationRepository>();
             services.AddTransient<IMergeRenovationRepository, MergeRenovationRepository>();
             services.AddTransient<IDoctorRepository, DoctorRepository>();
+            //Events
+            services.AddTransient<IBuildingSelectionEventRepository, BuildingSelectionEventDatabase>();
+            services.AddTransient<IEquipmentTransferEventRepository, EquipmentTransferEventDatabase>();
+            services.AddTransient<IRoomSelectionEventRepository, RoomSelectionEventDatabase>();
         }
 
         private static void ConfigureMapper(IServiceCollection services)

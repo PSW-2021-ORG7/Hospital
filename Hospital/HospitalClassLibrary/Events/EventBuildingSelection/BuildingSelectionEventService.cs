@@ -18,7 +18,9 @@ namespace HospitalClassLibrary.Events.EventBuildingSelection
         public void LogEvent(BuildingSelectionEventParams eventParams)
         {
             var buildingSelectionEvent = new BuildingSelection
-            { TimeStamp = DateTime.Now };
+            { TimeStamp = DateTime.Now,
+               buildingId = eventParams.buildingId
+            };
 
             _buildingSelectionEventRepository.LogEvent(buildingSelectionEvent);
         }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace HospitalClassLibrary.Events.LogEvent
 {
-    interface ILogEventService<in T> where T : EventParams
+    public interface ILogEventService<in T> where T : EventParams
     {
         void LogEvent(T eventParams);
     }

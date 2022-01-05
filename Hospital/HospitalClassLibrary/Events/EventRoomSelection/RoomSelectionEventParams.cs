@@ -8,6 +8,11 @@ namespace HospitalClassLibrary.Events.EventRoomSelection
 {
     public class RoomSelectionEventParams : EventParams
     {
-        public Room Room { get; set; }
+        public int RoomId { get; set; }
+
+        public RoomSelectionEventParams(int id)
+        {
+            RoomId = id;
+        }
     }
 }

@@ -9,6 +9,6 @@ namespace HospitalClassLibrary.Events
     [Table(nameof(BuildingSelection), Schema = "Events")]
     public class BuildingSelection : Event
     {
-        public Building Building { get; set; }
+        public int buildingId { get; set; }
     }
 }

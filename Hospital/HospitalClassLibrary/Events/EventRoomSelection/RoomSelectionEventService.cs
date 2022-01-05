@@ -17,7 +17,9 @@ namespace HospitalClassLibrary.Events.EventRoomSelection
         public void LogEvent(RoomSelectionEventParams eventParams)
         {
             var roomSelectionEvent = new RoomSelection
-            { TimeStamp = DateTime.Now };
+            { TimeStamp = DateTime.Now,
+              RoomId = eventParams.RoomId
+            };
 
             _roomSelectionEventRepository.LogEvent(roomSelectionEvent);
         }

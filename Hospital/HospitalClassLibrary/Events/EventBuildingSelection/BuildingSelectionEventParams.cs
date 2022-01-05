@@ -8,6 +8,11 @@ namespace HospitalClassLibrary.Events.EventBuildingSelection
 {
     public class BuildingSelectionEventParams : EventParams
     {
-        public Building Building { get; set; }
+        public int buildingId { get; set; }
+
+        public BuildingSelectionEventParams(int buildingId)
+        {
+            this.buildingId = buildingId;
+        }
     }
 }
