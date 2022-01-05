@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using HospitalClassLibrary.Events.EventEquipmentTransfer;
+using HospitalClassLibrary.Events.LogEvent;
 using HospitalClassLibrary.RoomEquipment.Models;
 using HospitalClassLibrary.RoomEquipment.Repositories.Interfaces;
 using HospitalClassLibrary.RoomEquipment.Services.Interfaces;
@@ -10,17 +12,21 @@ namespace HospitalClassLibrary.RoomEquipment.Services
     {
         private readonly IEquipmentTransferRepository _equipmentTransferRepository;
         private readonly IEquipmentRepository _equipmentRepository;
+        private readonly ILogEventService<EquipmentTransferEventParams> _logEquipmentTransferEventService;
 
-        public EquipmentTransferService(IEquipmentTransferRepository equipmentTransferRepository, IEquipmentRepository equipmentRepository)
+        public EquipmentTransferService(IEquipmentTransferRepository equipmentTransferRepository, IEquipmentRepository equipmentRepository
+            , ILogEventService<EquipmentTransferEventParams> logEquipmentTransferEventService)
         {
             _equipmentTransferRepository = equipmentTransferRepository;
             _equipmentRepository = equipmentRepository;
+            _logEquipmentTransferEventService = logEquipmentTransferEventService;
         }
 
         public async Task Create(EquipmentTransfer e)
         {
             await _equipmentTransferRepository.CreateAsync(e);
-
+            var eventparams = new EquipmentTransferEventParams(e);
+            _logEquipmentTransferEventService.LogEvent(eventparams);
             var equipment = await _equipmentRepository.GetByIdAsync(e.EquipmentId);
             equipment.ReservedQuantity += e.Quantity;
             await _equipmentRepository.UpdateAsync(equipment);
