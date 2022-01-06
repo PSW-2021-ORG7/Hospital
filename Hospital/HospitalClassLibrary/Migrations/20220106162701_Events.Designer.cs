@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HospitalClassLibrary.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220105121724_Events")]
+    [Migration("20220106162701_Events")]
     partial class Events
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
