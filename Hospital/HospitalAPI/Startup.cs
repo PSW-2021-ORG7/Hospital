@@ -31,8 +31,6 @@ using HospitalClassLibrary.Shared.Services.Interfaces;
 using HospitalClassLibrary.Events.EventBuildingSelection;
 using HospitalClassLibrary.Events.EventEquipmentTransfer;
 using HospitalClassLibrary.Events.EventRoomSelection;
-using HospitalClassLibrary.Events.EventBackToMap;
-using HospitalClassLibrary.Events.EventFlorChange;
 using HospitalClassLibrary.Events.LogEvent;
 using HospitalClassLibrary.Events.EventMergeRenovation;
 using HospitalClassLibrary.Events.EventSplitRenovation;
@@ -99,6 +97,7 @@ namespace HospitalAPI
             services.AddScoped<IRenovationCheckerService, RenovationCheckerService>();
             services.AddScoped<ICancellationService, CancellationService>();
             services.AddScoped<IShiftService, ShiftService>();
+            services.AddTransient<IHolidayService, HolidayService>();
             //Events
             services.AddScoped<ILogEventService<BuildingSelectionEventParams>, BuildingSelectionEventService>();
             services.AddScoped<ILogEventService<RoomSelectionEventParams>, RoomSelectionEventService>();
@@ -118,6 +117,7 @@ namespace HospitalAPI
             services.AddTransient<IMergeRenovationRepository, MergeRenovationRepository>();
             services.AddTransient<IDoctorRepository, DoctorRepository>();
             services.AddTransient<IShiftRepository, ShiftRepository>();
+            services.AddTransient<IHolidayRepository, HolidayRepository>();
             //Events
             services.AddTransient<IBuildingSelectionEventRepository, BuildingSelectionEventDatabase>();
             services.AddTransient<IEquipmentTransferEventRepository, EquipmentTransferEventDatabase>();

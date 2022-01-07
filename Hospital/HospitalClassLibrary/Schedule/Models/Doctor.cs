@@ -15,6 +15,7 @@ namespace HospitalClassLibrary.Schedule.Models
         public string Email { get; set; }
         public Gender Gender { get; set; }
         public Specialization Specialization { get; set; }
+        public int UsedOffDays { get; set; }
 
         public int? RoomId { get; set; }
         public Room Room { get; set; }

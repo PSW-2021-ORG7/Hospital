@@ -25,8 +25,10 @@ namespace HospitalClassLibrary.Data
         public DbSet<EquipmentTransfer> EquipmentTransfer { get; set; }
         public DbSet<RoomDimensions> RoomDimension { get; set; }
         public DbSet<NewRoomInfo> NewRoomInfo { get; set; }
-        public DbSet<Renovations.Models.SplitRenovation> SplitRenovation { get; set; }
-        public DbSet<Renovations.Models.MergeRenovation> MergeRenovation { get; set; }
+        public DbSet<SplitRenovation> SplitRenovation { get; set; }
+        public DbSet<MergeRenovation> MergeRenovation { get; set; }
+        public DbSet<Holiday> Holiday { get; set; }
+
 
         //Events
         public DbSet<BuildingSelection> BuildingSelection { get; set; }
@@ -53,6 +55,7 @@ namespace HospitalClassLibrary.Data
                    Description = "The treatment facility of Oasis Healthcare"
                }
            );
+            modelBuilder.Entity<Building>().Property(e => e.Id).HasIdentityOptions(startValue: 3);
 
             modelBuilder.Entity<RoomDimensions>().HasData(
                 new RoomDimensions
@@ -249,6 +252,7 @@ namespace HospitalClassLibrary.Data
                     Height = 134
                 }
             );
+            modelBuilder.Entity<RoomDimensions>().Property(e => e.Id).HasIdentityOptions(startValue: 25);
 
             modelBuilder.Entity<Room>().HasData(
                 new Room
@@ -496,6 +500,7 @@ namespace HospitalClassLibrary.Data
                     RoomDimensionsId = 24
                 }
             );
+            modelBuilder.Entity<Room>().Property(e => e.Id).HasIdentityOptions(startValue: 25);
 
             modelBuilder.Entity<EquipmentItem>().HasData(
                 new EquipmentItem
@@ -589,6 +594,7 @@ namespace HospitalClassLibrary.Data
                     Description = "Surgical suture is a medical device used to hold body tissues together after an injury or surgery."
                 }
             );
+            modelBuilder.Entity<EquipmentItem>().Property(e => e.Id).HasIdentityOptions(startValue: 16);
 
             modelBuilder.Entity<Equipment>().HasData(
                 new Equipment
@@ -884,6 +890,7 @@ namespace HospitalClassLibrary.Data
                     ReservedQuantity = 0
                 }
             );
+            modelBuilder.Entity<Equipment>().Property(e => e.Id).HasIdentityOptions(startValue: 37);
 
             modelBuilder.Entity<Doctor>().HasData(
                 new Doctor
@@ -959,6 +966,7 @@ namespace HospitalClassLibrary.Data
                     RoomId = 6
                 }
             );
+            modelBuilder.Entity<Doctor>().Property(e => e.Id).HasIdentityOptions(startValue: 7);
 
             modelBuilder.Entity<Shift>().HasData(
                 new Shift
@@ -1074,6 +1082,7 @@ namespace HospitalClassLibrary.Data
                     Name = "Afternoon shift"
                 }
             );
+            modelBuilder.Entity<Shift>().Property(e => e.Id).HasIdentityOptions(startValue: 17);
 
             modelBuilder.Entity<Workday>().HasData(
                 new Workday
@@ -1185,6 +1194,7 @@ namespace HospitalClassLibrary.Data
                     ShiftId = 8
                 }
             );
+            modelBuilder.Entity<Workday>().Property(e => e.Id).HasIdentityOptions(startValue: 19);
 
             modelBuilder.Entity<Appointment>().HasData(
                 // anonymous type
@@ -1420,6 +1430,7 @@ namespace HospitalClassLibrary.Data
                     WorkdayId = 18
                 }
             );
+            modelBuilder.Entity<Appointment>().Property(e => e.Id).HasIdentityOptions(startValue: 34);
         }
     }
 }
