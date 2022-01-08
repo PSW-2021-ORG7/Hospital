@@ -960,96 +960,112 @@ namespace HospitalClassLibrary.Data
                     Id = 1,
                     Start = new System.DateTime(2021, 11, 23, 8, 0, 0),
                     End = new System.DateTime(2021, 11, 23, 17, 0, 0),
+                    Name = "Morning shift"
                 },
                 new Shift
                 {
                     Id = 2,
                     Start = new System.DateTime(2021, 11, 23, 17, 0, 0),
                     End = new System.DateTime(2021, 11, 23, 23, 0, 0),
+                    Name = "Afternoon shift"
                 },
                 new Shift
                 {
                     Id = 3,
                     Start = new System.DateTime(2021, 11, 24, 8, 0, 0),
                     End = new System.DateTime(2021, 11, 24, 17, 0, 0),
+                    Name = "Morning shift"
                 },
                 new Shift
                 {
                     Id = 4,
                     Start = new System.DateTime(2021, 11, 24, 17, 0, 0),
                     End = new System.DateTime(2021, 11, 24, 23, 0, 0),
+                    Name = "Afternoon shift"
                 },
                 new Shift
                 {
                     Id = 5,
                     Start = new System.DateTime(2021, 11, 25, 8, 0, 0),
                     End = new System.DateTime(2021, 11, 25, 17, 0, 0),
+                    Name = "Morning shift"
                 },
                 new Shift
                 {
                     Id = 6,
                     Start = new System.DateTime(2021, 11, 25, 17, 0, 0),
                     End = new System.DateTime(2021, 11, 25, 23, 0, 0),
+                    Name = "Afternoon shift"
                 },
                 new Shift
                 {
                     Id = 7,
                     Start = new System.DateTime(2021, 11, 26, 8, 0, 0),
                     End = new System.DateTime(2021, 11, 26, 17, 0, 0),
+                    Name = "Morning shift"
                 },
                 new Shift
                 {
                     Id = 8,
                     Start = new System.DateTime(2021, 11, 26, 17, 0, 0),
                     End = new System.DateTime(2021, 11, 23, 23, 0, 0),
+                    Name = "Afternoon shift"
                 },
                 new Shift
                 {
                     Id = 9,
                     Start = new System.DateTime(2021, 11, 27, 8, 0, 0),
                     End = new System.DateTime(2021, 11, 27, 17, 0, 0),
+                    Name = "Morning shift"
                 },
                 new Shift
                 {
                     Id = 10,
                     Start = new System.DateTime(2021, 11, 27, 17, 0, 0),
                     End = new System.DateTime(2021, 11, 27, 23, 0, 0),
+                    Name = "Afternoon shift"
                 },
                 new Shift
                 {
                     Id = 11,
                     Start = new System.DateTime(2021, 11, 28, 8, 0, 0),
                     End = new System.DateTime(2021, 11, 28, 17, 0, 0),
+                    Name = "Morning shift"
                 },
                 new Shift
                 {
                     Id = 12,
                     Start = new System.DateTime(2021, 11, 28, 17, 0, 0),
                     End = new System.DateTime(2021, 11, 28, 23, 0, 0),
+                    Name = "Afternoon shift"
                 },
                 new Shift
                 {
                     Id = 13,
                     Start = new System.DateTime(2021, 11, 29, 8, 0, 0),
                     End = new System.DateTime(2021, 11, 29, 17, 0, 0),
+                    Name = "Morning shift"
                 },
                 new Shift
                 {
                     Id = 14,
                     Start = new System.DateTime(2021, 11, 29, 17, 0, 0),
                     End = new System.DateTime(2021, 11, 29, 23, 0, 0),
+                    Name = "Afternoon shift"
                 },
                 new Shift
                 {
                     Id = 15,
                     Start = new System.DateTime(2021, 11, 30, 8, 0, 0),
                     End = new System.DateTime(2021, 11, 30, 17, 0, 0),
+                    Name = "Morning shift"
                 },
                 new Shift
                 {
                     Id = 16,
                     Start = new System.DateTime(2021, 11, 30, 17, 0, 0),
                     End = new System.DateTime(2021, 11, 30, 23, 0, 0),
+                    Name = "Afternoon shift"
                 }
             );
 
