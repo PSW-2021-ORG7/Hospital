@@ -94,6 +94,7 @@ namespace HospitalAPI
             services.AddHostedService<RenovationsHostedService>();
             services.AddScoped<IRenovationCheckerService, RenovationCheckerService>();
             services.AddScoped<ICancellationService, CancellationService>();
+            services.AddScoped<IShiftService, ShiftService>();
             //Events
             services.AddScoped<ILogEventService<BuildingSelectionEventParams>, BuildingSelectionEventService>();
             services.AddScoped<ILogEventService<RoomSelectionEventParams>, RoomSelectionEventService>();
@@ -110,6 +111,7 @@ namespace HospitalAPI
             services.AddTransient<ISplitRenovationRepository, SplitRenovationRepository>();
             services.AddTransient<IMergeRenovationRepository, MergeRenovationRepository>();
             services.AddTransient<IDoctorRepository, DoctorRepository>();
+            services.AddTransient<IShiftRepository, ShiftRepository>();
             //Events
             services.AddTransient<IBuildingSelectionEventRepository, BuildingSelectionEventDatabase>();
             services.AddTransient<IEquipmentTransferEventRepository, EquipmentTransferEventDatabase>();
