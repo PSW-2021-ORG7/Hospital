@@ -98,6 +98,7 @@ namespace HospitalAPI
             services.AddScoped<ICancellationService, CancellationService>();
             services.AddScoped<IShiftService, ShiftService>();
             services.AddTransient<IHolidayService, HolidayService>();
+            services.AddTransient<IDoctorService, DoctorService>();
             //Events
             services.AddScoped<ILogEventService<BuildingSelectionEventParams>, BuildingSelectionEventService>();
             services.AddScoped<ILogEventService<RoomSelectionEventParams>, RoomSelectionEventService>();

@@ -1659,6 +1659,9 @@ namespace HospitalClassLibrary.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
                     b.Property<int>("DoctorId")
                         .HasColumnType("integer");
 

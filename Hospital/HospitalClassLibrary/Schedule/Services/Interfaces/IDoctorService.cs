@@ -3,10 +3,8 @@ using HospitalClassLibrary.Schedule.Models;
 
 namespace HospitalClassLibrary.Schedule.Services.Interfaces
 {
-    public interface IHolidayService
+    public interface IDoctorService
     {
-        Task Create(Holiday holiday);
-
-        Task<bool> HasOverlappingHoliday(Holiday holiday);
+        Task<Doctor> GetById(int id);
     }
 }
