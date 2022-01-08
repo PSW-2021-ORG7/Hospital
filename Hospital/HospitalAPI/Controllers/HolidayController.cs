@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
 using HospitalAPI.DTOs;
 using HospitalClassLibrary.Schedule.Models;
 using HospitalClassLibrary.Schedule.Services.Interfaces;
@@ -13,11 +15,20 @@ namespace HospitalAPI.Controllers
     {
         private readonly IHolidayService _holidayService;
         private readonly IDoctorService _doctorService;
+        private readonly IMapper _mapper;
 
-        public HolidayController(IHolidayService holidayService, IDoctorService doctorService)
+        public HolidayController(IHolidayService holidayService, IDoctorService doctorService, IMapper mapper)
         {
             _holidayService = holidayService;
             _doctorService = doctorService;
+            _mapper = mapper;
+        }
+
+        [HttpGet]
+        public async Task<IEnumerable<HolidayDto>> GetAllByDoctorId([FromQuery] int doctorId)
+        {
+            var holidays = await _holidayService.GetAllByDoctorId(doctorId);
+            return _mapper.Map<IEnumerable<HolidayDto>>(holidays);
         }
 
         [HttpPost]
@@ -41,5 +52,21 @@ namespace HospitalAPI.Controllers
                 return BadRequest("Not valid");
             }
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutHoliday(int id, HolidayDto holidayDto)
+        {
+            if (id != holidayDto.Id)
+            {
+                return BadRequest();
+            }
+
+            var doctor = await _doctorService.GetById(holidayDto.DoctorId);
+            var holiday = new Holiday(holidayDto.Id, holidayDto.Start, holidayDto.End, holidayDto.DoctorId, doctor, holidayDto.Description);
+            await _holidayService.Update(holiday);
+
+            return Ok();
+        }
+
     }
 }
