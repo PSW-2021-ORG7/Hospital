@@ -22,6 +22,7 @@ namespace HospitalUnitTests
             retVal.ShouldBe(hasOverlappingHoliday);
         }
 
+
         private static HolidayService CreateHolidayService()
         {
             var holidayStubRepository = new Mock<IHolidayRepository>();
@@ -31,7 +32,9 @@ namespace HospitalUnitTests
             };
             holidayStubRepository.Setup(m => m.GetAllByDoctorId(1)).ReturnsAsync(scheduledHolidays);
 
-            return new HolidayService(holidayStubRepository.Object);
+            var workdayStubRepository = new Mock<IWorkdayRepository>();
+
+            return new HolidayService(holidayStubRepository.Object, workdayStubRepository.Object);
         }
 
         public static IEnumerable<object[]> Data()

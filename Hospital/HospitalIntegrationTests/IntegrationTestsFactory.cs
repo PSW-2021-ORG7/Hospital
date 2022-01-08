@@ -5,6 +5,7 @@ using HospitalAPI;
 using HospitalClassLibrary.Data;
 using HospitalClassLibrary.GraphicalEditor.Models;
 using HospitalClassLibrary.RoomEquipment.Models;
+using HospitalClassLibrary.Schedule.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
@@ -248,6 +249,16 @@ namespace HospitalIntegrationTests
                 Height = 170
             };
 
+            var workday = new Workday()
+            {
+                Id = 1,
+                Appointments = new List<Appointment>(),
+                Doctor = new Doctor(),
+                DoctorId = 1,
+                Shift = new Shift() {Id = 1, Start = new DateTime(2021, 12, 1, 8, 0, 0), End = new DateTime(2021, 12, 1, 23, 0, 0)},
+                ShiftId = 1
+            };
+
             context.Room.Add(srcRoom1);
             context.Room.Add(srcRoom2);
             context.Room.Add(dstRoomWithEquipment);
@@ -266,6 +277,8 @@ namespace HospitalIntegrationTests
             context.RoomDimension.Add(roomDimensionForMergeRenovation2);
             context.Equipment.Add(equipmentForMergeRenovation1);
             context.Equipment.Add(equipmentForMergeRenovation2);
+
+            context.Workday.Add(workday);
         }
 
     }

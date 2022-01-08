@@ -8,6 +8,7 @@ using HospitalClassLibrary.Renovations.Repositories.Interfaces;
 using HospitalClassLibrary.RoomEquipment.Repositories.Interfaces;
 using HospitalClassLibrary.Schedule.Models;
 using static HospitalClassLibrary.Shared.Constants;
+using System.Threading.Tasks;
 
 namespace HospitalClassLibrary.Schedule.Services
 {
@@ -92,6 +93,11 @@ namespace HospitalClassLibrary.Schedule.Services
             var dstRoomDoctorId = _roomRepository.GetDoctorId(requirements.SecondRoomId);
             
             return _workdayRepository.GetAppointments(dateRange, srcRoomDoctorId, dstRoomDoctorId).Result;
+        }
+
+        public async Task<IEnumerable<Workday>> GetWorkdays(DateTimeRange dateRange, int doctorId)
+        {
+            return await _workdayRepository.GetWorkdays(dateRange, doctorId);
         }
     }
 }
