@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace HospitalClassLibrary.Migrations
 {
-    public partial class second2 : Migration
+    public partial class first : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -77,7 +77,8 @@ namespace HospitalClassLibrary.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Start = table.Column<DateTime>(nullable: false),
-                    End = table.Column<DateTime>(nullable: false)
+                    End = table.Column<DateTime>(nullable: false),
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -489,25 +490,25 @@ namespace HospitalClassLibrary.Migrations
 
             migrationBuilder.InsertData(
                 table: "Shift",
-                columns: new[] { "Id", "End", "Start" },
+                columns: new[] { "Id", "End", "Name", "Start" },
                 values: new object[,]
                 {
-                    { 11, new DateTime(2021, 11, 28, 17, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 28, 8, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 12, new DateTime(2021, 11, 28, 23, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 28, 17, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 15, new DateTime(2021, 11, 30, 17, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 30, 8, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 14, new DateTime(2021, 11, 29, 23, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 29, 17, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 10, new DateTime(2021, 11, 27, 23, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 27, 17, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 13, new DateTime(2021, 11, 29, 17, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 29, 8, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 9, new DateTime(2021, 11, 27, 17, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 27, 8, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 3, new DateTime(2021, 11, 24, 17, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 24, 8, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 7, new DateTime(2021, 11, 26, 17, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 26, 8, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 6, new DateTime(2021, 11, 25, 23, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 25, 17, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 5, new DateTime(2021, 11, 25, 17, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 25, 8, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 4, new DateTime(2021, 11, 24, 23, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 24, 17, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, new DateTime(2021, 11, 23, 23, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 23, 17, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 1, new DateTime(2021, 11, 23, 17, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 23, 8, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 8, new DateTime(2021, 11, 23, 23, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 26, 17, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 16, new DateTime(2021, 11, 30, 23, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 30, 17, 0, 0, 0, DateTimeKind.Unspecified) }
+                    { 11, new DateTime(2021, 11, 28, 17, 0, 0, 0, DateTimeKind.Unspecified), "Morning shift", new DateTime(2021, 11, 28, 8, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 12, new DateTime(2021, 11, 28, 23, 0, 0, 0, DateTimeKind.Unspecified), "Afternoon shift", new DateTime(2021, 11, 28, 17, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 15, new DateTime(2021, 11, 30, 17, 0, 0, 0, DateTimeKind.Unspecified), "Morning shift", new DateTime(2021, 11, 30, 8, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 14, new DateTime(2021, 11, 29, 23, 0, 0, 0, DateTimeKind.Unspecified), "Afternoon shift", new DateTime(2021, 11, 29, 17, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 10, new DateTime(2021, 11, 27, 23, 0, 0, 0, DateTimeKind.Unspecified), "Afternoon shift", new DateTime(2021, 11, 27, 17, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 13, new DateTime(2021, 11, 29, 17, 0, 0, 0, DateTimeKind.Unspecified), "Morning shift", new DateTime(2021, 11, 29, 8, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 9, new DateTime(2021, 11, 27, 17, 0, 0, 0, DateTimeKind.Unspecified), "Morning shift", new DateTime(2021, 11, 27, 8, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 3, new DateTime(2021, 11, 24, 17, 0, 0, 0, DateTimeKind.Unspecified), "Morning shift", new DateTime(2021, 11, 24, 8, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 7, new DateTime(2021, 11, 26, 17, 0, 0, 0, DateTimeKind.Unspecified), "Morning shift", new DateTime(2021, 11, 26, 8, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 6, new DateTime(2021, 11, 25, 23, 0, 0, 0, DateTimeKind.Unspecified), "Afternoon shift", new DateTime(2021, 11, 25, 17, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 5, new DateTime(2021, 11, 25, 17, 0, 0, 0, DateTimeKind.Unspecified), "Morning shift", new DateTime(2021, 11, 25, 8, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 4, new DateTime(2021, 11, 24, 23, 0, 0, 0, DateTimeKind.Unspecified), "Afternoon shift", new DateTime(2021, 11, 24, 17, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, new DateTime(2021, 11, 23, 23, 0, 0, 0, DateTimeKind.Unspecified), "Afternoon shift", new DateTime(2021, 11, 23, 17, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 1, new DateTime(2021, 11, 23, 17, 0, 0, 0, DateTimeKind.Unspecified), "Morning shift", new DateTime(2021, 11, 23, 8, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 8, new DateTime(2021, 11, 23, 23, 0, 0, 0, DateTimeKind.Unspecified), "Afternoon shift", new DateTime(2021, 11, 26, 17, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 16, new DateTime(2021, 11, 30, 23, 0, 0, 0, DateTimeKind.Unspecified), "Afternoon shift", new DateTime(2021, 11, 30, 17, 0, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.InsertData(

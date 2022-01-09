@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HospitalClassLibrary.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220109011011_second2")]
-    partial class second2
+    [Migration("20220109150831_first")]
+    partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -1648,6 +1648,9 @@ namespace HospitalClassLibrary.Migrations
                     b.Property<DateTime>("End")
                         .HasColumnType("timestamp without time zone");
 
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("Start")
                         .HasColumnType("timestamp without time zone");
 
@@ -1660,96 +1663,112 @@ namespace HospitalClassLibrary.Migrations
                         {
                             Id = 1,
                             End = new DateTime(2021, 11, 23, 17, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Morning shift",
                             Start = new DateTime(2021, 11, 23, 8, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2,
                             End = new DateTime(2021, 11, 23, 23, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Afternoon shift",
                             Start = new DateTime(2021, 11, 23, 17, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 3,
                             End = new DateTime(2021, 11, 24, 17, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Morning shift",
                             Start = new DateTime(2021, 11, 24, 8, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 4,
                             End = new DateTime(2021, 11, 24, 23, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Afternoon shift",
                             Start = new DateTime(2021, 11, 24, 17, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 5,
                             End = new DateTime(2021, 11, 25, 17, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Morning shift",
                             Start = new DateTime(2021, 11, 25, 8, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 6,
                             End = new DateTime(2021, 11, 25, 23, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Afternoon shift",
                             Start = new DateTime(2021, 11, 25, 17, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 7,
                             End = new DateTime(2021, 11, 26, 17, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Morning shift",
                             Start = new DateTime(2021, 11, 26, 8, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 8,
                             End = new DateTime(2021, 11, 23, 23, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Afternoon shift",
                             Start = new DateTime(2021, 11, 26, 17, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 9,
                             End = new DateTime(2021, 11, 27, 17, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Morning shift",
                             Start = new DateTime(2021, 11, 27, 8, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 10,
                             End = new DateTime(2021, 11, 27, 23, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Afternoon shift",
                             Start = new DateTime(2021, 11, 27, 17, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 11,
                             End = new DateTime(2021, 11, 28, 17, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Morning shift",
                             Start = new DateTime(2021, 11, 28, 8, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 12,
                             End = new DateTime(2021, 11, 28, 23, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Afternoon shift",
                             Start = new DateTime(2021, 11, 28, 17, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 13,
                             End = new DateTime(2021, 11, 29, 17, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Morning shift",
                             Start = new DateTime(2021, 11, 29, 8, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 14,
                             End = new DateTime(2021, 11, 29, 23, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Afternoon shift",
                             Start = new DateTime(2021, 11, 29, 17, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 15,
                             End = new DateTime(2021, 11, 30, 17, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Morning shift",
                             Start = new DateTime(2021, 11, 30, 8, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 16,
                             End = new DateTime(2021, 11, 30, 23, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Afternoon shift",
                             Start = new DateTime(2021, 11, 30, 17, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
