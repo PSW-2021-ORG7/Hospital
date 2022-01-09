@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using HospitalClassLibrary.Schedule.Models;
 using HospitalClassLibrary.Schedule.Repositories.Interfaces;
 using HospitalClassLibrary.Schedule.Services.Interfaces;
+using HospitalClassLibrary.Shared.Models;
 
 namespace HospitalClassLibrary.Schedule.Services
 {
@@ -19,9 +20,9 @@ namespace HospitalClassLibrary.Schedule.Services
             _workdayRepository = workdayRepository;
         }
 
-        public async Task<IEnumerable<Shift>> GetAll()
+        public async Task<IEnumerable<Shift>> GetAll(DateTimeRange dateTimeRange)
         {
-            return await _shiftRepository.GetAllAsync();
+            return await _shiftRepository.GetAllAsync(dateTimeRange);
         }
 
         public async Task Create(Shift s)
