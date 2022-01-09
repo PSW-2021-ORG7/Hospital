@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HospitalClassLibrary.Events.EventMergeRenovation;
+using HospitalClassLibrary.Events.EventSplitRenovation;
+using HospitalClassLibrary.Events.LogEvent;
 using HospitalClassLibrary.GraphicalEditor.Models;
 using HospitalClassLibrary.Renovations.Models;
 using HospitalClassLibrary.Renovations.Repositories.Interfaces;
@@ -14,13 +17,18 @@ namespace HospitalClassLibrary.Renovations.Services
     {
         private readonly ISplitRenovationRepository _splitRenovationRepository;
         private readonly IMergeRenovationRepository _mergeRenovationRepository;
+        private readonly ILogEventService<SplitRenovationEventParams> _logSplitRenovationEventService;
+        private readonly ILogEventService<MergeRenovationEventParams> _logMergeRenovationEventService;
+
         private readonly IRoomRepository _roomRepository;
 
-        public RenovationService(ISplitRenovationRepository splitRenovationRepository, IMergeRenovationRepository mergeRenovationRepository, IRoomRepository roomRepository)
+        public RenovationService(ISplitRenovationRepository splitRenovationRepository, IMergeRenovationRepository mergeRenovationRepository, IRoomRepository roomRepository, ILogEventService<MergeRenovationEventParams> logMergeRenovationEventService, ILogEventService<SplitRenovationEventParams> logSplitRenovationEventService)
         {
             _splitRenovationRepository = splitRenovationRepository;
             _mergeRenovationRepository = mergeRenovationRepository;
             _roomRepository = roomRepository;
+            _logMergeRenovationEventService = logMergeRenovationEventService;
+            _logSplitRenovationEventService = logSplitRenovationEventService;
         }
 
         public async Task<IEnumerable<SplitRenovation>> GetAllSplitRenovations()
@@ -30,6 +38,8 @@ namespace HospitalClassLibrary.Renovations.Services
 
         public async Task Create(SplitRenovation r)
         {
+            var eventparams = new SplitRenovationEventParams(r.RoomId, r.FirstNewRoomInfo.RoomName, r.SecondNewRoomInfo.RoomName, r.Start, r.End, r.EquipmentDestination);
+            _logSplitRenovationEventService.LogEvent(eventparams);
             await _splitRenovationRepository.CreateAsync(r);
         }
 
@@ -45,6 +55,8 @@ namespace HospitalClassLibrary.Renovations.Services
 
         public async Task Create(MergeRenovation r)
         {
+            var eventparams = new MergeRenovationEventParams(r.FirstOldRoomId, r.SecondOldRoomId, r.NewRoomInfo.RoomName, r.Start, r.End );
+            _logMergeRenovationEventService.LogEvent(eventparams);
             await _mergeRenovationRepository.CreateAsync(r);
         }
 

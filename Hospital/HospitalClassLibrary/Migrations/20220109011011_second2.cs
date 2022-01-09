@@ -4,10 +4,13 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace HospitalClassLibrary.Migrations
 {
-    public partial class Initial : Migration
+    public partial class second2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.EnsureSchema(
+                name: "Events");
+
             migrationBuilder.CreateTable(
                 name: "Building",
                 columns: table => new
@@ -37,6 +40,37 @@ namespace HospitalClassLibrary.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "NewRoomInfo",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    RoomName = table.Column<string>(nullable: true),
+                    RoomType = table.Column<int>(nullable: false),
+                    RoomStatus = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NewRoomInfo", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RoomDimension",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    X = table.Column<double>(nullable: false),
+                    Y = table.Column<double>(nullable: false),
+                    Width = table.Column<double>(nullable: false),
+                    Height = table.Column<double>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RoomDimension", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Shift",
                 columns: table => new
                 {
@@ -51,6 +85,180 @@ namespace HospitalClassLibrary.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "BackToMap",
+                schema: "Events",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    TimeStamp = table.Column<DateTime>(nullable: false),
+                    fromBouldingId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BackToMap", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BuildingSelection",
+                schema: "Events",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    TimeStamp = table.Column<DateTime>(nullable: false),
+                    buildingId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BuildingSelection", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "EquipmentTransferEvent",
+                schema: "Events",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    TimeStamp = table.Column<DateTime>(nullable: false),
+                    SourceRoomId = table.Column<int>(nullable: false),
+                    DestinationRoomId = table.Column<int>(nullable: false),
+                    TransferDate = table.Column<DateTime>(nullable: false),
+                    TransferDuration = table.Column<int>(nullable: false),
+                    EquipmentId = table.Column<int>(nullable: false),
+                    Quantity = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EquipmentTransferEvent", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "FloorChange",
+                schema: "Events",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    TimeStamp = table.Column<DateTime>(nullable: false),
+                    buildingId = table.Column<int>(nullable: false),
+                    fromFloor = table.Column<int>(nullable: false),
+                    toFloor = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FloorChange", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MergeRenovationEvent",
+                schema: "Events",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    TimeStamp = table.Column<DateTime>(nullable: false),
+                    FirstOldRoomId = table.Column<int>(nullable: false),
+                    SecondOldRoomId = table.Column<int>(nullable: false),
+                    NewRoomName = table.Column<string>(nullable: true),
+                    Start = table.Column<DateTime>(nullable: false),
+                    End = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MergeRenovationEvent", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RoomSelection",
+                schema: "Events",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    TimeStamp = table.Column<DateTime>(nullable: false),
+                    RoomId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RoomSelection", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SplitRenovationEvent",
+                schema: "Events",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    TimeStamp = table.Column<DateTime>(nullable: false),
+                    RoomId = table.Column<int>(nullable: false),
+                    FirstNewRoomName = table.Column<string>(nullable: true),
+                    SecondNewRoomName = table.Column<string>(nullable: true),
+                    Start = table.Column<DateTime>(nullable: false),
+                    End = table.Column<DateTime>(nullable: false),
+                    EquipmentDestination = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SplitRenovationEvent", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MergeRenovation",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    FirstOldRoomId = table.Column<int>(nullable: false),
+                    SecondOldRoomId = table.Column<int>(nullable: false),
+                    NewRoomInfoId = table.Column<int>(nullable: true),
+                    Start = table.Column<DateTime>(nullable: false),
+                    End = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MergeRenovation", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_MergeRenovation_NewRoomInfo_NewRoomInfoId",
+                        column: x => x.NewRoomInfoId,
+                        principalTable: "NewRoomInfo",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SplitRenovation",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    RoomId = table.Column<int>(nullable: false),
+                    FirstNewRoomInfoId = table.Column<int>(nullable: true),
+                    SecondNewRoomInfoId = table.Column<int>(nullable: true),
+                    Start = table.Column<DateTime>(nullable: false),
+                    End = table.Column<DateTime>(nullable: false),
+                    EquipmentDestination = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SplitRenovation", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SplitRenovation_NewRoomInfo_FirstNewRoomInfoId",
+                        column: x => x.FirstNewRoomInfoId,
+                        principalTable: "NewRoomInfo",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_SplitRenovation_NewRoomInfo_SecondNewRoomInfoId",
+                        column: x => x.SecondNewRoomInfoId,
+                        principalTable: "NewRoomInfo",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Room",
                 columns: table => new
                 {
@@ -59,12 +267,8 @@ namespace HospitalClassLibrary.Migrations
                     Name = table.Column<string>(nullable: true),
                     Status = table.Column<int>(nullable: false),
                     Type = table.Column<int>(nullable: false),
-                    FreeBeds = table.Column<int>(nullable: false),
                     Floor = table.Column<int>(nullable: false),
-                    X = table.Column<double>(nullable: false),
-                    Y = table.Column<double>(nullable: false),
-                    Width = table.Column<double>(nullable: false),
-                    Height = table.Column<double>(nullable: false),
+                    RoomDimensionsId = table.Column<int>(nullable: false),
                     BuildingId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -74,6 +278,12 @@ namespace HospitalClassLibrary.Migrations
                         name: "FK_Room_Building_BuildingId",
                         column: x => x.BuildingId,
                         principalTable: "Building",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Room_RoomDimension_RoomDimensionsId",
+                        column: x => x.RoomDimensionsId,
+                        principalTable: "RoomDimension",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -91,7 +301,7 @@ namespace HospitalClassLibrary.Migrations
                     Email = table.Column<string>(nullable: true),
                     Gender = table.Column<int>(nullable: false),
                     Specialization = table.Column<int>(nullable: false),
-                    RoomId = table.Column<int>(nullable: false)
+                    RoomId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -101,7 +311,7 @@ namespace HospitalClassLibrary.Migrations
                         column: x => x.RoomId,
                         principalTable: "Room",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -112,7 +322,8 @@ namespace HospitalClassLibrary.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     RoomId = table.Column<int>(nullable: false),
                     EquipmentItemId = table.Column<int>(nullable: false),
-                    Quantity = table.Column<int>(nullable: false)
+                    Quantity = table.Column<int>(nullable: false),
+                    ReservedQuantity = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -158,6 +369,42 @@ namespace HospitalClassLibrary.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "EquipmentTransfer",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    SourceRoomId = table.Column<int>(nullable: false),
+                    DestinationRoomId = table.Column<int>(nullable: false),
+                    TransferDate = table.Column<DateTime>(nullable: false),
+                    TransferDuration = table.Column<int>(nullable: false),
+                    EquipmentId = table.Column<int>(nullable: false),
+                    Quantity = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EquipmentTransfer", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_EquipmentTransfer_Room_DestinationRoomId",
+                        column: x => x.DestinationRoomId,
+                        principalTable: "Room",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_EquipmentTransfer_Equipment_EquipmentId",
+                        column: x => x.EquipmentId,
+                        principalTable: "Equipment",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_EquipmentTransfer_Room_SourceRoomId",
+                        column: x => x.SourceRoomId,
+                        principalTable: "Room",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Appointment",
                 columns: table => new
                 {
@@ -192,6 +439,7 @@ namespace HospitalClassLibrary.Migrations
                 columns: new[] { "Id", "Description", "Name" },
                 values: new object[,]
                 {
+                    { 15, "Surgical suture is a medical device used to hold body tissues together after an injury or surgery.", "Surgical suture" },
                     { 14, "The tube is inserted through a cut in the neck below the vocal cords. This allows air to enter the lungs.", "Trach tube" },
                     { 13, "A Miller–Abbott tube is a tube used to treat obstructions in the small intestine through intubation.", "Miller–Abbott tube" },
                     { 12, "An oxygen tank is an oxygen storage vessel, which is either held under pressure in gas cylinders, or as liquid oxygen in a cryogenic storage tank.", "Oxygen tank" },
@@ -199,14 +447,44 @@ namespace HospitalClassLibrary.Migrations
                     { 10, "A curette is a surgical instrument designed for scraping or debriding biological tissue or debris in a biopsy, excision, or cleaning procedure.", "Curette" },
                     { 9, "An adhesive bandage is a small medical dressing used for injuries not serious enough to require a full-size bandage.", "Adhesive Plaster" },
                     { 8, "A scalpel is a small and extremely sharp bladed instrument used for surgery, anatomical dissection, podiatry and various arts and crafts.", "Scalpel" },
-                    { 15, "Surgical suture is a medical device used to hold body tissues together after an injury or surgery.", "Surgical suture" },
+                    { 7, "An inhaler is a medical device used for delivering medicines into the lungs through the work of a person's breathing.", "Inhaler" },
                     { 6, "An otoscope or auriscope is a medical device which is used to look into the ears.", "Otoscope" },
                     { 5, "An operating table, sometimes called operating room table, is the table on which the patient lies during a surgical operation.", "Operating table" },
                     { 4, "Gauze is a thin, translucent fabric with a loose open weave.", "Gauze" },
-                    { 3, "An external infusion pump is a medical device used to deliver fluids into a patient’s body in a controlled manner.", "Infusion pump" },
                     { 2, "A thermometer is a device that measures temperature or a temperature gradient.", "Thermometer" },
                     { 1, "A syringe is a simple reciprocating pump consisting of a plunger that fits tightly within a cylindrical tube called a barrel.", "Syringe" },
-                    { 7, "An inhaler is a medical device used for delivering medicines into the lungs through the work of a person's breathing.", "Inhaler" }
+                    { 3, "An external infusion pump is a medical device used to deliver fluids into a patient’s body in a controlled manner.", "Infusion pump" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "RoomDimension",
+                columns: new[] { "Id", "Height", "Width", "X", "Y" },
+                values: new object[,]
+                {
+                    { 16, 170.0, 210.0, 1182.0, 237.0 },
+                    { 1, 220.0, 228.0, 422.0, 187.0 },
+                    { 2, 217.0, 229.0, 422.0, 683.0 },
+                    { 3, 254.0, 209.0, 651.0, 596.0 },
+                    { 4, 170.0, 210.0, 1182.0, 237.0 },
+                    { 15, 254.0, 209.0, 651.0, 596.0 },
+                    { 6, 170.0, 322.0, 861.0, 237.0 },
+                    { 7, 154.0, 202.0, 1190.0, 696.0 },
+                    { 8, 154.0, 202.0, 1190.0, 541.0 },
+                    { 9, 138.0, 106.0, 422.0, 407.0 },
+                    { 10, 138.0, 106.0, 422.0, 544.0 },
+                    { 11, 69.0, 69.0, 581.0, 407.0 },
+                    { 5, 170.0, 210.0, 650.0, 237.0 },
+                    { 19, 154.0, 202.0, 1190.0, 696.0 },
+                    { 13, 220.0, 228.0, 422.0, 187.0 },
+                    { 14, 217.0, 229.0, 422.0, 683.0 },
+                    { 24, 134.0, 69.0, 581.0, 548.0 },
+                    { 23, 69.0, 69.0, 581.0, 407.0 },
+                    { 22, 138.0, 106.0, 422.0, 544.0 },
+                    { 21, 138.0, 106.0, 422.0, 407.0 },
+                    { 20, 154.0, 202.0, 1190.0, 541.0 },
+                    { 18, 170.0, 322.0, 861.0, 237.0 },
+                    { 17, 170.0, 210.0, 650.0, 237.0 },
+                    { 12, 134.0, 69.0, 581.0, 548.0 }
                 });
 
             migrationBuilder.InsertData(
@@ -214,53 +492,53 @@ namespace HospitalClassLibrary.Migrations
                 columns: new[] { "Id", "End", "Start" },
                 values: new object[,]
                 {
-                    { 14, new DateTime(2021, 11, 29, 23, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 29, 17, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 13, new DateTime(2021, 11, 29, 17, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 29, 8, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 12, new DateTime(2021, 11, 28, 23, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 28, 17, 0, 0, 0, DateTimeKind.Unspecified) },
                     { 11, new DateTime(2021, 11, 28, 17, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 28, 8, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 12, new DateTime(2021, 11, 28, 23, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 28, 17, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 15, new DateTime(2021, 11, 30, 17, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 30, 8, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 14, new DateTime(2021, 11, 29, 23, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 29, 17, 0, 0, 0, DateTimeKind.Unspecified) },
                     { 10, new DateTime(2021, 11, 27, 23, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 27, 17, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 13, new DateTime(2021, 11, 29, 17, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 29, 8, 0, 0, 0, DateTimeKind.Unspecified) },
                     { 9, new DateTime(2021, 11, 27, 17, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 27, 8, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 8, new DateTime(2021, 11, 23, 23, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 26, 17, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 5, new DateTime(2021, 11, 25, 17, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 25, 8, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 6, new DateTime(2021, 11, 25, 23, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 25, 17, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 4, new DateTime(2021, 11, 24, 23, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 24, 17, 0, 0, 0, DateTimeKind.Unspecified) },
                     { 3, new DateTime(2021, 11, 24, 17, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 24, 8, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 7, new DateTime(2021, 11, 26, 17, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 26, 8, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 6, new DateTime(2021, 11, 25, 23, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 25, 17, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 5, new DateTime(2021, 11, 25, 17, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 25, 8, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 4, new DateTime(2021, 11, 24, 23, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 24, 17, 0, 0, 0, DateTimeKind.Unspecified) },
                     { 2, new DateTime(2021, 11, 23, 23, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 23, 17, 0, 0, 0, DateTimeKind.Unspecified) },
                     { 1, new DateTime(2021, 11, 23, 17, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 23, 8, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 15, new DateTime(2021, 11, 30, 17, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 30, 8, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 7, new DateTime(2021, 11, 26, 17, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 26, 8, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 8, new DateTime(2021, 11, 23, 23, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 26, 17, 0, 0, 0, DateTimeKind.Unspecified) },
                     { 16, new DateTime(2021, 11, 30, 23, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 30, 17, 0, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.InsertData(
                 table: "Room",
-                columns: new[] { "Id", "BuildingId", "Floor", "FreeBeds", "Height", "Name", "Status", "Type", "Width", "X", "Y" },
+                columns: new[] { "Id", "BuildingId", "Floor", "Name", "RoomDimensionsId", "Status", "Type" },
                 values: new object[,]
                 {
-                    { 1, 1, 0, 0, 220.0, "0A", 1, 4, 228.0, 422.0, 187.0 },
-                    { 22, 1, 1, 0, 138.0, "Women's", 1, 5, 106.0, 422.0, 544.0 },
-                    { 21, 1, 1, 0, 138.0, "Men's", 1, 5, 106.0, 422.0, 407.0 },
-                    { 20, 1, 1, 1, 154.0, "1B", 1, 3, 202.0, 1190.0, 541.0 },
-                    { 19, 1, 1, 1, 154.0, "1A", 1, 3, 202.0, 1190.0, 696.0 },
-                    { 18, 1, 1, 1, 170.0, "1A", 1, 1, 322.0, 861.0, 237.0 },
-                    { 17, 1, 1, 1, 170.0, "1B", 1, 0, 210.0, 650.0, 237.0 },
-                    { 16, 1, 1, 1, 170.0, "1A", 1, 0, 210.0, 1182.0, 237.0 },
-                    { 15, 1, 1, 0, 254.0, "1C", 1, 4, 209.0, 651.0, 596.0 },
-                    { 14, 1, 1, 0, 217.0, "1B", 1, 4, 229.0, 422.0, 683.0 },
-                    { 13, 1, 1, 0, 220.0, "1A", 1, 4, 228.0, 422.0, 187.0 },
-                    { 12, 1, 0, 0, 134.0, "S1", 1, 7, 69.0, 581.0, 548.0 },
-                    { 11, 1, 0, 0, 69.0, "L", 1, 6, 69.0, 581.0, 407.0 },
-                    { 10, 1, 0, 0, 138.0, "Women's", 1, 5, 106.0, 422.0, 544.0 },
-                    { 9, 1, 0, 0, 138.0, "Men's", 1, 5, 106.0, 422.0, 407.0 },
-                    { 8, 1, 0, 1, 154.0, "0B", 1, 3, 202.0, 1190.0, 541.0 },
-                    { 7, 1, 0, 1, 154.0, "0A", 1, 3, 202.0, 1190.0, 696.0 },
-                    { 6, 1, 0, 1, 170.0, "0A", 1, 1, 322.0, 861.0, 237.0 },
-                    { 5, 1, 0, 1, 170.0, "0B", 1, 0, 210.0, 650.0, 237.0 },
-                    { 4, 1, 0, 1, 170.0, "0A", 1, 0, 210.0, 1182.0, 237.0 },
-                    { 3, 1, 0, 0, 254.0, "0C", 1, 4, 209.0, 651.0, 596.0 },
-                    { 2, 1, 0, 0, 217.0, "0B", 1, 4, 229.0, 422.0, 683.0 },
-                    { 23, 1, 1, 0, 69.0, "L", 1, 6, 69.0, 581.0, 407.0 },
-                    { 24, 1, 1, 0, 134.0, "S1", 1, 7, 69.0, 581.0, 548.0 }
+                    { 1, 1, 0, "0A", 1, 1, 4 },
+                    { 22, 1, 1, "Women's", 22, 1, 5 },
+                    { 21, 1, 1, "Men's", 21, 1, 5 },
+                    { 20, 1, 1, "1B", 20, 1, 3 },
+                    { 19, 1, 1, "1A", 19, 1, 3 },
+                    { 18, 1, 1, "1A", 18, 1, 1 },
+                    { 17, 1, 1, "1B", 17, 1, 0 },
+                    { 16, 1, 1, "1A", 16, 1, 0 },
+                    { 15, 1, 1, "1C", 15, 1, 4 },
+                    { 14, 1, 1, "1B", 14, 1, 4 },
+                    { 13, 1, 1, "1A", 13, 1, 4 },
+                    { 12, 1, 0, "S1", 12, 1, 7 },
+                    { 11, 1, 0, "L", 11, 1, 6 },
+                    { 10, 1, 0, "Women's", 10, 1, 5 },
+                    { 9, 1, 0, "Men's", 9, 1, 5 },
+                    { 8, 1, 0, "0B", 8, 1, 3 },
+                    { 7, 1, 0, "0A", 7, 1, 3 },
+                    { 6, 1, 0, "0A", 6, 1, 1 },
+                    { 5, 1, 0, "0B", 5, 1, 0 },
+                    { 4, 1, 0, "0A", 4, 1, 0 },
+                    { 3, 1, 0, "0C", 3, 1, 4 },
+                    { 2, 1, 0, "0B", 2, 1, 4 },
+                    { 23, 1, 1, "L", 23, 1, 6 },
+                    { 24, 1, 1, "S1", 24, 1, 7 }
                 });
 
             migrationBuilder.InsertData(
@@ -278,45 +556,45 @@ namespace HospitalClassLibrary.Migrations
 
             migrationBuilder.InsertData(
                 table: "Equipment",
-                columns: new[] { "Id", "EquipmentItemId", "Quantity", "RoomId" },
+                columns: new[] { "Id", "EquipmentItemId", "Quantity", "ReservedQuantity", "RoomId" },
                 values: new object[,]
                 {
-                    { 17, 1, 100, 16 },
-                    { 18, 2, 2, 16 },
-                    { 19, 3, 4, 16 },
-                    { 20, 4, 200, 16 },
-                    { 21, 8, 6, 16 },
-                    { 22, 5, 1, 16 },
-                    { 25, 1, 104, 17 },
-                    { 24, 15, 1, 16 },
-                    { 26, 2, 5, 17 },
-                    { 27, 3, 6, 17 },
-                    { 28, 4, 150, 17 },
-                    { 29, 8, 10, 17 },
-                    { 30, 5, 1, 17 },
-                    { 31, 14, 3, 17 },
-                    { 23, 14, 4, 16 },
-                    { 34, 11, 200, 1 },
-                    { 10, 4, 150, 5 },
-                    { 11, 8, 10, 5 },
-                    { 35, 11, 110, 2 },
-                    { 36, 11, 235, 3 },
-                    { 1, 1, 100, 4 },
-                    { 2, 2, 2, 4 },
-                    { 3, 3, 4, 4 },
-                    { 4, 4, 200, 4 },
-                    { 5, 8, 6, 4 },
-                    { 12, 5, 1, 5 },
-                    { 6, 5, 1, 4 },
-                    { 14, 15, 1, 4 },
-                    { 15, 14, 3, 4 },
-                    { 16, 15, 1, 4 },
-                    { 7, 1, 104, 5 },
-                    { 8, 2, 5, 5 },
-                    { 9, 3, 6, 5 },
-                    { 32, 15, 1, 17 },
-                    { 13, 14, 4, 4 },
-                    { 33, 11, 230, 17 }
+                    { 17, 1, 100, 0, 16 },
+                    { 18, 2, 2, 0, 16 },
+                    { 19, 3, 4, 0, 16 },
+                    { 20, 4, 200, 0, 16 },
+                    { 21, 8, 6, 0, 16 },
+                    { 22, 5, 1, 0, 16 },
+                    { 25, 1, 104, 0, 17 },
+                    { 24, 15, 1, 0, 16 },
+                    { 26, 2, 5, 0, 17 },
+                    { 27, 3, 6, 0, 17 },
+                    { 28, 4, 150, 0, 17 },
+                    { 29, 8, 10, 0, 17 },
+                    { 30, 5, 1, 0, 17 },
+                    { 31, 14, 3, 0, 17 },
+                    { 23, 14, 4, 0, 16 },
+                    { 34, 11, 200, 0, 1 },
+                    { 10, 4, 150, 0, 5 },
+                    { 11, 8, 10, 0, 5 },
+                    { 35, 11, 110, 0, 2 },
+                    { 36, 11, 235, 0, 3 },
+                    { 1, 1, 100, 0, 4 },
+                    { 2, 2, 2, 0, 4 },
+                    { 3, 3, 4, 0, 4 },
+                    { 4, 4, 200, 0, 4 },
+                    { 5, 8, 6, 0, 4 },
+                    { 12, 5, 1, 0, 5 },
+                    { 6, 5, 1, 0, 4 },
+                    { 14, 15, 1, 0, 4 },
+                    { 15, 14, 3, 0, 4 },
+                    { 16, 15, 1, 0, 4 },
+                    { 7, 1, 104, 0, 5 },
+                    { 8, 2, 5, 0, 5 },
+                    { 9, 3, 6, 0, 5 },
+                    { 32, 15, 1, 0, 17 },
+                    { 13, 14, 4, 0, 4 },
+                    { 33, 11, 230, 0, 17 }
                 });
 
             migrationBuilder.InsertData(
@@ -406,9 +684,44 @@ namespace HospitalClassLibrary.Migrations
                 column: "RoomId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_EquipmentTransfer_DestinationRoomId",
+                table: "EquipmentTransfer",
+                column: "DestinationRoomId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EquipmentTransfer_EquipmentId",
+                table: "EquipmentTransfer",
+                column: "EquipmentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EquipmentTransfer_SourceRoomId",
+                table: "EquipmentTransfer",
+                column: "SourceRoomId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MergeRenovation_NewRoomInfoId",
+                table: "MergeRenovation",
+                column: "NewRoomInfoId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Room_BuildingId",
                 table: "Room",
                 column: "BuildingId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Room_RoomDimensionsId",
+                table: "Room",
+                column: "RoomDimensionsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SplitRenovation_FirstNewRoomInfoId",
+                table: "SplitRenovation",
+                column: "FirstNewRoomInfoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SplitRenovation_SecondNewRoomInfoId",
+                table: "SplitRenovation",
+                column: "SecondNewRoomInfoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Workday_DoctorId",
@@ -427,13 +740,50 @@ namespace HospitalClassLibrary.Migrations
                 name: "Appointment");
 
             migrationBuilder.DropTable(
-                name: "Equipment");
+                name: "EquipmentTransfer");
+
+            migrationBuilder.DropTable(
+                name: "MergeRenovation");
+
+            migrationBuilder.DropTable(
+                name: "SplitRenovation");
+
+            migrationBuilder.DropTable(
+                name: "BackToMap",
+                schema: "Events");
+
+            migrationBuilder.DropTable(
+                name: "BuildingSelection",
+                schema: "Events");
+
+            migrationBuilder.DropTable(
+                name: "EquipmentTransferEvent",
+                schema: "Events");
+
+            migrationBuilder.DropTable(
+                name: "FloorChange",
+                schema: "Events");
+
+            migrationBuilder.DropTable(
+                name: "MergeRenovationEvent",
+                schema: "Events");
+
+            migrationBuilder.DropTable(
+                name: "RoomSelection",
+                schema: "Events");
+
+            migrationBuilder.DropTable(
+                name: "SplitRenovationEvent",
+                schema: "Events");
 
             migrationBuilder.DropTable(
                 name: "Workday");
 
             migrationBuilder.DropTable(
-                name: "EquipmentItem");
+                name: "Equipment");
+
+            migrationBuilder.DropTable(
+                name: "NewRoomInfo");
 
             migrationBuilder.DropTable(
                 name: "Doctor");
@@ -442,10 +792,16 @@ namespace HospitalClassLibrary.Migrations
                 name: "Shift");
 
             migrationBuilder.DropTable(
+                name: "EquipmentItem");
+
+            migrationBuilder.DropTable(
                 name: "Room");
 
             migrationBuilder.DropTable(
                 name: "Building");
+
+            migrationBuilder.DropTable(
+                name: "RoomDimension");
         }
     }
 }

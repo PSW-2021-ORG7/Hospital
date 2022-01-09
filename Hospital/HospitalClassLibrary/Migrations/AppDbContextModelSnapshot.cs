@@ -37,6 +37,24 @@ namespace HospitalClassLibrary.Migrations
                     b.ToTable("BuildingSelection","Events");
                 });
 
+            modelBuilder.Entity("HospitalClassLibrary.Events.EventBackToMap.BackToMap", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<DateTime>("TimeStamp")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("fromBouldingId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BackToMap","Events");
+                });
+
             modelBuilder.Entity("HospitalClassLibrary.Events.EventEquipmentTransfer.EquipmentTransferEvent", b =>
                 {
                     b.Property<long>("Id")
@@ -70,6 +88,60 @@ namespace HospitalClassLibrary.Migrations
                     b.ToTable("EquipmentTransferEvent","Events");
                 });
 
+            modelBuilder.Entity("HospitalClassLibrary.Events.EventFlorChange.FloorChange", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<DateTime>("TimeStamp")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("buildingId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("fromFloor")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("toFloor")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FloorChange","Events");
+                });
+
+            modelBuilder.Entity("HospitalClassLibrary.Events.EventMergeRenovation.MergeRenovationEvent", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<DateTime>("End")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("FirstOldRoomId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("NewRoomName")
+                        .HasColumnType("text");
+
+                    b.Property<int>("SecondOldRoomId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("Start")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime>("TimeStamp")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MergeRenovationEvent","Events");
+                });
+
             modelBuilder.Entity("HospitalClassLibrary.Events.EventRoomSelection.RoomSelection", b =>
                 {
                     b.Property<long>("Id")
@@ -86,6 +158,39 @@ namespace HospitalClassLibrary.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("RoomSelection","Events");
+                });
+
+            modelBuilder.Entity("HospitalClassLibrary.Events.EventSplitRenovation.SplitRenovationEvent", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<DateTime>("End")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("EquipmentDestination")
+                        .HasColumnType("text");
+
+                    b.Property<string>("FirstNewRoomName")
+                        .HasColumnType("text");
+
+                    b.Property<int>("RoomId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("SecondNewRoomName")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("Start")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime>("TimeStamp")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SplitRenovationEvent","Events");
                 });
 
             modelBuilder.Entity("HospitalClassLibrary.GraphicalEditor.Models.Building", b =>

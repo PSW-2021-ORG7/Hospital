@@ -1,5 +1,7 @@
 ﻿using HospitalClassLibrary.Events;
+using HospitalClassLibrary.Events.EventBackToMap;
 using HospitalClassLibrary.Events.EventEquipmentTransfer;
+using HospitalClassLibrary.Events.EventFlorChange;
 using HospitalClassLibrary.Events.EventRoomSelection;
 using HospitalClassLibrary.GraphicalEditor.Models;
 using HospitalClassLibrary.Renovations.Models;
@@ -23,13 +25,17 @@ namespace HospitalClassLibrary.Data
         public DbSet<EquipmentTransfer> EquipmentTransfer { get; set; }
         public DbSet<RoomDimensions> RoomDimension { get; set; }
         public DbSet<NewRoomInfo> NewRoomInfo { get; set; }
-        public DbSet<SplitRenovation> SplitRenovation { get; set; }
-        public DbSet<MergeRenovation> MergeRenovation { get; set; }
+        public DbSet<Renovations.Models.SplitRenovation> SplitRenovation { get; set; }
+        public DbSet<Renovations.Models.MergeRenovation> MergeRenovation { get; set; }
 
         //Events
         public DbSet<BuildingSelection> BuildingSelection { get; set; }
         public DbSet<RoomSelection> RoomSelection { get; set; }
         public DbSet<EquipmentTransferEvent> EquipmentTransferEvent { get; set; }
+        public DbSet<FloorChange> FloorChange { get; set; }
+        public DbSet<BackToMap> BackToMap { get; set; }
+        public DbSet<Events.EventMergeRenovation.MergeRenovationEvent> MergeRenovation1 { get; set; }
+        public DbSet<Events.EventSplitRenovation.SplitRenovationEvent> SplitRenovation1 { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
