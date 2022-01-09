@@ -38,9 +38,9 @@ namespace HospitalClassLibrary.Renovations.Services
 
         public RenovationService(ISplitRenovationRepository object1, IMergeRenovationRepository object2, IRoomRepository object3)
         {
-            this.object1 = object1;
-            this.object2 = object2;
-            this.object3 = object3;
+            this._splitRenovationRepository = object1;
+            this._mergeRenovationRepository = object2;
+            this._roomRepository = object3;
             fromFront = false;
 
         }
