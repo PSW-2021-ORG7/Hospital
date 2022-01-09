@@ -19,9 +19,15 @@ namespace HospitalClassLibrary.Schedule.Services
         {
             return await _doctorRepository.GetByIdAsync(id);
         }
-        Task<Doctor> IDoctorService.GetDoctorForRoom(int roomId)
+
+        public async Task<Doctor> GetDoctor(int id)
         {
-            return _doctorRepository.GetDoctorForRoom(roomId);
+            return await _doctorRepository.GetByIdAsync(id);
+        }
+
+        public async Task<Doctor> GetDoctorForRoom(int roomId)
+        {
+            return await _doctorRepository.GetDoctorForRoom(roomId);
         }
     }
 }

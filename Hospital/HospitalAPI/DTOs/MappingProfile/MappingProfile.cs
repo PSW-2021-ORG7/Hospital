@@ -22,6 +22,7 @@ namespace HospitalAPI.DTOs.MappingProfile
             CreateMap<EquipmentTransfer, EquipmentTransferDto>();
             CreateMap<Holiday, HolidayDto>();
             CreateMap<Doctor, DoctorRoomDto>();
+            CreateMap<Doctor, DoctorDto>();
         }
     }
 }

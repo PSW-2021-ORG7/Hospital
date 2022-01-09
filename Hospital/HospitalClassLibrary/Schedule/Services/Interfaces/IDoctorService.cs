@@ -7,5 +7,6 @@ namespace HospitalClassLibrary.Schedule.Services.Interfaces
     {
         Task<Doctor> GetById(int id);
         Task<Doctor> GetDoctorForRoom(int roomId);
+        Task<Doctor> GetDoctor(int id);
     }
 }

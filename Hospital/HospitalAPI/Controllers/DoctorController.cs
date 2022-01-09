@@ -36,5 +36,18 @@ namespace HospitalAPI.Controllers
             }
             return _mapper.Map<DoctorRoomDto>(doctor);
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<DoctorDto>> GetDoctor(int id)
+        {
+
+            var doctor = await _doctorService.GetDoctor(id);
+            if (doctor == null)
+            {
+                return NotFound();
+            }
+            return _mapper.Map<DoctorDto>(doctor);
+        }
+
     }
 }
