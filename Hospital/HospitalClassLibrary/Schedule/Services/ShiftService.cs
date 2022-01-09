@@ -11,10 +11,12 @@ namespace HospitalClassLibrary.Schedule.Services
     public class ShiftService : IShiftService
     {
         private readonly IShiftRepository _shiftRepository;
+        private readonly IWorkdayRepository _workdayRepository;
 
-        public ShiftService(IShiftRepository shiftRepository)
+        public ShiftService(IShiftRepository shiftRepository, IWorkdayRepository workdayRepository)
         {
             _shiftRepository = shiftRepository;
+            _workdayRepository = workdayRepository;
         }
 
         public async Task<IEnumerable<Shift>> GetAll()
@@ -36,5 +38,13 @@ namespace HospitalClassLibrary.Schedule.Services
         {
             await _shiftRepository.DeleteAsync(s);
         }
+
+        public async Task<IEnumerable<Shift>> GetAllShiftsByDoctorId(int id)
+        {
+            return await _workdayRepository.GetAllShiftsByDoctorId(id);
+        }
+
+
+
     }
 }

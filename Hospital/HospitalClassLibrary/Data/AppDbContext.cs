@@ -22,6 +22,7 @@ namespace HospitalClassLibrary.Data
         public DbSet<Equipment> Equipment { get; set; }
         public DbSet<Doctor> Doctor { get; set; }
         public DbSet<Workday> Workday { get; set; }
+        public DbSet<Shift> Shift { get; set; }
         public DbSet<EquipmentTransfer> EquipmentTransfer { get; set; }
         public DbSet<RoomDimensions> RoomDimension { get; set; }
         public DbSet<NewRoomInfo> NewRoomInfo { get; set; }
