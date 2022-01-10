@@ -27,7 +27,7 @@ jobs:
         run: |
               cd ${{env.PROJECT_PATH}}
               dotnet tool install -g dotnet-ef && \
-              dotnet ef migrations script -p "HospitalAPI/HospitalAPI.csproj" -o ./init.sql
+              dotnet-ef migrations script -p "HospitalAPI/HospitalAPI.csproj" -o ./init.sql
     
       - name: Start dependencies (docker-compose)
         run: |
