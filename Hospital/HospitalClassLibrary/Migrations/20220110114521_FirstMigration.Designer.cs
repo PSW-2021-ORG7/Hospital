@@ -10,13 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HospitalClassLibrary.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-<<<<<<< HEAD:Hospital/HospitalClassLibrary/Migrations/20220110113041_FirstMigration.Designer.cs
-    [Migration("20220110113041_FirstMigration")]
+    [Migration("20220110114521_FirstMigration")]
     partial class FirstMigration
-=======
-    [Migration("20220108115522_AddHolidayClass")]
-    partial class AddHolidayClass
->>>>>>> 68e348d (feat: Implement POST method):Hospital/HospitalClassLibrary/Migrations/20220108115522_AddHolidayClass.Designer.cs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
