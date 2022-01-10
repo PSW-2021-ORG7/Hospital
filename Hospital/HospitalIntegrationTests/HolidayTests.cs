@@ -31,7 +31,7 @@ namespace HospitalIntegrationTests
                 Description = ""
             };
 
-            await _client.PostAsync("/api/holiday", new StringContent(JsonConvert.SerializeObject(holiday), Encoding.UTF8, "application/json"));
+            await _client.PostAsync("/api/holidays", new StringContent(JsonConvert.SerializeObject(holiday), Encoding.UTF8, "application/json"));
 
             var workdays = await _client.GetAsync("/api/workdays?start=2021-11-30T09:00:00&end=2021-12-2T23:00:00&doctorId=1");
             var workdaysAsString = await workdays.Content.ReadAsStringAsync();
