@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using HospitalClassLibrary.Schedule.Models;
 using HospitalClassLibrary.Schedule.Services.Interfaces;
+using HospitalClassLibrary.Shared.Models;
 
 namespace HospitalAPI.Controllers
 {
@@ -20,9 +21,9 @@ namespace HospitalAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<Shift>> GetShifts()
+        public async Task<IEnumerable<Shift>> GetShifts([FromQuery] DateTimeRange dateTimeRange)
         {
-            return await _shiftService.GetAll();
+            return await _shiftService.GetAll(dateTimeRange);
         }
 
         [HttpPost]
@@ -47,6 +48,12 @@ namespace HospitalAPI.Controllers
             await _shiftService.Delete(shift);
 
             return NoContent();
+        }
+
+        [HttpGet("doctor/{id}")]
+        public async Task<IEnumerable<Shift>> GetAllShiftsByDoctorId(int id)
+        {
+            return await _shiftService.GetAllShiftsByDoctorId(id);
         }
     }
 }

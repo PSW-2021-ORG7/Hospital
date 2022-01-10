@@ -99,5 +99,14 @@ namespace HospitalClassLibrary.Schedule.Services
         {
             return await _workdayRepository.GetWorkdays(dateRange, doctorId);
         }
+        public async Task Create(Workday workday)
+        {
+            await _workdayRepository.CreateAsync(workday);
+        }
+
+        public async Task Update(Workday workday)
+        {
+            await _workdayRepository.UpdateAsync(workday);
+        }
     }
 }

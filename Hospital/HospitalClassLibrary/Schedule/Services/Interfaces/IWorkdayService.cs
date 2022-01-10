@@ -9,5 +9,7 @@ namespace HospitalClassLibrary.Schedule.Services.Interfaces
     {
         ICollection<DateTimeRange> GetAvailableTimeSlots(TimeSlotsRequirements requirements);
         Task<IEnumerable<Workday>> GetWorkdays(DateTimeRange dateRange, int doctorId);
+        Task Create(Workday workday);
+        Task Update(Workday workday);
     }
 }

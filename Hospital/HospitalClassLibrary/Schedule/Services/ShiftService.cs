@@ -5,21 +5,24 @@ using System.Threading.Tasks;
 using HospitalClassLibrary.Schedule.Models;
 using HospitalClassLibrary.Schedule.Repositories.Interfaces;
 using HospitalClassLibrary.Schedule.Services.Interfaces;
+using HospitalClassLibrary.Shared.Models;
 
 namespace HospitalClassLibrary.Schedule.Services
 {
     public class ShiftService : IShiftService
     {
         private readonly IShiftRepository _shiftRepository;
+        private readonly IWorkdayRepository _workdayRepository;
 
-        public ShiftService(IShiftRepository shiftRepository)
+        public ShiftService(IShiftRepository shiftRepository, IWorkdayRepository workdayRepository)
         {
             _shiftRepository = shiftRepository;
+            _workdayRepository = workdayRepository;
         }
 
-        public async Task<IEnumerable<Shift>> GetAll()
+        public async Task<IEnumerable<Shift>> GetAll(DateTimeRange dateTimeRange)
         {
-            return await _shiftRepository.GetAllAsync();
+            return await _shiftRepository.GetAllAsync(dateTimeRange);
         }
 
         public async Task Create(Shift s)
@@ -36,5 +39,13 @@ namespace HospitalClassLibrary.Schedule.Services
         {
             await _shiftRepository.DeleteAsync(s);
         }
+
+        public async Task<IEnumerable<Shift>> GetAllShiftsByDoctorId(int id)
+        {
+            return await _workdayRepository.GetAllShiftsByDoctorId(id);
+        }
+
+
+
     }
 }
