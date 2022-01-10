@@ -7,5 +7,6 @@
         public const int WorkHoursEnd = 23;
         public const int NonWorkingHours = 9;
         public const int TwoHours = 2 * 60 * 60 * 1000;
+        public const int MaxOffDays = 25;
     }
 }

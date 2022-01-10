@@ -198,6 +198,7 @@ namespace HospitalClassLibrary.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:IdentitySequenceOptions", "'3', '1', '', '', 'False', '1'")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Description")
@@ -230,6 +231,7 @@ namespace HospitalClassLibrary.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:IdentitySequenceOptions", "'25', '1', '', '', 'False', '1'")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<double>("Height")
@@ -532,6 +534,7 @@ namespace HospitalClassLibrary.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:IdentitySequenceOptions", "'37', '1', '', '', 'False', '1'")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<int>("EquipmentItemId")
@@ -850,6 +853,7 @@ namespace HospitalClassLibrary.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:IdentitySequenceOptions", "'16', '1', '', '', 'False', '1'")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Description")
@@ -996,6 +1000,7 @@ namespace HospitalClassLibrary.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:IdentitySequenceOptions", "'25', '1', '', '', 'False', '1'")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<int>("BuildingId")
@@ -1272,6 +1277,7 @@ namespace HospitalClassLibrary.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:IdentitySequenceOptions", "'34', '1', '', '', 'False', '1'")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<DateTime>("EndTime")
@@ -1528,6 +1534,7 @@ namespace HospitalClassLibrary.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:IdentitySequenceOptions", "'7', '1', '', '', 'False', '1'")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<DateTime>("DateOfBirth")
@@ -1554,6 +1561,9 @@ namespace HospitalClassLibrary.Migrations
                     b.Property<string>("Surname")
                         .HasColumnType("text");
 
+                    b.Property<int>("UsedOffDays")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
 
                     b.HasIndex("RoomId")
@@ -1572,7 +1582,8 @@ namespace HospitalClassLibrary.Migrations
                             Phone = "0618384494",
                             RoomId = 1,
                             Specialization = 0,
-                            Surname = "Ross"
+                            Surname = "Ross",
+                            UsedOffDays = 0
                         },
                         new
                         {
@@ -1584,7 +1595,8 @@ namespace HospitalClassLibrary.Migrations
                             Phone = "0628345664",
                             RoomId = 2,
                             Specialization = 3,
-                            Surname = "Depp"
+                            Surname = "Depp",
+                            UsedOffDays = 0
                         },
                         new
                         {
@@ -1596,7 +1608,8 @@ namespace HospitalClassLibrary.Migrations
                             Phone = "0618331884",
                             RoomId = 3,
                             Specialization = 1,
-                            Surname = "Domino"
+                            Surname = "Domino",
+                            UsedOffDays = 0
                         },
                         new
                         {
@@ -1608,7 +1621,8 @@ namespace HospitalClassLibrary.Migrations
                             Phone = "0633415156",
                             RoomId = 4,
                             Specialization = 2,
-                            Surname = "Beckham"
+                            Surname = "Beckham",
+                            UsedOffDays = 0
                         },
                         new
                         {
@@ -1620,7 +1634,8 @@ namespace HospitalClassLibrary.Migrations
                             Phone = "066144141",
                             RoomId = 5,
                             Specialization = 3,
-                            Surname = "Remi"
+                            Surname = "Remi",
+                            UsedOffDays = 0
                         },
                         new
                         {
@@ -1632,8 +1647,35 @@ namespace HospitalClassLibrary.Migrations
                             Phone = "066165642",
                             RoomId = 6,
                             Specialization = 3,
-                            Surname = "Uri"
+                            Surname = "Uri",
+                            UsedOffDays = 0
                         });
+                });
+
+            modelBuilder.Entity("HospitalClassLibrary.Schedule.Models.Holiday", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("End")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime>("Start")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DoctorId");
+
+                    b.ToTable("Holiday");
                 });
 
             modelBuilder.Entity("HospitalClassLibrary.Schedule.Models.Shift", b =>
@@ -1641,6 +1683,7 @@ namespace HospitalClassLibrary.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:IdentitySequenceOptions", "'17', '1', '', '', 'False', '1'")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<DateTime>("End")
@@ -1776,6 +1819,7 @@ namespace HospitalClassLibrary.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:IdentitySequenceOptions", "'19', '1', '', '', 'False', '1'")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<int>("DoctorId")
@@ -1984,6 +2028,15 @@ namespace HospitalClassLibrary.Migrations
                     b.HasOne("HospitalClassLibrary.RoomEquipment.Models.Room", "Room")
                         .WithOne("Doctor")
                         .HasForeignKey("HospitalClassLibrary.Schedule.Models.Doctor", "RoomId");
+                });
+
+            modelBuilder.Entity("HospitalClassLibrary.Schedule.Models.Holiday", b =>
+                {
+                    b.HasOne("HospitalClassLibrary.Schedule.Models.Doctor", "Doctor")
+                        .WithMany()
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("HospitalClassLibrary.Schedule.Models.Workday", b =>

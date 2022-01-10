@@ -7,6 +7,14 @@
   <ItemGroup>
     <Compile Remove="Migrations\20220105121724_Events.cs" />
     <Compile Remove="Migrations\20220105121724_Events.Designer.cs" />
+    <Compile Remove="Migrations\20220107222353_AddHolidayClass.cs" />
+    <Compile Remove="Migrations\20220107222353_AddHolidayClass.Designer.cs" />
+    <Compile Remove="Migrations\20220109150831_first.cs" />
+    <Compile Remove="Migrations\20220109150831_first.Designer.cs" />
+    <Compile Remove="Migrations\20220110112245_FirstMigration.cs" />
+    <Compile Remove="Migrations\20220110112245_FirstMigration.Designer.cs" />
+    <Compile Remove="Migrations\20220110114419_FirstMigration.cs" />
+    <Compile Remove="Migrations\20220110114419_FirstMigration.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace HospitalClassLibrary.Migrations
 {
-    public partial class first : Migration
+    public partial class FirstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -16,6 +16,7 @@ namespace HospitalClassLibrary.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:IdentitySequenceOptions", "'3', '1', '', '', 'False', '1'")
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true)
@@ -30,6 +31,7 @@ namespace HospitalClassLibrary.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:IdentitySequenceOptions", "'16', '1', '', '', 'False', '1'")
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true)
@@ -59,6 +61,7 @@ namespace HospitalClassLibrary.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:IdentitySequenceOptions", "'25', '1', '', '', 'False', '1'")
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     X = table.Column<double>(nullable: false),
                     Y = table.Column<double>(nullable: false),
@@ -75,6 +78,7 @@ namespace HospitalClassLibrary.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:IdentitySequenceOptions", "'17', '1', '', '', 'False', '1'")
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Start = table.Column<DateTime>(nullable: false),
                     End = table.Column<DateTime>(nullable: false),
@@ -264,6 +268,7 @@ namespace HospitalClassLibrary.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:IdentitySequenceOptions", "'25', '1', '', '', 'False', '1'")
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(nullable: true),
                     Status = table.Column<int>(nullable: false),
@@ -294,6 +299,7 @@ namespace HospitalClassLibrary.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:IdentitySequenceOptions", "'7', '1', '', '', 'False', '1'")
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(nullable: true),
                     Surname = table.Column<string>(nullable: true),
@@ -302,6 +308,7 @@ namespace HospitalClassLibrary.Migrations
                     Email = table.Column<string>(nullable: true),
                     Gender = table.Column<int>(nullable: false),
                     Specialization = table.Column<int>(nullable: false),
+                    UsedOffDays = table.Column<int>(nullable: false),
                     RoomId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -320,6 +327,7 @@ namespace HospitalClassLibrary.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:IdentitySequenceOptions", "'37', '1', '', '', 'False', '1'")
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     RoomId = table.Column<int>(nullable: false),
                     EquipmentItemId = table.Column<int>(nullable: false),
@@ -344,10 +352,33 @@ namespace HospitalClassLibrary.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Holiday",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Start = table.Column<DateTime>(nullable: false),
+                    End = table.Column<DateTime>(nullable: false),
+                    DoctorId = table.Column<int>(nullable: false),
+                    Description = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Holiday", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Holiday_Doctor_DoctorId",
+                        column: x => x.DoctorId,
+                        principalTable: "Doctor",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Workday",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:IdentitySequenceOptions", "'19', '1', '', '', 'False', '1'")
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     DoctorId = table.Column<int>(nullable: false),
                     ShiftId = table.Column<int>(nullable: false)
@@ -410,6 +441,7 @@ namespace HospitalClassLibrary.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:IdentitySequenceOptions", "'34', '1', '', '', 'False', '1'")
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     StartTime = table.Column<DateTime>(nullable: false),
                     EndTime = table.Column<DateTime>(nullable: false),
@@ -544,15 +576,15 @@ namespace HospitalClassLibrary.Migrations
 
             migrationBuilder.InsertData(
                 table: "Doctor",
-                columns: new[] { "Id", "DateOfBirth", "Email", "Gender", "Name", "Phone", "RoomId", "Specialization", "Surname" },
+                columns: new[] { "Id", "DateOfBirth", "Email", "Gender", "Name", "Phone", "RoomId", "Specialization", "Surname", "UsedOffDays" },
                 values: new object[,]
                 {
-                    { 5, new DateTime(1968, 2, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "melanie@gmail.com", 1, "Melanie", "066144141", 5, 3, "Remi" },
-                    { 1, new DateTime(1959, 1, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), "georgeross@gmail.com", 0, "George", "0618384494", 1, 0, "Ross" },
-                    { 2, new DateTime(1965, 4, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "jonnydepp@gmail.com", 0, "Jonny", "0628345664", 2, 3, "Depp" },
-                    { 3, new DateTime(1963, 8, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), "luigidomino@gmail.com", 0, "Luigi", "0618331884", 3, 1, "Domino" },
-                    { 4, new DateTime(1987, 4, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "monnica13@gmail.com", 1, "Monnica", "0633415156", 4, 2, "Beckham" },
-                    { 6, new DateTime(1988, 1, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), "latcika@gmail.com", 0, "Latcika", "066165642", 6, 3, "Uri" }
+                    { 5, new DateTime(1968, 2, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "melanie@gmail.com", 1, "Melanie", "066144141", 5, 3, "Remi", 0 },
+                    { 1, new DateTime(1959, 1, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), "georgeross@gmail.com", 0, "George", "0618384494", 1, 0, "Ross", 0 },
+                    { 2, new DateTime(1965, 4, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "jonnydepp@gmail.com", 0, "Jonny", "0628345664", 2, 3, "Depp", 0 },
+                    { 3, new DateTime(1963, 8, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), "luigidomino@gmail.com", 0, "Luigi", "0618331884", 3, 1, "Domino", 0 },
+                    { 4, new DateTime(1987, 4, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "monnica13@gmail.com", 1, "Monnica", "0633415156", 4, 2, "Beckham", 0 },
+                    { 6, new DateTime(1988, 1, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), "latcika@gmail.com", 0, "Latcika", "066165642", 6, 3, "Uri", 0 }
                 });
 
             migrationBuilder.InsertData(
@@ -700,6 +732,11 @@ namespace HospitalClassLibrary.Migrations
                 column: "SourceRoomId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Holiday_DoctorId",
+                table: "Holiday",
+                column: "DoctorId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_MergeRenovation_NewRoomInfoId",
                 table: "MergeRenovation",
                 column: "NewRoomInfoId");
@@ -742,6 +779,9 @@ namespace HospitalClassLibrary.Migrations
 
             migrationBuilder.DropTable(
                 name: "EquipmentTransfer");
+
+            migrationBuilder.DropTable(
+                name: "Holiday");
 
             migrationBuilder.DropTable(
                 name: "MergeRenovation");
