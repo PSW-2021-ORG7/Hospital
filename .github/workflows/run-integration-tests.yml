@@ -27,7 +27,7 @@ jobs:
         run: |
               cd ${{env.PROJECT_PATH}}
               ls
-              dotnet build -c Release --no-restore ${{ env.PROJECT_PATH }}
+              dotnet build -c Release --no-restore
               dotnet tool install -g dotnet-ef && \
               dotnet ef migrations script --context AppDbContext -p "HospitalAPI/HospitalAPI.csproj" -o ./init.sql
     
