@@ -35,6 +35,11 @@ namespace HospitalClassLibrary.Schedule.Services
             await _holidayRepository.UpdateAsync(holiday);
         }
 
+        public async Task Delete(Holiday holiday)
+        {
+            await _holidayRepository.DeleteAsync(holiday);
+        }
+
         public Task<IEnumerable<Holiday>> GetAllByDoctorId(int doctorId)
         {
             return _holidayRepository.GetAllByDoctorId(doctorId);
@@ -45,5 +50,6 @@ namespace HospitalClassLibrary.Schedule.Services
             var existingHoliday = await _holidayRepository.GetAllByDoctorId(holiday.DoctorId);
             return existingHoliday.Any(holiday.Overlaps);
         }
+
     }
 }
