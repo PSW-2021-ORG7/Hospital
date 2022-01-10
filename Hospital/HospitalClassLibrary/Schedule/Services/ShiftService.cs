@@ -45,7 +45,9 @@ namespace HospitalClassLibrary.Schedule.Services
             return await _workdayRepository.GetAllShiftsByDoctorId(id);
         }
 
-
-
+        public async Task<Shift> GetById(int id)
+        {
+            return await _shiftRepository.GetByIdAsync(id);
+        }
     }
 }

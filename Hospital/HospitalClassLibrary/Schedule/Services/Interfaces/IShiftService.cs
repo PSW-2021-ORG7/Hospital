@@ -15,5 +15,6 @@ namespace HospitalClassLibrary.Schedule.Services.Interfaces
         Task Delete(Shift s);
 
         Task<IEnumerable<Shift>> GetAllShiftsByDoctorId(int id);
+        Task<Shift> GetById(int id);
     }
 }
