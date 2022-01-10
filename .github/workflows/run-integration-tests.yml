@@ -22,6 +22,13 @@ jobs:
 
       - name: Restore NuGet packages
         run: dotnet restore ${{ env.PROJECT_PATH }}
+
+      - name: Generate init.sql script
+        run: |
+              cd ${{env.PROJECT_PATH}}
+              ls
+              dotnet tool install -g dotnet-ef && \
+              dotnet ef migrations script --context AppDbContext -p "HospitalAPI/HospitalAPI.csproj" -o ./init.sql
     
       - name: Start dependencies (docker-compose)
         run: |
@@ -35,12 +42,6 @@ jobs:
 
       - name: Build
         run: dotnet build -c Release --no-restore ${{ env.PROJECT_PATH }}
-
-      - name: Generate init.sql script
-        run: |
-              cd ${{env.PROJECT_PATH}}
-              dotnet tool install -g dotnet-ef && \
-              dotnet ef migrations script --context AppDbContext  -p "HospitalAPI/HospitalAPI.csproj" -o ./init.sql
-
+    
       - name: Test
         run: dotnet test -c Release --no-build ${{ env.PROJECT_PATH }}/HospitalIntegrationTests
