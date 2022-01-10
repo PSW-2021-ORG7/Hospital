@@ -32,7 +32,7 @@ namespace HospitalClassLibrary.Schedule.Repositories
         public async Task<IEnumerable<Shift>> GetAllShiftsByDoctorId(int doctorId)
         {
             return await Context.Workday.Where(w => w.DoctorId == doctorId).
-                Join(Context.Shift, w => w.Id, s => s.Id,
+                Join(Context.Shift, w => w.ShiftId, s => s.Id,
                 (w, s) => new Shift
                 {
                     Id = s.Id,
