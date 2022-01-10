@@ -26,7 +26,6 @@ jobs:
       - name: Generate init.sql script
         run: |
               cd ${{env.PROJECT_PATH}}
-              dotnet build HospitalAPI/HospitalAPI.csproj
               dotnet tool install -g dotnet-ef && \
               dotnet ef migrations script --context AppDbContext -p "HospitalAPI/HospitalAPI.csproj" -o ./init.sql
     
