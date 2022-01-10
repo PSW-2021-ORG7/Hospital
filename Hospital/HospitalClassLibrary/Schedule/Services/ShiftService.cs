@@ -40,12 +40,14 @@ namespace HospitalClassLibrary.Schedule.Services
             await _shiftRepository.DeleteAsync(s);
         }
 
-        public async Task<IEnumerable<Shift>> GetAllShiftsByDoctorId(int id)
+        public async Task<IEnumerable<object>> GetAllShiftsByDoctorId(int id)
         {
             return await _workdayRepository.GetAllShiftsByDoctorId(id);
         }
 
-
-
+        public async Task<Shift> GetById(int id)
+        {
+            return await _shiftRepository.GetByIdAsync(id);
+        }
     }
 }

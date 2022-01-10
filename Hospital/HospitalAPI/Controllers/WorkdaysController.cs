@@ -47,5 +47,21 @@ namespace HospitalAPI.Controllers
 
                 return NoContent();
             }
+
+            [HttpDelete("{id}")]
+            public async Task<ActionResult> DeleteWorkday(int id)
+            {
+                var employeeToDelete = await _workdayService.GetWorkdayById(id);
+
+                if (employeeToDelete == null)
+                {
+                    return NotFound($"Workday with Id = {id} not found");
+                }
+
+                await _workdayService.DeleteWorkdayById(id);
+
+                return NoContent();
+
+            }
     }
 }

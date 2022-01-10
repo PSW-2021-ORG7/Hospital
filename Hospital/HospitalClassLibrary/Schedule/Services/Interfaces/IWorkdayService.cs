@@ -11,5 +11,7 @@ namespace HospitalClassLibrary.Schedule.Services.Interfaces
         Task<IEnumerable<Workday>> GetWorkdays(DateTimeRange dateRange, int doctorId);
         Task Create(Workday workday);
         Task Update(Workday workday);
+        Task<Workday> GetWorkdayById(int id);
+        Task DeleteWorkdayById(int id);
     }
 }
