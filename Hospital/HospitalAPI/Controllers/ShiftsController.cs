@@ -54,7 +54,6 @@ namespace HospitalAPI.Controllers
         public async Task<IEnumerable<Shift>> GetAllShiftsByDoctorId(int id)
         {
             return await _shiftService.GetAllShiftsByDoctorId(id);
-
         }
     }
 }

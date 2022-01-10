@@ -17,12 +17,8 @@
       "commandName": "IISExpress",
       "launchBrowser": false,
       "environmentVariables": {
-<<<<<<< HEAD
         "ASPNETCORE_ENVIRONMENT": "Development",
         "DB_CONNECTION_STRING_H": "Server=localhost;Port=5432;Database=Hospital.Db;User Id=postgres;Password=psql;"
-=======
-        "ASPNETCORE_ENVIRONMENT": "Development"
->>>>>>> 819c8db (refactor: Add individual migrations)
       }
     },
     "oasishealthcare": {
