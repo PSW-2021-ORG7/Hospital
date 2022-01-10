@@ -8,6 +8,7 @@ namespace HospitalClassLibrary.Schedule.Services.Interfaces
     {
         Task Create(Holiday holiday);
         Task Update(Holiday holiday);
+        Task Delete(Holiday holiday);
         Task<IEnumerable<Holiday>> GetAllByDoctorId(int doctorId);
         Task<bool> HasOverlappingHoliday(Holiday holiday);
     }

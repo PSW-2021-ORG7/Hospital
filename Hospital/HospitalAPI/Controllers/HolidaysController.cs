@@ -68,5 +68,20 @@ namespace HospitalAPI.Controllers
             return Ok();
         }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteHoliday(int id, HolidayDto holidayDto)
+        {
+            if (id != holidayDto.Id)
+            {
+                return BadRequest();
+            }
+
+            var doctor = await _doctorService.GetById(holidayDto.DoctorId);
+            var holiday = new Holiday(holidayDto.Id, holidayDto.Start, holidayDto.End, holidayDto.DoctorId, doctor, holidayDto.Description);
+            await _holidayService.Delete(holiday);
+
+            return Ok();
+        }
+
     }
 }
