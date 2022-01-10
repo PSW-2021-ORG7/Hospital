@@ -63,6 +63,12 @@ namespace HospitalAPI.Controllers
 
             var doctor = await _doctorService.GetById(holidayDto.DoctorId);
             var holiday = new Holiday(holidayDto.Id, holidayDto.Start, holidayDto.End, holidayDto.DoctorId, doctor, holidayDto.Description);
+
+            if (_holidayService.HasOverlappingHoliday(holiday).Result)
+            {
+                return Conflict("Doctor has scheduled holiday at the requested date");
+            }
+
             await _holidayService.Update(holiday);
 
             return Ok();
