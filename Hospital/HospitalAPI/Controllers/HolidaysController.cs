@@ -11,13 +11,13 @@ namespace HospitalAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class HolidayController : ControllerBase
+    public class HolidaysController : ControllerBase
     {
         private readonly IHolidayService _holidayService;
         private readonly IDoctorService _doctorService;
         private readonly IMapper _mapper;
 
-        public HolidayController(IHolidayService holidayService, IDoctorService doctorService, IMapper mapper)
+        public HolidaysController(IHolidayService holidayService, IDoctorService doctorService, IMapper mapper)
         {
             _holidayService = holidayService;
             _doctorService = doctorService;
