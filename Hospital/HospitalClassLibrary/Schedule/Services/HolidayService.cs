@@ -21,18 +21,25 @@ namespace HospitalClassLibrary.Schedule.Services
 
         public async Task Create(Holiday holiday)
         {
-            var workdays = _workdayRepository.GetWorkdays(new DateTimeRange() {Start = holiday.Start, End = holiday.End}, holiday.DoctorId).Result;
-            foreach (var workday in workdays)
-            {
-                await _workdayRepository.DeleteAsync(workday);
-            }
+            await DeleteWorkdaysInHolidayDateRange(holiday);
 
             await _holidayRepository.CreateAsync(holiday);
         }
 
         public async Task Update(Holiday holiday)
         {
+            await DeleteWorkdaysInHolidayDateRange(holiday);
+
             await _holidayRepository.UpdateAsync(holiday);
+        }
+
+        private async Task DeleteWorkdaysInHolidayDateRange(Holiday holiday)
+        {
+            var workdays = _workdayRepository.GetWorkdays(new DateTimeRange() { Start = holiday.Start, End = holiday.End }, holiday.DoctorId).Result;
+            foreach (var workday in workdays)
+            {
+                await _workdayRepository.DeleteAsync(workday);
+            }
         }
 
         public async Task Delete(Holiday holiday)
