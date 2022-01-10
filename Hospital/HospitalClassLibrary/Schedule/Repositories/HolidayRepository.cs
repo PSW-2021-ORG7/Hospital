@@ -15,9 +15,14 @@ namespace HospitalClassLibrary.Schedule.Repositories
         {
         }
 
+        public new async Task<Holiday> GetByIdAsync(int id)
+        {
+            return await Context.Holiday.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+        }
+
         public async Task<IEnumerable<Holiday>> GetAllByDoctorId(int doctorId)
         {
-            return await Context.Holiday.Where(h => h.DoctorId == doctorId).ToListAsync();
+            return await Context.Holiday.AsNoTracking().Where(h => h.DoctorId == doctorId).ToListAsync();
         }
     }
 }

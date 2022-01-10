@@ -55,6 +55,7 @@ namespace HospitalClassLibrary.Schedule.Services
         public async Task<bool> HasOverlappingHoliday(Holiday holiday)
         {
             var existingHoliday = await _holidayRepository.GetAllByDoctorId(holiday.DoctorId);
+            existingHoliday = existingHoliday.Where(h => h.Id != holiday.Id);
             return existingHoliday.Any(holiday.Overlaps);
         }
 
