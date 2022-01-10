@@ -43,6 +43,13 @@ namespace HospitalClassLibrary.Shared.Repositories
             await SaveChanges();
         }
 
+        public async Task DeleteByIdAsync(int id)
+        {
+            T entity = await GetByIdAsync(id);
+            Context.Set<T>().Remove(entity);
+            await SaveChanges();
+        }
+
         public async Task SaveChanges()
         {
             await Context.SaveChangesAsync();

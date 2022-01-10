@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace HospitalClassLibrary.Schedule.Repositories
 {
@@ -29,16 +30,17 @@ namespace HospitalClassLibrary.Schedule.Repositories
             return  allWorkdays.SelectMany(w => w.Appointments);
         }
 
-        public async Task<IEnumerable<Shift>> GetAllShiftsByDoctorId(int doctorId)
+        public async Task<IEnumerable<object>> GetAllShiftsByDoctorId(int doctorId)
         {
             return await Context.Workday.Where(w => w.DoctorId == doctorId).
                 Join(Context.Shift, w => w.ShiftId, s => s.Id,
-                (w, s) => new Shift
+                (w, s) => new
                 {
                     Id = s.Id,
                     Start = s.Start,
                     End = s.End,
-                    Name = s.Name
+                    Name = s.Name,
+                    WorkdayId = w.Id
                 }).ToListAsync();
 
         }

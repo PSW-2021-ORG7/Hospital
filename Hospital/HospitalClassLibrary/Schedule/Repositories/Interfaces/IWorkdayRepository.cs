@@ -10,6 +10,6 @@ namespace HospitalClassLibrary.Schedule.Repositories.Interfaces
     {
         Task<IEnumerable<Workday>> GetWorkdays(DateTimeRange dateTimeRange, int doctorId);
         Task<IEnumerable<Appointment>> GetAppointments(DateTimeRange dateTimeRange, int srcRoomDoctorId, int dstRoomDoctorId);
-        Task<IEnumerable<Shift>> GetAllShiftsByDoctorId(int doctorId);
+        Task<IEnumerable<object>> GetAllShiftsByDoctorId(int doctorId);
     }
 }

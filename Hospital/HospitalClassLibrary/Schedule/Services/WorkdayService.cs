@@ -108,5 +108,15 @@ namespace HospitalClassLibrary.Schedule.Services
         {
             await _workdayRepository.UpdateAsync(workday);
         }
+
+        public async Task<Workday> GetWorkdayById(int id)
+        {
+            return await _workdayRepository.GetByIdAsync(id);
+        }
+
+        public async Task DeleteWorkdayById(int id)
+        {
+            await _workdayRepository.DeleteByIdAsync(id);
+        }
     }
 }
