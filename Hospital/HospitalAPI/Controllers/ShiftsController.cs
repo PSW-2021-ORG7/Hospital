@@ -9,7 +9,7 @@ using HospitalClassLibrary.Shared.Models;
 
 namespace HospitalAPI.Controllers
 {
-    [Route("api/shifts")]
+    [Route("api")]
     [ApiController]
     public class ShiftsController : Controller
     {
@@ -20,7 +20,7 @@ namespace HospitalAPI.Controllers
             _shiftService = shiftService;
         }
 
-        [HttpGet]
+        [HttpGet("shifts")]
         public async Task<IEnumerable<Shift>> GetShifts([FromQuery] DateTimeRange dateTimeRange)
         {
             return await _shiftService.GetAll(dateTimeRange);
@@ -43,7 +43,7 @@ namespace HospitalAPI.Controllers
             return NoContent();
         }
 
-        [HttpPut]
+        [HttpPut("shifts")]
         public async Task<IActionResult> PutShift(Shift shift)
         {
             await _shiftService.Update(shift);
@@ -51,7 +51,7 @@ namespace HospitalAPI.Controllers
             return NoContent();
         }
 
-        [HttpDelete]
+        [HttpDelete("shifts")]
         public async Task<IActionResult> DeleteShift(Shift shift)
         {
             await _shiftService.Delete(shift);
@@ -64,5 +64,13 @@ namespace HospitalAPI.Controllers
         {
             return await _shiftService.GetAllShiftsByDoctorId(id);
         }
+
+        [HttpGet("onCallShifts/doctor/{id}")]
+        public async Task<IEnumerable<OnCallShift>> GetAllOnCallShiftsByDoctorId(int id)
+        {
+            return await _shiftService.GetAllOnCallShiftsByDoctorId(id);
+        }
+
+
     }
 }

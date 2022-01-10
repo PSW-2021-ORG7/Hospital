@@ -23,6 +23,7 @@ namespace HospitalClassLibrary.Data
         public DbSet<Doctor> Doctor { get; set; }
         public DbSet<Workday> Workday { get; set; }
         public DbSet<Shift> Shift { get; set; }
+        public DbSet<OnCallShift> OnCallShift { get; set; }
         public DbSet<EquipmentTransfer> EquipmentTransfer { get; set; }
         public DbSet<RoomDimensions> RoomDimension { get; set; }
         public DbSet<NewRoomInfo> NewRoomInfo { get; set; }
@@ -1084,6 +1085,84 @@ namespace HospitalClassLibrary.Data
                 }
             );
             modelBuilder.Entity<Shift>().Property(e => e.Id).HasIdentityOptions(startValue: 17);
+
+            modelBuilder.Entity<OnCallShift>().HasData(
+                new OnCallShift
+                {
+                    Id = 1,
+                    Start = new System.DateTime(2022, 1, 10, 23, 0, 0),
+                    DoctorId = 1
+                },
+                new OnCallShift
+                {
+                    Id = 2,
+                    Start = new System.DateTime(2022, 1, 10, 23, 0, 0),
+                    DoctorId = 2
+                },
+                new OnCallShift
+                {
+                    Id = 3,
+                    Start = new System.DateTime(2022, 1, 11, 23, 0, 0),
+                    DoctorId = 1
+                },
+                new OnCallShift
+                {
+                    Id = 4,
+                    Start = new System.DateTime(2022, 1, 11, 23, 0, 0),
+                    DoctorId = 2
+                },
+                new OnCallShift
+                {
+                    Id = 5,
+                    Start = new System.DateTime(2022, 1, 12, 23, 0, 0),
+                    DoctorId = 3
+                },
+                new OnCallShift
+                {
+                    Id = 6,
+                    Start = new System.DateTime(2022, 1, 12, 23, 0, 0),
+                    DoctorId = 4
+                },
+                new OnCallShift
+                {
+                    Id = 7,
+                    Start = new System.DateTime(2022, 1, 13, 23, 0, 0),
+                    DoctorId = 3
+                },
+                new OnCallShift
+                {
+                    Id = 8,
+                    Start = new System.DateTime(2022, 1, 13, 23, 0, 0),
+                    DoctorId = 4
+                },
+                new OnCallShift
+                {
+                    Id = 9,
+                    Start = new System.DateTime(2022, 1, 14, 23, 0, 0),
+                    DoctorId = 5
+                },
+                new OnCallShift
+                {
+                    Id = 10,
+                    Start = new System.DateTime(2022, 1, 14, 23, 0, 0),
+                    DoctorId = 6
+                },
+                new OnCallShift
+                {
+                    Id = 11,
+                    Start = new System.DateTime(2022, 1, 15, 23, 0, 0),
+                    DoctorId = 5
+                },
+                new OnCallShift
+                {
+                    Id = 12,
+                    Start = new System.DateTime(2022, 1, 15, 23, 0, 0),
+                    DoctorId = 6
+                }
+            );
+            modelBuilder.Entity<OnCallShift>().Property(e => e.Id).HasIdentityOptions(startValue: 13);
+
+
 
             modelBuilder.Entity<Workday>().HasData(
                 new Workday

@@ -120,6 +120,7 @@ namespace HospitalAPI
             services.AddTransient<IMergeRenovationRepository, MergeRenovationRepository>();
             services.AddTransient<IDoctorRepository, DoctorRepository>();
             services.AddTransient<IShiftRepository, ShiftRepository>();
+            services.AddTransient<IOnCallShiftRepository, OnCallShiftRepository>();
             services.AddTransient<IHolidayRepository, HolidayRepository>();
             //Events
             services.AddTransient<IBuildingSelectionEventRepository, BuildingSelectionEventDatabase>();

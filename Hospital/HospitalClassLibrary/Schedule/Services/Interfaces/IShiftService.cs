@@ -16,5 +16,6 @@ namespace HospitalClassLibrary.Schedule.Services.Interfaces
 
         Task<IEnumerable<object>> GetAllShiftsByDoctorId(int id);
         Task<Shift> GetById(int id);
+        Task<IEnumerable<OnCallShift>> GetAllOnCallShiftsByDoctorId(int id);
     }
 }
