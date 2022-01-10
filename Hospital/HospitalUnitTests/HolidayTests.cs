@@ -41,8 +41,8 @@ namespace HospitalUnitTests
         {
             var retVal = new List<object[]>
             {
-                new object[] { new Holiday(1, new DateTime(2021, 12, 22), new DateTime(2021, 12, 30), 1, new Doctor(), ""), true },
-                new object[] { new Holiday(1, new DateTime(2021, 12, 1), new DateTime(2021, 12, 15), 1, new Doctor(), ""), false }
+                new object[] { new Holiday(2, new DateTime(2021, 12, 22), new DateTime(2021, 12, 30), 1, new Doctor(), ""), true },
+                new object[] { new Holiday(3, new DateTime(2021, 12, 1), new DateTime(2021, 12, 15), 1, new Doctor(), ""), false }
             };
 
             return retVal;
