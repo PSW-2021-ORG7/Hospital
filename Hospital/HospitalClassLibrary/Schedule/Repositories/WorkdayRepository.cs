@@ -45,6 +45,9 @@ namespace HospitalClassLibrary.Schedule.Repositories
 
         }
 
-
+        public async Task<IEnumerable<Workday>> GetWorkdaysByShiftId(int shiftId)
+        {
+            return await Context.Workday.Where(w => w.ShiftId == shiftId).Include(w => w.Appointments).ToListAsync();
+        }
     }
 }

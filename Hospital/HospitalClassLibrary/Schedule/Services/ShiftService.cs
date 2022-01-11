@@ -37,6 +37,12 @@ namespace HospitalClassLibrary.Schedule.Services
 
         public async Task Delete(Shift s)
         {
+            var workdays = _workdayRepository.GetWorkdaysByShiftId(s.Id).Result;
+            foreach (var workday in workdays)
+            {
+                await _workdayRepository.DeleteAsync(workday);
+            }
+
             await _shiftRepository.DeleteAsync(s);
         }
 
