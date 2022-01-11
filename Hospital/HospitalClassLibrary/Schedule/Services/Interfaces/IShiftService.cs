@@ -22,5 +22,6 @@ namespace HospitalClassLibrary.Schedule.Services.Interfaces
         Task Update(OnCallShift s);
         Task Delete(OnCallShift s);
         Task<IEnumerable<OnCallShift>> GetAllOnCallShiftsForDateTimeRange(DateTimeRange dateTimeRange);
+        Task DeleteByOnCallShiftById(int id);
     }
 }

@@ -85,12 +85,14 @@ namespace HospitalAPI.Controllers
             return NoContent();
         }
 
-        [HttpDelete("onCallShifts")]
-        public async Task<IActionResult> DeleteOnCallShiftShift(OnCallShift onCallShift)
+        [HttpDelete("onCallShifts/{id}")]
+        public async Task<ActionResult> DeleteOnCallShiftShift(int id)
         {
-            await _shiftService.Delete(onCallShift);
+
+            await _shiftService.DeleteByOnCallShiftById(id);
 
             return NoContent();
+
         }
 
     }

@@ -98,7 +98,12 @@ namespace HospitalClassLibrary.Schedule.Services
 
         public async Task<IEnumerable<OnCallShift>> GetAllOnCallShiftsForDateTimeRange(DateTimeRange dateTimeRange)
         {
-            return await _onCallShiftRepository.GetAllAsync(dateTimeRange); ;
+            return await _onCallShiftRepository.GetAllAsync(dateTimeRange);
+        }
+
+        public async Task DeleteByOnCallShiftById(int id)
+        {
+            await _onCallShiftRepository.DeleteByIdAsync(id);
         }
     }
 }
