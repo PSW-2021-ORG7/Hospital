@@ -81,13 +81,7 @@ namespace HospitalClassLibrary.Renovations.Services
                 Status = splitRenovation.FirstNewRoomInfo.RoomStatus,
                 Type = splitRenovation.FirstNewRoomInfo.RoomType,
                 Floor = room.Floor,
-                RoomDimensions = new RoomDimensions()
-                {
-                    X = room.RoomDimensions.X,
-                    Y = room.RoomDimensions.Y,
-                    Width = room.RoomDimensions.Width,
-                    Height = room.RoomDimensions.Height / 2
-                },
+                RoomDimensions = new RoomDimensions(room.RoomDimensions.X, room.RoomDimensions.Y, room.RoomDimensions.Width, room.RoomDimensions.Height / 2),
                 BuildingId = room.BuildingId
             };
             await _roomRepository.CreateAsync(firstNewRoom);
@@ -101,13 +95,7 @@ namespace HospitalClassLibrary.Renovations.Services
                 Status = splitRenovation.SecondNewRoomInfo.RoomStatus,
                 Type = splitRenovation.SecondNewRoomInfo.RoomType,
                 Floor = room.Floor,
-                RoomDimensions = new RoomDimensions()
-                {
-                    X = room.RoomDimensions.X,
-                    Y = room.RoomDimensions.Y + room.RoomDimensions.Height / 2,
-                    Width = room.RoomDimensions.Width,
-                    Height = room.RoomDimensions.Height / 2
-                },
+                RoomDimensions = new RoomDimensions(room.RoomDimensions.X, room.RoomDimensions.Y + room.RoomDimensions.Height / 2, room.RoomDimensions.Width, room.RoomDimensions.Height / 2),
                 BuildingId = room.BuildingId
             };
             await _roomRepository.CreateAsync(secondNewRoom);
@@ -213,13 +201,7 @@ namespace HospitalClassLibrary.Renovations.Services
                 Type = mergeRenovation.NewRoomInfo.RoomType,
                 Status = mergeRenovation.NewRoomInfo.RoomStatus,
                 Floor = firstOldRoom.Floor,
-                RoomDimensions = new RoomDimensions()
-                {
-                    X = x,
-                    Y = y,
-                    Width = width,
-                    Height = height
-                },
+                RoomDimensions = new RoomDimensions(x, y, width, height),
                 BuildingId = firstOldRoom.BuildingId
             };
             await _roomRepository.CreateAsync(newRoom);

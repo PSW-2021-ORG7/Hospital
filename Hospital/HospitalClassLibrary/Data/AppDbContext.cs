@@ -17,6 +17,7 @@ namespace HospitalClassLibrary.Data
         {
         }
 
+        public const string DefaultSchema = "public";
         public DbSet<Building> Building { get; set; }
         public DbSet<Room> Room { get; set; }
         public DbSet<Equipment> Equipment { get; set; }
@@ -31,7 +32,6 @@ namespace HospitalClassLibrary.Data
         public DbSet<MergeRenovation> MergeRenovation { get; set; }
         public DbSet<Holiday> Holiday { get; set; }
 
-
         //Events
         public DbSet<BuildingSelection> BuildingSelection { get; set; }
         public DbSet<RoomSelection> RoomSelection { get; set; }
@@ -43,6 +43,8 @@ namespace HospitalClassLibrary.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new RoomEntityTypeConfiguration());
+
             modelBuilder.Entity<Building>().HasData(
                new Building
                {
@@ -59,202 +61,209 @@ namespace HospitalClassLibrary.Data
            );
             modelBuilder.Entity<Building>().Property(e => e.Id).HasIdentityOptions(startValue: 3);
 
-            modelBuilder.Entity<RoomDimensions>().HasData(
-                new RoomDimensions
+            modelBuilder.Entity<Room>().OwnsOne(r => r.RoomDimensions,
+                ba =>
                 {
-                    Id = 1,
-                    X = 422,
-                    Y = 187,
-                    Width = 228,
-                    Height = 220
+                    ba.Property(rd => rd.X).HasColumnName("X");
+                    ba.Property(rd => rd.Y).HasColumnName("Y");
+                    ba.Property(rd => rd.Width).HasColumnName("Width");
+                    ba.Property(rd => rd.Height).HasColumnName("Height");
+                });
+
+            modelBuilder.Entity<Room>().OwnsOne(r => r.RoomDimensions).HasData(
+                new 
+                {
+                    RoomId = 1,
+                    X = 422.0,
+                    Y = 187.0,
+                    Width = 228.0,
+                    Height = 220.0
                 },
-                new RoomDimensions
+                new
                 {
-                    Id = 2,
-                    X = 422,
-                    Y = 683,
-                    Width = 229,
-                    Height = 217
+                    RoomId = 2,
+                    X = 422.0,
+                    Y = 683.0,
+                    Width = 229.0,
+                    Height = 217.0
                 },
-                new RoomDimensions
+                new
                 {
-                    Id = 3,
-                    X = 651,
-                    Y = 596,
-                    Width = 209,
-                    Height = 254
+                    RoomId = 3,
+                    X = 651.0,
+                    Y = 596.0,
+                    Width = 209.0,
+                    Height = 254.0
                 },
-                new RoomDimensions
+                new
                 {
-                    Id = 4,
-                    X = 1182,
-                    Y = 237,
-                    Width = 210,
-                    Height = 170
+                    RoomId = 4,
+                    X = 1182.0,
+                    Y = 237.0,
+                    Width = 210.0,
+                    Height = 170.0
                 },
-                new RoomDimensions
+                new
                 {
-                    Id = 5,
-                    X = 650,
-                    Y = 237,
-                    Width = 210,
-                    Height = 170
+                    RoomId = 5,
+                    X = 650.0,
+                    Y = 237.0,
+                    Width = 210.0,
+                    Height = 170.0
                 },
-                new RoomDimensions
+                new
                 {
-                    Id = 6,
-                    X = 861,
-                    Y = 237,
-                    Width = 322,
-                    Height = 170
+                    RoomId = 6,
+                    X = 861.0,
+                    Y = 237.0,
+                    Width = 322.0,
+                    Height = 170.0
                 },
-                new RoomDimensions
+                new
                 {
-                    Id = 7,
-                    X = 1190,
-                    Y = 696,
-                    Width = 202,
-                    Height = 154
+                    RoomId = 7,
+                    X = 1190.0,
+                    Y = 696.0,
+                    Width = 202.0,
+                    Height = 154.0
                 },
-                new RoomDimensions
+                new
                 {
-                    Id = 8,
-                    X = 1190,
-                    Y = 541,
-                    Width = 202,
-                    Height = 154
+                    RoomId = 8,
+                    X = 1190.0,
+                    Y = 541.0,
+                    Width = 202.0,
+                    Height = 154.0
                 },
-                new RoomDimensions
+                new
                 {
-                    Id = 9,
-                    X = 422,
-                    Y = 407,
-                    Width = 106,
-                    Height = 138
+                    RoomId = 9,
+                    X = 422.0,
+                    Y = 407.0,
+                    Width = 106.0,
+                    Height = 138.0
                 },
-                new RoomDimensions
+                new
                 {
-                    Id = 10,
-                    X = 422,
-                    Y = 544,
-                    Width = 106,
-                    Height = 138
+                    RoomId = 10,
+                    X = 422.0,
+                    Y = 544.0,
+                    Width = 106.0,
+                    Height = 138.0
                 },
-                new RoomDimensions
+                new
                 {
-                    Id = 11,
-                    X = 581,
-                    Y = 407,
-                    Width = 69,
-                    Height = 69
+                    RoomId = 11,
+                    X = 581.0,
+                    Y = 407.0,
+                    Width = 69.0,
+                    Height = 69.0
                 },
-                new RoomDimensions
+                new
                 {
-                    Id = 12,
-                    X = 581,
-                    Y = 548,
-                    Width = 69,
-                    Height = 134
+                    RoomId = 12,
+                    X = 581.0,
+                    Y = 548.0,
+                    Width = 69.0,
+                    Height = 134.0
                 },
-                // Floor 1
-                new RoomDimensions
+                new
                 {
-                    Id = 13,
-                    X = 422,
-                    Y = 187,
-                    Width = 228,
-                    Height = 220
+                    RoomId = 13,
+                    X = 422.0,
+                    Y = 187.0,
+                    Width = 228.0,
+                    Height = 220.0
                 },
-                new RoomDimensions
+                new
                 {
-                    Id = 14,
-                    X = 422,
-                    Y = 683,
-                    Width = 229,
-                    Height = 217
+                    RoomId = 14,
+                    X = 422.0,
+                    Y = 683.0,
+                    Width = 229.0,
+                    Height = 217.0
                 },
-                new RoomDimensions
+                new
                 {
-                    Id = 15,
-                    X = 651,
-                    Y = 596,
-                    Width = 209,
-                    Height = 254
+                    RoomId = 15,
+                    X = 651.0,
+                    Y = 596.0,
+                    Width = 209.0,
+                    Height = 254.0
                 },
-                new RoomDimensions
+                new
                 {
-                    Id = 16,
-                    X = 1182,
-                    Y = 237,
-                    Width = 210,
-                    Height = 170
+                    RoomId = 16,
+                    X = 1182.0,
+                    Y = 237.0,
+                    Width = 210.0,
+                    Height = 170.0
                 },
-                new RoomDimensions
+                new
                 {
-                    Id = 17,
-                    X = 650,
-                    Y = 237,
-                    Width = 210,
-                    Height = 170
+                    RoomId = 17,
+                    X = 650.0,
+                    Y = 237.0,
+                    Width = 210.0,
+                    Height = 170.0
                 },
-                new RoomDimensions
+                new
                 {
-                    Id = 18,
-                    X = 861,
-                    Y = 237,
-                    Width = 322,
-                    Height = 170
+                    RoomId = 18,
+                    X = 861.0,
+                    Y = 237.0,
+                    Width = 322.0,
+                    Height = 170.0
                 },
-                new RoomDimensions
+                new
                 {
-                    Id = 19,
-                    X = 1190,
-                    Y = 696,
-                    Width = 202,
-                    Height = 154
+                    RoomId = 19,
+                    X = 1190.0,
+                    Y = 696.0,
+                    Width = 202.0,
+                    Height = 154.0
                 },
-                new RoomDimensions
+                new
                 {
-                    Id = 20,
-                    X = 1190,
-                    Y = 541,
-                    Width = 202,
-                    Height = 154
+                    RoomId = 20,
+                    X = 1190.0,
+                    Y = 541.0,
+                    Width = 202.0,
+                    Height = 154.0
                 },
-                new RoomDimensions
+                new
                 {
-                    Id = 21,
-                    X = 422,
-                    Y = 407,
-                    Width = 106,
-                    Height = 138
+                    RoomId = 21,
+                    X = 422.0,
+                    Y = 407.0,
+                    Width = 106.0,
+                    Height = 138.0
                 },
-                new RoomDimensions
+                new
                 {
-                    Id = 22,
-                    X = 422,
-                    Y = 544,
-                    Width = 106,
-                    Height = 138
+                    RoomId = 22,
+                    X = 422.0,
+                    Y = 544.0,
+                    Width = 106.0,
+                    Height = 138.0
                 },
-                new RoomDimensions
+                new
                 {
-                    Id = 23,
-                    X = 581,
-                    Y = 407,
-                    Width = 69,
-                    Height = 69
+                    RoomId = 23,
+                    X = 581.0,
+                    Y = 407.0,
+                    Width = 69.0,
+                    Height = 69.0
                 },
-                new RoomDimensions
+                new
                 {
-                    Id = 24,
-                    X = 581,
-                    Y = 548,
-                    Width = 69,
-                    Height = 134
+                    RoomId = 24,
+                    X = 581.0,
+                    Y = 548.0,
+                    Width = 69.0,
+                    Height = 134.0
                 }
             );
-            modelBuilder.Entity<RoomDimensions>().Property(e => e.Id).HasIdentityOptions(startValue: 25);
 
             modelBuilder.Entity<Room>().HasData(
                 new Room
@@ -264,8 +273,7 @@ namespace HospitalClassLibrary.Data
                     Name = "0A",
                     Status = RoomStatus.UNOCCUPIED,
                     Type = RoomType.DOCTOR_OFFICE,
-                    Floor = 0,
-                    RoomDimensionsId = 1
+                    Floor = 0
                 },
                 new Room
                 {
@@ -274,8 +282,7 @@ namespace HospitalClassLibrary.Data
                     Name = "0B",
                     Status = RoomStatus.UNOCCUPIED,
                     Type = RoomType.DOCTOR_OFFICE,
-                    Floor = 0,
-                    RoomDimensionsId = 2
+                    Floor = 0
                 },
                 new Room
                 {
@@ -284,8 +291,7 @@ namespace HospitalClassLibrary.Data
                     Name = "0C",
                     Status = RoomStatus.UNOCCUPIED,
                     Type = RoomType.DOCTOR_OFFICE,
-                    Floor = 0,
-                    RoomDimensionsId = 3
+                    Floor = 0
                     
                 },
                 new Room
@@ -295,8 +301,7 @@ namespace HospitalClassLibrary.Data
                     Name = "0A",
                     Status = RoomStatus.UNOCCUPIED,
                     Type = RoomType.OPERATING_ROOM,
-                    Floor = 0,
-                    RoomDimensionsId = 4
+                    Floor = 0
                 },
                 new Room
                 {
@@ -305,8 +310,7 @@ namespace HospitalClassLibrary.Data
                     Name = "0B",
                     Status = RoomStatus.UNOCCUPIED,
                     Type = RoomType.OPERATING_ROOM,
-                    Floor = 0,
-                    RoomDimensionsId = 5
+                    Floor = 0
                 },
                 new Room
                 {
@@ -315,8 +319,7 @@ namespace HospitalClassLibrary.Data
                     Name = "0A",
                     Status = RoomStatus.UNOCCUPIED,
                     Type = RoomType.SURGERY_ROOM,
-                    Floor = 0,
-                    RoomDimensionsId = 6
+                    Floor = 0
                 },
                 new Room
                 {
@@ -325,9 +328,7 @@ namespace HospitalClassLibrary.Data
                     Name = "0A",
                     Status = RoomStatus.UNOCCUPIED,
                     Type = RoomType.EMERGENCY_ROOM,
-                    Floor = 0,
-                    RoomDimensionsId = 7
-                    
+                    Floor = 0
                 },
                 new Room
                 {
@@ -336,8 +337,7 @@ namespace HospitalClassLibrary.Data
                     Name = "0B",
                     Status = RoomStatus.UNOCCUPIED,
                     Type = RoomType.EMERGENCY_ROOM,
-                    Floor = 0,
-                    RoomDimensionsId = 8
+                    Floor = 0
                 },
                 new Room
                 {
@@ -346,8 +346,7 @@ namespace HospitalClassLibrary.Data
                     Name = "Men's",
                     Status = RoomStatus.UNOCCUPIED,
                     Type = RoomType.RESTROOM,
-                    Floor = 0,
-                    RoomDimensionsId = 9
+                    Floor = 0
                 },
                 new Room
                 {
@@ -356,8 +355,7 @@ namespace HospitalClassLibrary.Data
                     Name = "Women's",
                     Status = RoomStatus.UNOCCUPIED,
                     Type = RoomType.RESTROOM,
-                    Floor = 0,
-                    RoomDimensionsId = 10
+                    Floor = 0
                 },
                 new Room
                 {
@@ -366,8 +364,7 @@ namespace HospitalClassLibrary.Data
                     Name = "L",
                     Status = RoomStatus.UNOCCUPIED,
                     Type = RoomType.LIFT,
-                    Floor = 0,
-                    RoomDimensionsId = 11
+                    Floor = 0
                 },
                 new Room
                 {
@@ -376,8 +373,7 @@ namespace HospitalClassLibrary.Data
                     Name = "S1",
                     Status = RoomStatus.UNOCCUPIED,
                     Type = RoomType.STAIRS,
-                    Floor = 0,
-                    RoomDimensionsId = 12
+                    Floor = 0
                 },
 
                 //FLOOR - 1
@@ -388,8 +384,7 @@ namespace HospitalClassLibrary.Data
                     Name = "1A",
                     Status = RoomStatus.UNOCCUPIED,
                     Type = RoomType.DOCTOR_OFFICE,
-                    Floor = 1,
-                    RoomDimensionsId = 13
+                    Floor = 1
                 },
                 new Room
                 {
@@ -398,8 +393,7 @@ namespace HospitalClassLibrary.Data
                     Name = "1B",
                     Status = RoomStatus.UNOCCUPIED,
                     Type = RoomType.DOCTOR_OFFICE,
-                    Floor = 1,
-                    RoomDimensionsId = 14
+                    Floor = 1
                 },
                 new Room
                 {
@@ -408,8 +402,7 @@ namespace HospitalClassLibrary.Data
                     Name = "1C",
                     Status = RoomStatus.UNOCCUPIED,
                     Type = RoomType.DOCTOR_OFFICE,
-                    Floor = 1,
-                    RoomDimensionsId = 15
+                    Floor = 1
                 },
                 new Room
                 {
@@ -418,8 +411,7 @@ namespace HospitalClassLibrary.Data
                     Name = "1A",
                     Status = RoomStatus.UNOCCUPIED,
                     Type = RoomType.OPERATING_ROOM,
-                    Floor = 1,
-                    RoomDimensionsId = 16
+                    Floor = 1
                 },
                 new Room
                 {
@@ -428,8 +420,7 @@ namespace HospitalClassLibrary.Data
                     Name = "1B",
                     Status = RoomStatus.UNOCCUPIED,
                     Type = RoomType.OPERATING_ROOM,
-                    Floor = 1,
-                    RoomDimensionsId = 17
+                    Floor = 1
                 },
                 new Room
                 {
@@ -438,8 +429,7 @@ namespace HospitalClassLibrary.Data
                     Name = "1A",
                     Status = RoomStatus.UNOCCUPIED,
                     Type = RoomType.SURGERY_ROOM,
-                    Floor = 1,
-                    RoomDimensionsId = 18
+                    Floor = 1
                 },
                 new Room
                 {
@@ -448,8 +438,7 @@ namespace HospitalClassLibrary.Data
                     Name = "1A",
                     Status = RoomStatus.UNOCCUPIED,
                     Type = RoomType.EMERGENCY_ROOM,
-                    Floor = 1,
-                    RoomDimensionsId = 19
+                    Floor = 1
                 },
                 new Room
                 {
@@ -458,8 +447,7 @@ namespace HospitalClassLibrary.Data
                     Name = "1B",
                     Status = RoomStatus.UNOCCUPIED,
                     Type = RoomType.EMERGENCY_ROOM,
-                    Floor = 1,
-                    RoomDimensionsId = 20
+                    Floor = 1
                 },
                 new Room
                 {
@@ -468,8 +456,7 @@ namespace HospitalClassLibrary.Data
                     Name = "Men's",
                     Status = RoomStatus.UNOCCUPIED,
                     Type = RoomType.RESTROOM,
-                    Floor = 1,
-                    RoomDimensionsId = 21
+                    Floor = 1
                 },
                 new Room
                 {
@@ -478,8 +465,7 @@ namespace HospitalClassLibrary.Data
                     Name = "Women's",
                     Status = RoomStatus.UNOCCUPIED,
                     Type = RoomType.RESTROOM,
-                    Floor = 1,
-                    RoomDimensionsId = 22
+                    Floor = 1
                 },
                 new Room
                 {
@@ -488,8 +474,7 @@ namespace HospitalClassLibrary.Data
                     Name = "L",
                     Status = RoomStatus.UNOCCUPIED,
                     Type = RoomType.LIFT,
-                    Floor = 1,
-                    RoomDimensionsId = 23
+                    Floor = 1
                 },
                 new Room
                 {
@@ -498,8 +483,7 @@ namespace HospitalClassLibrary.Data
                     Name = "S1",
                     Status = RoomStatus.UNOCCUPIED,
                     Type = RoomType.STAIRS,
-                    Floor = 1,
-                    RoomDimensionsId = 24
+                    Floor = 1
                 }
             );
             modelBuilder.Entity<Room>().Property(e => e.Id).HasIdentityOptions(startValue: 25);

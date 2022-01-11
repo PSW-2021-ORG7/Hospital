@@ -3,8 +3,6 @@ using System.Threading.Tasks;
 using HospitalClassLibrary.Renovations.Models;
 using HospitalClassLibrary.Shared.Models;
 using HospitalClassLibrary.Shared.Repositories;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace HospitalClassLibrary.Renovations.Repositories.Interfaces
 {

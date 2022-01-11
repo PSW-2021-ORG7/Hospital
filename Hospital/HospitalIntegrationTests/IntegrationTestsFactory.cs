@@ -156,21 +156,12 @@ namespace HospitalIntegrationTests
                 Id = 5,
                 BuildingId = 1,
                 Name = "SplitRoom",
-                RoomDimensionsId = 5,
+                RoomDimensions = new RoomDimensions(650, 237, 210, 170),
                 Status = RoomStatus.UNOCCUPIED,
                 Type = RoomType.DOCTOR_OFFICE,
                 Floor = 0,
                 Equipment = new List<Equipment> { equipmentForSplitRenovation }
 
-            };
-
-            var roomDimensionForSplitRenovation = new RoomDimensions()
-            {
-                Id = 5,
-                X = 650,
-                Y = 237,
-                Width = 210,
-                Height = 170
             };
 
             var equipmentItemForMergeRenovation1 = new EquipmentItem()
@@ -212,7 +203,7 @@ namespace HospitalIntegrationTests
                 Id = 10,
                 BuildingId = 1,
                 Name = "MergeRoom1",
-                RoomDimensionsId = 6,
+                RoomDimensions = new RoomDimensions(861, 237, 322, 170),
                 Status = RoomStatus.UNOCCUPIED,
                 Type = RoomType.SURGERY_ROOM,
                 Floor = 0,
@@ -224,30 +215,13 @@ namespace HospitalIntegrationTests
                 Id = 11,
                 BuildingId = 1,
                 Name = "MergeRoom2",
-                RoomDimensionsId = 7,
+                RoomDimensions = new RoomDimensions(1182, 237, 210, 170),
                 Status = RoomStatus.UNOCCUPIED,
                 Type = RoomType.OPERATING_ROOM,
                 Floor = 0,
                 Equipment = new List<Equipment> { equipmentForMergeRenovation2 }
             };
 
-            var roomDimensionForMergeRenovation1 = new RoomDimensions()
-            {
-                Id = 6,
-                X = 861,
-                Y = 237,
-                Width = 322,
-                Height = 170
-            };
-
-            var roomDimensionForMergeRenovation2 = new RoomDimensions()
-            {
-                Id = 7,
-                X = 1182,
-                Y = 237,
-                Width = 210,
-                Height = 170
-            };
 
             var workday = new Workday()
             {
@@ -268,13 +242,10 @@ namespace HospitalIntegrationTests
             context.Equipment.Add(dstRoomEquipment);
 
             context.Room.Add(roomForSplitRenovation);
-            context.RoomDimension.Add(roomDimensionForSplitRenovation);
             context.Equipment.Add(equipmentForSplitRenovation);
 
             context.Room.Add(roomForMergeRenovation1);
             context.Room.Add(roomForMergeRenovation2);
-            context.RoomDimension.Add(roomDimensionForMergeRenovation1);
-            context.RoomDimension.Add(roomDimensionForMergeRenovation2);
             context.Equipment.Add(equipmentForMergeRenovation1);
             context.Equipment.Add(equipmentForMergeRenovation2);
 

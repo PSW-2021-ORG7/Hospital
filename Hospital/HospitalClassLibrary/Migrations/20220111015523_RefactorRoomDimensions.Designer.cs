@@ -3,15 +3,17 @@ using System;
 using HospitalClassLibrary.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace HospitalClassLibrary.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220111015523_RefactorRoomDimensions")]
+    partial class RefactorRoomDimensions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1428,99 +1430,6 @@ namespace HospitalClassLibrary.Migrations
                     b.HasIndex("DoctorId");
 
                     b.ToTable("Holiday");
-                });
-
-            modelBuilder.Entity("HospitalClassLibrary.Schedule.Models.OnCallShift", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:IdentitySequenceOptions", "'13', '1', '', '', 'False', '1'")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<int>("DoctorId")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("Start")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("OnCallShift");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DoctorId = 1,
-                            Start = new DateTime(2022, 1, 10, 23, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 2,
-                            DoctorId = 2,
-                            Start = new DateTime(2022, 1, 10, 23, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 3,
-                            DoctorId = 1,
-                            Start = new DateTime(2022, 1, 11, 23, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 4,
-                            DoctorId = 2,
-                            Start = new DateTime(2022, 1, 11, 23, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 5,
-                            DoctorId = 3,
-                            Start = new DateTime(2022, 1, 12, 23, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 6,
-                            DoctorId = 4,
-                            Start = new DateTime(2022, 1, 12, 23, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 7,
-                            DoctorId = 3,
-                            Start = new DateTime(2022, 1, 13, 23, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 8,
-                            DoctorId = 4,
-                            Start = new DateTime(2022, 1, 13, 23, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 9,
-                            DoctorId = 5,
-                            Start = new DateTime(2022, 1, 14, 23, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 10,
-                            DoctorId = 6,
-                            Start = new DateTime(2022, 1, 14, 23, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 11,
-                            DoctorId = 5,
-                            Start = new DateTime(2022, 1, 15, 23, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 12,
-                            DoctorId = 6,
-                            Start = new DateTime(2022, 1, 15, 23, 0, 0, 0, DateTimeKind.Unspecified)
-                        });
                 });
 
             modelBuilder.Entity("HospitalClassLibrary.Schedule.Models.Shift", b =>

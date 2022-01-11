@@ -12,7 +12,6 @@ namespace HospitalClassLibrary.RoomEquipment.Models
         public RoomType Type { get; set; }
         public int Floor { get; set; }
 
-        public int RoomDimensionsId { get; set; }
         public RoomDimensions RoomDimensions { get; set; }
 
         public int BuildingId { get; set; }

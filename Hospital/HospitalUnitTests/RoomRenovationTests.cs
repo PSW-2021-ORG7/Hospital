@@ -34,46 +34,22 @@ namespace HospitalUnitTests
 
             Room room1 = new Room()
             {
-                RoomDimensions = new RoomDimensions()
-                {
-                    X = 861,
-                    Y = 237,
-                    Height = 170,
-                    Width = 322
-                }
+                RoomDimensions = new RoomDimensions(861, 237, 322, 170)
             };
 
             Room room2 = new Room()
             {
-                RoomDimensions = new RoomDimensions()
-                {
-                    X = 650,
-                    Y = 237,
-                    Height = 170,
-                    Width = 210
-                }
+                RoomDimensions = new RoomDimensions(650, 237, 210, 170)
             };
 
             Room room3 = new Room()
             {
-                RoomDimensions = new RoomDimensions()
-                {
-                    X = 422,
-                    Y = 544,
-                    Height = 138,
-                    Width = 106
-                }
+                RoomDimensions = new RoomDimensions(422, 544, 106, 138)
             };
 
             Room room4 = new Room()
             {
-                RoomDimensions = new RoomDimensions()
-                {
-                    X = 422,
-                    Y = 407,
-                    Height = 138,
-                    Width = 106
-                }
+                RoomDimensions = new RoomDimensions(422, 407, 106, 138)
             };
             roomStubRepository.Setup(m => m.GetByIdAsync(1)).ReturnsAsync(room1);
             roomStubRepository.Setup(m => m.GetByIdAsync(2)).ReturnsAsync(room2);
