@@ -68,17 +68,6 @@ namespace HospitalClassLibrary.Schedule.Services
             return await _onCallShiftRepository.GetOnCallShiftByStartDate(start);
         }
 
-        public async Task<IEnumerable<OnCallShift>> GetAllOnCallShiftsByDoctorId(int id)
-        {
-            return await _onCallShiftRepository.GetAllOnCallShiftsByDoctorId(id);
-        }
-
-        public async Task<IEnumerable<OnCallShift>> GetOnCallShiftByStartDate(DateTime start)
-        {
-            return await _onCallShiftRepository.GetOnCallShiftByStartDate(start);
-        }
-
-
         public async Task Create(OnCallShift ocs)
         {
             bool hasTheSameDate = false;
