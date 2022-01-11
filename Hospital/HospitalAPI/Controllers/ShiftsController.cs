@@ -65,6 +65,12 @@ namespace HospitalAPI.Controllers
             return await _shiftService.GetAllShiftsByDoctorId(id);
         }
 
+        [HttpGet("onCallShifts")]
+        public async Task<IEnumerable<OnCallShift>> GetAllOnCallShiftsForDateTimeRange([FromQuery] DateTimeRange dateTimeRange)
+        {
+            return await _shiftService.GetAllOnCallShiftsForDateTimeRange(dateTimeRange);
+        }
+
         [HttpGet("onCallShifts/doctor/{id}")]
         public async Task<IEnumerable<OnCallShift>> GetAllOnCallShiftsByDoctorId(int id)
         {

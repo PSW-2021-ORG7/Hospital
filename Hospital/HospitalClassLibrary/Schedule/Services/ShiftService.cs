@@ -74,12 +74,12 @@ namespace HospitalClassLibrary.Schedule.Services
             var onCallShifts = _onCallShiftRepository.GetAllOnCallShiftsByDoctorId(ocs.DoctorId).Result;
             foreach (var onCallShift in onCallShifts)
             {
-                if(onCallShift.Start == ocs.Start)
+                if (onCallShift.Start == ocs.Start)
                 {
                     hasTheSameDate = true;
                 }
             }
-            if(hasTheSameDate== false)
+            if (hasTheSameDate == false)
             {
                 await _onCallShiftRepository.CreateAsync(ocs);
             }
@@ -96,5 +96,9 @@ namespace HospitalClassLibrary.Schedule.Services
             await _onCallShiftRepository.DeleteAsync(ocs);
         }
 
+        public async Task<IEnumerable<OnCallShift>> GetAllOnCallShiftsForDateTimeRange(DateTimeRange dateTimeRange)
+        {
+            return await _onCallShiftRepository.GetAllAsync(dateTimeRange); ;
+        }
     }
 }

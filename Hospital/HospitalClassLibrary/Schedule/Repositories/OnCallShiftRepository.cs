@@ -7,6 +7,7 @@ using HospitalClassLibrary.Shared.Repositories;
 using HospitalClassLibrary.Schedule.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
+using HospitalClassLibrary.Shared.Models;
 
 namespace HospitalClassLibrary.Schedule.Repositories
 {
@@ -14,6 +15,15 @@ namespace HospitalClassLibrary.Schedule.Repositories
     {
         public OnCallShiftRepository(AppDbContext context) : base(context)
         {
+        }
+
+        public async Task<IEnumerable<OnCallShift>> GetAllAsync(DateTimeRange dateTimeRange)
+        {
+            return await Context.OnCallShift.Where(
+                o =>
+                (dateTimeRange.Start == DateTime.MinValue || o.Start >= dateTimeRange.Start) &&
+                (dateTimeRange.End == DateTime.MinValue || o.Start <= dateTimeRange.End)
+            ).ToListAsync();
         }
 
         public async Task<IEnumerable<OnCallShift>> GetAllOnCallShiftsByDoctorId(int doctorId)
