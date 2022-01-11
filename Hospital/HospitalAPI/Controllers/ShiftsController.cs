@@ -26,7 +26,7 @@ namespace HospitalAPI.Controllers
             return await _shiftService.GetAll(dateTimeRange);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("shifts/{id}")]
         public async Task<IActionResult> GetShift(int id)
         {
             var shift = await _shiftService.GetById(id);
@@ -35,7 +35,7 @@ namespace HospitalAPI.Controllers
             return Ok(shift);
         }
 
-        [HttpPost]
+        [HttpPost("shifts")]
         public async Task<IActionResult> PostShift(Shift shift)
         {
             await _shiftService.Create(shift);
@@ -59,7 +59,7 @@ namespace HospitalAPI.Controllers
             return NoContent();
         }
 
-        [HttpGet("doctor/{id}")]
+        [HttpGet("shifts/doctor/{id}")]
         public async Task<IEnumerable<object>> GetAllShiftsByDoctorId(int id)
         {
             return await _shiftService.GetAllShiftsByDoctorId(id);
