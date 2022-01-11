@@ -65,6 +65,12 @@ namespace HospitalAPI.Controllers
             return await _shiftService.GetAllShiftsByDoctorId(id);
         }
 
+        [HttpGet("onCallShifts")]
+        public async Task<IEnumerable<OnCallShift>> GetAllOnCallShiftsForDateTimeRange([FromQuery] DateTimeRange dateTimeRange)
+        {
+            return await _shiftService.GetAllOnCallShiftsForDateTimeRange(dateTimeRange);
+        }
+
         [HttpGet("onCallShifts/doctor/{id}")]
         public async Task<IEnumerable<OnCallShift>> GetAllOnCallShiftsByDoctorId(int id)
         {
@@ -79,12 +85,14 @@ namespace HospitalAPI.Controllers
             return NoContent();
         }
 
-        [HttpDelete("onCallShifts")]
-        public async Task<IActionResult> DeleteOnCallShiftShift(OnCallShift onCallShift)
+        [HttpDelete("onCallShifts/{id}")]
+        public async Task<ActionResult> DeleteOnCallShiftShift(int id)
         {
-            await _shiftService.Delete(onCallShift);
+
+            await _shiftService.DeleteByOnCallShiftById(id);
 
             return NoContent();
+
         }
 
     }
