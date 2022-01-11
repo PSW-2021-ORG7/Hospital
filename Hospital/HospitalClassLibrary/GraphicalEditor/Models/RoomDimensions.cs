@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using HospitalClassLibrary.Shared.Models;
 
 namespace HospitalClassLibrary.GraphicalEditor.Models
@@ -18,6 +19,15 @@ namespace HospitalClassLibrary.GraphicalEditor.Models
             Y = y;
             Width = width;
             Height = height;
+            Validate();
+        }
+
+        private void Validate()
+        {
+            if (X < 0 || Y < 0 || Width <= 0 || Height <= 0)
+            {
+                throw new ArgumentException("Not valid");
+            }
         }
 
         public bool AreHorizontallyAligned(RoomDimensions roomDimensions)
