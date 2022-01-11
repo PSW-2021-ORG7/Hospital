@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HospitalClassLibrary.Schedule.Models;
@@ -12,11 +13,13 @@ namespace HospitalClassLibrary.Schedule.Services
     public class ShiftService : IShiftService
     {
         private readonly IShiftRepository _shiftRepository;
+        private readonly IOnCallShiftRepository _onCallShiftRepository;
         private readonly IWorkdayRepository _workdayRepository;
 
-        public ShiftService(IShiftRepository shiftRepository, IWorkdayRepository workdayRepository)
+        public ShiftService(IShiftRepository shiftRepository, IWorkdayRepository workdayRepository, IOnCallShiftRepository onCallShiftRepository)
         {
             _shiftRepository = shiftRepository;
+            _onCallShiftRepository = onCallShiftRepository;
             _workdayRepository = workdayRepository;
         }
 
@@ -55,5 +58,43 @@ namespace HospitalClassLibrary.Schedule.Services
         {
             return await _shiftRepository.GetByIdAsync(id);
         }
+        public async Task<IEnumerable<OnCallShift>> GetAllOnCallShiftsByDoctorId(int id)
+        {
+            return await _onCallShiftRepository.GetAllOnCallShiftsByDoctorId(id);
+        }
+
+        public async Task<IEnumerable<OnCallShift>> GetOnCallShiftByStartDate(DateTime start)
+        {
+            return await _onCallShiftRepository.GetOnCallShiftByStartDate(start);
+        }
+
+        public async Task Create(OnCallShift ocs)
+        {
+            bool hasTheSameDate = false;
+            var onCallShifts = _onCallShiftRepository.GetAllOnCallShiftsByDoctorId(ocs.DoctorId).Result;
+            foreach (var onCallShift in onCallShifts)
+            {
+                if(onCallShift.Start == ocs.Start)
+                {
+                    hasTheSameDate = true;
+                }
+            }
+            if(hasTheSameDate== false)
+            {
+                await _onCallShiftRepository.CreateAsync(ocs);
+            }
+
+        }
+
+        public async Task Update(OnCallShift ocs)
+        {
+            await _onCallShiftRepository.UpdateAsync(ocs);
+        }
+
+        public async Task Delete(OnCallShift ocs)
+        {
+            await _onCallShiftRepository.DeleteAsync(ocs);
+        }
+
     }
 }
