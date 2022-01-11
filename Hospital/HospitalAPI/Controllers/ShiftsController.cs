@@ -62,6 +62,21 @@ namespace HospitalAPI.Controllers
             return await _shiftService.GetAllOnCallShiftsByDoctorId(id);
         }
 
+        [HttpPost("onCallShifts")]
+        public async Task<IActionResult> PostShift(OnCallShift onCallShift)
+        {
+            await _shiftService.Create(onCallShift);
+
+            return NoContent();
+        }
+
+        [HttpDelete("onCallShifts")]
+        public async Task<IActionResult> DeleteOnCallShiftShift(OnCallShift onCallShift)
+        {
+            await _shiftService.Delete(onCallShift);
+
+            return NoContent();
+        }
 
     }
 }

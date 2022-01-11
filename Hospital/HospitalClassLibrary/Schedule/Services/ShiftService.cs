@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HospitalClassLibrary.Schedule.Models;
@@ -51,9 +52,29 @@ namespace HospitalClassLibrary.Schedule.Services
         {
             return await _onCallShiftRepository.GetAllOnCallShiftsByDoctorId(id);
         }
+
+        public async Task<IEnumerable<OnCallShift>> GetOnCallShiftByStartDate(DateTime start)
+        {
+            return await _onCallShiftRepository.GetOnCallShiftByStartDate(start);
+        }
+
+
         public async Task Create(OnCallShift ocs)
         {
-            await _onCallShiftRepository.CreateAsync(ocs);
+            bool hasTheSameDate = false;
+            var onCallShifts = _onCallShiftRepository.GetAllOnCallShiftsByDoctorId(ocs.DoctorId).Result;
+            foreach (var onCallShift in onCallShifts)
+            {
+                if(onCallShift.Start == ocs.Start)
+                {
+                    hasTheSameDate = true;
+                }
+            }
+            if(hasTheSameDate== false)
+            {
+                await _onCallShiftRepository.CreateAsync(ocs);
+            }
+
         }
 
         public async Task Update(OnCallShift ocs)

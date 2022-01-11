@@ -10,5 +10,8 @@ namespace HospitalClassLibrary.Schedule.Repositories.Interfaces
     public interface IOnCallShiftRepository : IGenericRepository<OnCallShift>
     {
         Task<IEnumerable<OnCallShift>> GetAllOnCallShiftsByDoctorId(int doctorId);
+
+        Task<IEnumerable<OnCallShift>> GetOnCallShiftByStartDate(DateTime start);
+
     }
 }
