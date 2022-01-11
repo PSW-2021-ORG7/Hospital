@@ -1,12 +1,24 @@
-﻿namespace HospitalClassLibrary.GraphicalEditor.Models
+﻿using System.Collections.Generic;
+using HospitalClassLibrary.Shared.Models;
+
+namespace HospitalClassLibrary.GraphicalEditor.Models
 {
-    public class RoomDimensions
+    public class RoomDimensions : ValueObject
     {
-        public int Id { get; set; }
-        public double X { get; set; }
-        public double Y { get; set; }
-        public double Width { get; set; }
-        public double Height { get; set; }
+        public double X { get; private set; }
+        public double Y { get; private set; }
+        public double Width { get; private set; }
+        public double Height { get; private set; }
+
+        public RoomDimensions() { }
+
+        public RoomDimensions(double x, double y, double width, double height)
+        {
+            X = x;
+            Y = y;
+            Width = width;
+            Height = height;
+        }
 
         public bool AreHorizontallyAligned(RoomDimensions roomDimensions)
         {
@@ -16,6 +28,14 @@
         public bool AreVerticallyAligned(RoomDimensions roomDimensions)
         {
             return X.Equals(roomDimensions.X);
+        }
+
+        protected override IEnumerable<object> GetEqualityComponents()
+        {
+            yield return X;
+            yield return Y;
+            yield return Width;
+            yield return Height;
         }
     }
 }

@@ -17,7 +17,11 @@ namespace HospitalAPI.DTOs.MappingProfile
 
             CreateMap<Equipment, EquipmentDto>();
             CreateMap<Equipment, RoomEquipmentDto>();
-            CreateMap<Room, RoomDto>().IncludeMembers(r => r.RoomDimensions);
+            CreateMap<Room, RoomDto>()
+                .ForMember(d => d.X, o => o.MapFrom(s => s.RoomDimensions.X))
+                .ForMember(d => d.Y, o => o.MapFrom(s => s.RoomDimensions.Y))
+                .ForMember(d => d.Width, o => o.MapFrom(s => s.RoomDimensions.Width))
+                .ForMember(d => d.Height, o => o.MapFrom(s => s.RoomDimensions.Height));
             CreateMap<RoomDimensions, RoomDto>();
             CreateMap<EquipmentTransfer, EquipmentTransferDto>();
             CreateMap<Holiday, HolidayDto>();

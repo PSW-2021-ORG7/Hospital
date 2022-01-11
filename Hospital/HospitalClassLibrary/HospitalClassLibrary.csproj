@@ -17,6 +17,8 @@
     <Compile Remove="Migrations\20220110114419_FirstMigration.Designer.cs" />
     <Compile Remove="Migrations\20220110114521_FirstMigration.cs" />
     <Compile Remove="Migrations\20220110114521_FirstMigration.Designer.cs" />
+    <Compile Remove="Migrations\20220111013020_RefactorRoomDimensions.cs" />
+    <Compile Remove="Migrations\20220111013020_RefactorRoomDimensions.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
