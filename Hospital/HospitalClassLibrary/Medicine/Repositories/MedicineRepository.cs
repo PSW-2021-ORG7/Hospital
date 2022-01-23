@@ -79,7 +79,7 @@ namespace HospitalClassLibrary.Medicine.Repositories
 
         public Models.Medicine GetByID(int id)
         {
-            return _dataContext.Medicine.Include(m => m.Ingredients).SingleOrDefault(m => m.Id.Equals(id));
+            return _dataContext.Medicine.SingleOrDefault(m => m.Id.Equals(id));
         }
 
     }

@@ -71,17 +71,17 @@ namespace HospitalAPI.Controllers
             return medicine;
         }
 
-        /*
-        [HttpGet("request/{name}/{dose}")]
-
-        public IActionResult RequestSpecification(string name, int dose)
+       [HttpGet("{id}")]
+        public IActionResult FindMedicineByID(int id)
         {
-            return Ok(JsonConvert.SerializeObject(_medicineService.RequestSpecification(name, dose)));
+            Medicine medicine = _medicineService.GetByID(id);
+            if (medicine != null) return Ok(medicine);
+            else return NotFound();
+
         }
-        */
 
 
-  
+
         [HttpPut("inventory/order/{quantity}")]
         public IActionResult ProcessOrder([FromBody] Medicine medicine, int quantity)
         {
