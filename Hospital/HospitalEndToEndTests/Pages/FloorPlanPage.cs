@@ -84,10 +84,10 @@ namespace HospitalEndToEndTests.Pages
             });
         }
 
-        public string SelectRoom()
+        public IWebElement SelectRoom()
         {
             RoomsList.ElementAt(0).Click();
-            return RoomsList.ElementAt(0).FindElement(By.TagName("span")).Text;
+            return RoomsList.ElementAt(0);
         }
 
         public IWebElement FindSelectedRoom()
