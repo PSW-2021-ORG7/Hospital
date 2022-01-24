@@ -39,10 +39,9 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         port: 22215
         script: |
+          docker system prune -a --volumes --force
           cd DevOps
           git pull
           git checkout bugfix/frontend
           cd docker-compose
-          docker-compose build --no-cache
-          docker-compose pull
-          docker-compose up -d
+          docker stack deploy --compose-file docker-compose.yml stack
