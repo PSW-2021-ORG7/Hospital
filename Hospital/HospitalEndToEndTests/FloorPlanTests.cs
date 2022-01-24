@@ -34,9 +34,9 @@ namespace HospitalEndToEndTests
         [Fact]
         public void Checks_if_correct_room_is_selected()
         {
-            var selectedRoomName = _floorPlanPage.SelectRoom();
-            var selectedRoom = _floorPlanPage.FindSelectedRoom();
-            Assert.Equal(selectedRoomName, selectedRoom.Text);
+            var expectedSelectedRoomName = _floorPlanPage.SelectRoom().FindElement(By.TagName("span")).Text;
+            var actualSelectedRoomName = _floorPlanPage.FindSelectedRoom().Text;
+            Assert.Equal(expectedSelectedRoomName, actualSelectedRoomName);
             Dispose();
         }
 
