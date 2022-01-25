@@ -44,6 +44,7 @@ namespace HospitalClassLibrary.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new RoomEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new EquipmentTransferEntityTypeConfiguration());
 
             modelBuilder.Entity<Building>().HasData(
                new Building

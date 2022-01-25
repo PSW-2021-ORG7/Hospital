@@ -7,6 +7,7 @@ using HospitalAPI.DTOs;
 using HospitalClassLibrary.RoomEquipment.Models;
 using HospitalClassLibrary.RoomEquipment.Services.Interfaces;
 using HospitalClassLibrary.Shared.Services.Interfaces;
+using HospitalClassLibrary.Shared.Models;
 
 namespace HospitalAPI.Controllers
 {
@@ -26,16 +27,22 @@ namespace HospitalAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostTransfer(EquipmentTransfer transfer)
+        public async Task<IActionResult> PostTransfer(EquipmentTransferDto e)
         {
-            if (transfer == null)
+            try
             {
-                return BadRequest();
+                var equipmentTransfer = new EquipmentTransfer(e.Id, e.SourceRoomId, e.DestinationRoomId,
+                    e.TransferDate, e.TransferDuration, e.EquipmentId, e.Quantity);
+
+                await _equipmentTransferService.Create(equipmentTransfer);
+
+                return NoContent();
+            } 
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
-
-            await _equipmentTransferService.Create(transfer);
-
-            return NoContent();
+            
         }
 
         [HttpGet]
@@ -57,7 +64,7 @@ namespace HospitalAPI.Controllers
         {
             var transfer = _mapper.Map<EquipmentTransfer>(e);
             
-            if (!await _cancellationService.CanBeCancelled(transfer.TransferDate))
+            if (!await _cancellationService.CanBeCancelled(transfer.TransferDateInfo.TransferDate))
             {
                 return BadRequest("Chosen equipment transfer cannot be canceled");
             }

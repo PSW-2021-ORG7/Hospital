@@ -61,7 +61,7 @@ namespace HospitalUnitTests
 
             var timeSlots = service.GetAvailableTimeSlots(requirements);
 
-            timeSlots.All(ts => !ts.Overlaps(transfer.TransferDate, transfer.TransferDate.AddMinutes(transfer.TransferDuration))).ShouldBe(true);
+            timeSlots.All(ts => !ts.Overlaps(transfer.TransferDateInfo.TransferDate, transfer.TransferDateInfo.TransferDate.AddMinutes(transfer.TransferDateInfo.TransferDuration))).ShouldBe(true);
         }
 
         [Fact]
@@ -161,16 +161,8 @@ namespace HospitalUnitTests
 
         private static EquipmentTransfer GetTransfer()
         {
-            var transfer = new EquipmentTransfer()
-            {
-                Id = 0,
-                SourceRoomId = 1,
-                DestinationRoomId = 2,
-                EquipmentId = 12,
-                Quantity = 17,
-                TransferDate = new DateTime(2021, 11, 29, 18, 0, 0),
-                TransferDuration = 60
-            };
+            var transfer = new EquipmentTransfer(0, 1, 2, new DateTime(2021, 11, 29, 18, 0, 0), 60, 12, 17);
+
             return transfer;
         }
 
