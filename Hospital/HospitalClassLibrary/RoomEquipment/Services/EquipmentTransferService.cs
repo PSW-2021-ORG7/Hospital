@@ -13,13 +13,15 @@ namespace HospitalClassLibrary.RoomEquipment.Services
         private readonly IEquipmentTransferRepository _equipmentTransferRepository;
         private readonly IEquipmentRepository _equipmentRepository;
         private readonly ILogEventService<EquipmentTransferEventParams> _logEquipmentTransferEventService;
+        private readonly IEquipmentTransferEventRepository _equipmentTransferEventRepository;
 
         public EquipmentTransferService(IEquipmentTransferRepository equipmentTransferRepository, IEquipmentRepository equipmentRepository, 
-            ILogEventService<EquipmentTransferEventParams> logEquipmentTransferEventService)
+            ILogEventService<EquipmentTransferEventParams> logEquipmentTransferEventService, IEquipmentTransferEventRepository equipmentTransferEventRepository)
         {
             _equipmentTransferRepository = equipmentTransferRepository;
             _equipmentRepository = equipmentRepository;
             _logEquipmentTransferEventService = logEquipmentTransferEventService;
+            _equipmentTransferEventRepository = equipmentTransferEventRepository;
         }
 
         public async Task Create(EquipmentTransfer equipmentTransfer)
@@ -46,5 +48,16 @@ namespace HospitalClassLibrary.RoomEquipment.Services
         {
             return await _equipmentTransferRepository.GetAllByRoomIdAsync(roomId);
         }
+
+        public async Task<IEnumerable<EquipmentTransferEvent>> GetAllEvents()
+        {
+            //List <EquipmentTransferEvent> list = 
+
+            return await _equipmentTransferEventRepository.GetAllEvents();
+        }
+
+
     }
+
+
 }
