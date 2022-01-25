@@ -33,11 +33,6 @@ namespace HospitalAPI.Controllers
             {
                 var equipmentTransfer = new EquipmentTransfer(e.Id, e.SourceRoomId, e.DestinationRoomId,
                     e.TransferDate, e.TransferDuration, e.EquipmentId, e.Quantity);
-                
-                if (equipmentTransfer == null)
-                {
-                    return BadRequest();
-                }
 
                 await _equipmentTransferService.Create(equipmentTransfer);
 
