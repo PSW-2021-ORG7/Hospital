@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using HospitalEndToEndTests.Pages;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -29,6 +30,7 @@ namespace HospitalEndToEndTests
             _floorPlanPage.EnsureFloorPlanIsDisplayed();
             _floorPlanPage.EnsureRoomDetailsButtonIsDisabled();
             _floorPlanPage.EnsureRoomsListIsNotEmpty();
+            _floorPlanPage.EnsureRadioButtonsAreDisplayed();
         }
 
         [Fact]
@@ -37,7 +39,6 @@ namespace HospitalEndToEndTests
             var expectedSelectedRoomName = _floorPlanPage.SelectRoom().FindElement(By.TagName("span")).Text;
             var actualSelectedRoomName = _floorPlanPage.FindSelectedRoom().Text;
             Assert.Equal(expectedSelectedRoomName, actualSelectedRoomName);
-            Dispose();
         }
 
         [Fact]
@@ -45,7 +46,16 @@ namespace HospitalEndToEndTests
         {
             _floorPlanPage.SelectRoom();
             Assert.True(_floorPlanPage.IsRoomDetailsBtnEnabled());
-            Dispose();
+        }
+
+        [Fact]
+        public void Checks_if_correct_rooms_are_visible()
+        {
+            var selectedFloor = _floorPlanPage.ChangeFloors();
+            var actualVisibleRooms = _floorPlanPage.GetVisibleRooms();
+            var actualHiddenRooms = _floorPlanPage.GetHiddenRooms();
+            Assert.True(actualVisibleRooms.All(r => r.GetAttribute("class").Contains("floor-" + selectedFloor)));
+            Assert.True(actualHiddenRooms.All(r => !r.GetAttribute("class").Contains("floor-" + selectedFloor)));
         }
 
         public void Dispose()
