@@ -9,5 +9,13 @@ namespace HospitalClassLibrary.Schedule.Models
         public int Id { get; set; }
         public DateTime Start { get; set; }
         public int DoctorId { get; set; }
+
+        public bool IsOverlapping(DateTime start, DateTime end)
+        {
+            if (Start >= start && Start <= end)
+                return true;
+
+            return false;
+        }
     }
 }

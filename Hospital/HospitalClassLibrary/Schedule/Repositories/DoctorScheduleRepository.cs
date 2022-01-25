@@ -18,7 +18,7 @@ namespace HospitalClassLibrary.Schedule.Repositories.Interfaces
 
         public async Task<DoctorSchedule> GetScheduleByDoctorId(int id)
         {
-            return await Context.DoctorSchedule.Where(ds => ds.Id == id).Include(ds => ds.Holidays).Include(ds => ds.OnCallShifts).Include(ds => ds.Workdays).ThenInclude(w => w.Appointments).FirstOrDefaultAsync();
+            return await Context.DoctorSchedule.Where(ds => ds.Id == id).Include(ds => ds.Holidays).Include(ds => ds.OnCallShifts).Include(ds => ds.Workdays).ThenInclude(w => w.Appointments).Include(ds => ds.Workdays).ThenInclude(w => w.Shift).FirstOrDefaultAsync();
         }
     }
 }

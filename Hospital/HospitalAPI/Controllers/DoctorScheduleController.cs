@@ -24,5 +24,18 @@ namespace HospitalAPI.Controllers
         {
             return await _doctorScheduleService.GetByDoctorId(id);
         }
+
+        [HttpPut("workdays")]
+        public async Task<IActionResult> PutShift([FromBody] Workday workday)
+        {
+            if (!await _doctorScheduleService.CanCreateEntity(workday.DoctorId, workday.Shift.Start, workday.Shift.End))
+            {
+                return BadRequest("Chosen workday can not be updated!");
+            }
+
+            await _doctorScheduleService.UpdateWorkday(workday);
+
+            return Created("api/workdays", workday);
+        }
     }
 }

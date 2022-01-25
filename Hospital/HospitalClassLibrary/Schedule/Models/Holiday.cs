@@ -52,5 +52,20 @@ namespace HospitalClassLibrary.Schedule.Models
         {
             return Start <= holiday.End && holiday.Start <= End;
         }
+
+        public bool IsOverlapping(DateTime start, DateTime end)
+        {
+            if (Start >= start &&
+                Start <= end ||
+                End >= start &&
+                End <= end ||
+                start >= Start &&
+                start <= End ||
+                end >= Start &&
+                end <= End)
+                return true;
+
+            return false;
+        }
     }
 }
