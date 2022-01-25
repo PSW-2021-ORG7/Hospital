@@ -100,6 +100,7 @@ namespace HospitalAPI
             services.AddTransient<IHolidayService, HolidayService>();
             services.AddTransient<IDoctorService, DoctorService>();
             services.AddTransient<IWorkdayService, WorkdayService>();
+            services.AddTransient<IDoctorScheduleService, DoctorScheduleService>();
 
             //Events
             services.AddScoped<ILogEventService<BuildingSelectionEventParams>, BuildingSelectionEventService>();
@@ -122,6 +123,7 @@ namespace HospitalAPI
             services.AddTransient<IShiftRepository, ShiftRepository>();
             services.AddTransient<IOnCallShiftRepository, OnCallShiftRepository>();
             services.AddTransient<IHolidayRepository, HolidayRepository>();
+            services.AddTransient<IDoctorScheduleRepository, DoctorScheduleRepository>();
             //Events
             services.AddTransient<IBuildingSelectionEventRepository, BuildingSelectionEventDatabase>();
             services.AddTransient<IEquipmentTransferEventRepository, EquipmentTransferEventDatabase>();

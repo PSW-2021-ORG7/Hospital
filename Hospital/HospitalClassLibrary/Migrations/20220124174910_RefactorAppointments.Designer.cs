@@ -3,15 +3,17 @@ using System;
 using HospitalClassLibrary.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace HospitalClassLibrary.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220124174910_RefactorAppointments")]
+    partial class RefactorAppointments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -747,9 +749,33 @@ namespace HospitalClassLibrary.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+                    b.Property<int>("DestinationRoomId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("EquipmentId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("SourceRoomId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("TransferDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("TransferDuration")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
 
-                    b.ToTable("EquipmentTransfer","public");
+                    b.HasIndex("DestinationRoomId");
+
+                    b.HasIndex("EquipmentId");
+
+                    b.HasIndex("SourceRoomId");
+
+                    b.ToTable("EquipmentTransfer");
                 });
 
             modelBuilder.Entity("HospitalClassLibrary.RoomEquipment.Models.Room", b =>
@@ -1123,54 +1149,6 @@ namespace HospitalClassLibrary.Migrations
                         });
                 });
 
-            modelBuilder.Entity("HospitalClassLibrary.Schedule.Models.DoctorSchedule", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:IdentitySequenceOptions", "'7', '1', '', '', 'False', '1'")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<int>("DoctorId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("DoctorSchedule");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DoctorId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            DoctorId = 2
-                        },
-                        new
-                        {
-                            Id = 3,
-                            DoctorId = 3
-                        },
-                        new
-                        {
-                            Id = 4,
-                            DoctorId = 4
-                        },
-                        new
-                        {
-                            Id = 5,
-                            DoctorId = 5
-                        },
-                        new
-                        {
-                            Id = 6,
-                            DoctorId = 6
-                        });
-                });
-
             modelBuilder.Entity("HospitalClassLibrary.Schedule.Models.Holiday", b =>
                 {
                     b.Property<int>("Id")
@@ -1184,9 +1162,6 @@ namespace HospitalClassLibrary.Migrations
                     b.Property<int>("DoctorId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("DoctorScheduleId")
-                        .HasColumnType("integer");
-
                     b.Property<DateTime>("End")
                         .HasColumnType("timestamp without time zone");
 
@@ -1196,8 +1171,6 @@ namespace HospitalClassLibrary.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("DoctorId");
-
-                    b.HasIndex("DoctorScheduleId");
 
                     b.ToTable("Holiday");
                 });
@@ -1213,15 +1186,10 @@ namespace HospitalClassLibrary.Migrations
                     b.Property<int>("DoctorId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("DoctorScheduleId")
-                        .HasColumnType("integer");
-
                     b.Property<DateTime>("Start")
                         .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DoctorScheduleId");
 
                     b.ToTable("OnCallShift");
 
@@ -1447,17 +1415,12 @@ namespace HospitalClassLibrary.Migrations
                     b.Property<int>("DoctorId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("DoctorScheduleId")
-                        .HasColumnType("integer");
-
                     b.Property<int>("ShiftId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
                     b.HasIndex("DoctorId");
-
-                    b.HasIndex("DoctorScheduleId");
 
                     b.HasIndex("ShiftId");
 
@@ -1609,98 +1572,23 @@ namespace HospitalClassLibrary.Migrations
 
             modelBuilder.Entity("HospitalClassLibrary.RoomEquipment.Models.EquipmentTransfer", b =>
                 {
-                    b.OwnsOne("HospitalClassLibrary.RoomEquipment.Models.TransferDateInfo", "TransferDateInfo", b1 =>
-                        {
-                            b1.Property<int>("EquipmentTransferId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("integer")
-                                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                    b.HasOne("HospitalClassLibrary.RoomEquipment.Models.Room", "DestinationRoom")
+                        .WithMany()
+                        .HasForeignKey("DestinationRoomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                            b1.Property<DateTime>("TransferDate")
-                                .HasColumnName("TransferDate")
-                                .HasColumnType("timestamp without time zone");
+                    b.HasOne("HospitalClassLibrary.RoomEquipment.Models.Equipment", "Equipment")
+                        .WithMany()
+                        .HasForeignKey("EquipmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                            b1.Property<int>("TransferDuration")
-                                .HasColumnName("TransferDuration")
-                                .HasColumnType("integer");
-
-                            b1.HasKey("EquipmentTransferId");
-
-                            b1.ToTable("EquipmentTransfer");
-
-                            b1.WithOwner()
-                                .HasForeignKey("EquipmentTransferId");
-                        });
-
-                    b.OwnsOne("HospitalClassLibrary.RoomEquipment.Models.TransferEquipmentInfo", "TransferEquipmentInfo", b1 =>
-                        {
-                            b1.Property<int>("EquipmentTransferId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("integer")
-                                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                            b1.Property<int>("EquipmentId")
-                                .HasColumnName("EquipmentId")
-                                .HasColumnType("integer");
-
-                            b1.Property<int>("Quantity")
-                                .HasColumnName("Quantity")
-                                .HasColumnType("integer");
-
-                            b1.HasKey("EquipmentTransferId");
-
-                            b1.HasIndex("EquipmentId");
-
-                            b1.ToTable("EquipmentTransfer");
-
-                            b1.HasOne("HospitalClassLibrary.RoomEquipment.Models.Equipment", "Equipment")
-                                .WithMany()
-                                .HasForeignKey("EquipmentId")
-                                .OnDelete(DeleteBehavior.Cascade)
-                                .IsRequired();
-
-                            b1.WithOwner()
-                                .HasForeignKey("EquipmentTransferId");
-                        });
-
-                    b.OwnsOne("HospitalClassLibrary.RoomEquipment.Models.TransferLocationInfo", "TransferLocationInfo", b1 =>
-                        {
-                            b1.Property<int>("EquipmentTransferId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("integer")
-                                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                            b1.Property<int>("DestinationRoomId")
-                                .HasColumnName("DestinationRoomId")
-                                .HasColumnType("integer");
-
-                            b1.Property<int>("SourceRoomId")
-                                .HasColumnName("SourceRoomId")
-                                .HasColumnType("integer");
-
-                            b1.HasKey("EquipmentTransferId");
-
-                            b1.HasIndex("DestinationRoomId");
-
-                            b1.HasIndex("SourceRoomId");
-
-                            b1.ToTable("EquipmentTransfer");
-
-                            b1.HasOne("HospitalClassLibrary.RoomEquipment.Models.Room", "DestinationRoom")
-                                .WithMany()
-                                .HasForeignKey("DestinationRoomId")
-                                .OnDelete(DeleteBehavior.Cascade)
-                                .IsRequired();
-
-                            b1.WithOwner()
-                                .HasForeignKey("EquipmentTransferId");
-
-                            b1.HasOne("HospitalClassLibrary.RoomEquipment.Models.Room", "SourceRoom")
-                                .WithMany()
-                                .HasForeignKey("SourceRoomId")
-                                .OnDelete(DeleteBehavior.Cascade)
-                                .IsRequired();
-                        });
+                    b.HasOne("HospitalClassLibrary.RoomEquipment.Models.Room", "SourceRoom")
+                        .WithMany()
+                        .HasForeignKey("SourceRoomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("HospitalClassLibrary.RoomEquipment.Models.Room", b =>
@@ -1949,17 +1837,6 @@ namespace HospitalClassLibrary.Migrations
                         .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("HospitalClassLibrary.Schedule.Models.DoctorSchedule", null)
-                        .WithMany("Holidays")
-                        .HasForeignKey("DoctorScheduleId");
-                });
-
-            modelBuilder.Entity("HospitalClassLibrary.Schedule.Models.OnCallShift", b =>
-                {
-                    b.HasOne("HospitalClassLibrary.Schedule.Models.DoctorSchedule", null)
-                        .WithMany("OnCallShifts")
-                        .HasForeignKey("DoctorScheduleId");
                 });
 
             modelBuilder.Entity("HospitalClassLibrary.Schedule.Models.Workday", b =>
@@ -1969,10 +1846,6 @@ namespace HospitalClassLibrary.Migrations
                         .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("HospitalClassLibrary.Schedule.Models.DoctorSchedule", null)
-                        .WithMany("Workdays")
-                        .HasForeignKey("DoctorScheduleId");
 
                     b.HasOne("HospitalClassLibrary.Schedule.Models.Shift", "Shift")
                         .WithMany()

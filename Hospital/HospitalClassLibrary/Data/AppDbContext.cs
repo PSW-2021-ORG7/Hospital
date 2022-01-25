@@ -31,6 +31,7 @@ namespace HospitalClassLibrary.Data
         public DbSet<SplitRenovation> SplitRenovation { get; set; }
         public DbSet<MergeRenovation> MergeRenovation { get; set; }
         public DbSet<Holiday> Holiday { get; set; }
+        public DbSet<DoctorSchedule> DoctorSchedule { get; set; }
 
         //Events
         public DbSet<BuildingSelection> BuildingSelection { get; set; }
@@ -45,6 +46,7 @@ namespace HospitalClassLibrary.Data
         {
             modelBuilder.ApplyConfiguration(new RoomEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new EquipmentTransferEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new WorkdayEntityTypeConfiguration());
 
             modelBuilder.Entity<Building>().HasData(
                new Building
@@ -1118,7 +1120,7 @@ namespace HospitalClassLibrary.Data
                 {
                     Id = 8,
                     Start = new System.DateTime(2022, 1, 13, 23, 0, 0),
-                    DoctorId = 4
+                    DoctorId = 4,
                 },
                 new OnCallShift
                 {
@@ -1147,121 +1149,37 @@ namespace HospitalClassLibrary.Data
             );
             modelBuilder.Entity<OnCallShift>().Property(e => e.Id).HasIdentityOptions(startValue: 13);
 
-
-
             modelBuilder.Entity<Workday>().HasData(
-                new Workday
-                {
-                    Id = 1,
-                    DoctorId = 1,
-                    ShiftId = 1
-                },
-                new Workday
-                {
-                    Id = 2,
-                    DoctorId = 1,
-                    ShiftId = 3
-                },
-                new Workday
-                {
-                    Id = 3,
-                    DoctorId = 1,
-                    ShiftId = 5
-                },
-                new Workday
-                {
-                    Id = 4,
-                    DoctorId = 1,
-                    ShiftId = 7
-                },
-                new Workday
-                {
-                    Id = 5,
-                    DoctorId = 1,
-                    ShiftId = 9
-                },
-                new Workday
-                {
-                    Id = 6,
-                    DoctorId = 2,
-                    ShiftId = 2
-                },
-                new Workday
-                {
-                    Id = 7,
-                    DoctorId = 2,
-                    ShiftId = 4
-                },
-                new Workday
-                {
-                    Id = 8,
-                    DoctorId = 2,
-                    ShiftId = 6
-                },
-                new Workday
-                {
-                    Id = 9,
-                    DoctorId = 2,
-                    ShiftId = 8
-                },
-                new Workday
-                {
-                    Id = 10,
-                    DoctorId = 3,
-                    ShiftId = 1
-                },
-                new Workday
-                {
-                    Id = 11,
-                    DoctorId = 3,
-                    ShiftId = 3
-                },
-                new Workday
-                {
-                    Id = 12,
-                    DoctorId = 3,
-                    ShiftId = 5
-                },
-                new Workday
-                {
-                    Id = 13,
-                    DoctorId = 3,
-                    ShiftId = 7
-                },
-                new Workday
-                {
-                    Id = 14,
-                    DoctorId = 3,
-                    ShiftId = 9
-                },
-                new Workday
-                {
-                    Id = 15,
-                    DoctorId = 4,
-                    ShiftId = 2
-                },
-                new Workday
-                {
-                    Id = 16,
-                    DoctorId = 4,
-                    ShiftId = 4
-                },
-                new Workday
-                {
-                    Id = 17,
-                    DoctorId = 4,
-                    ShiftId = 6
-                },
-                new Workday
-                {
-                    Id = 18,
-                    DoctorId = 4,
-                    ShiftId = 8
-                }
+                new Workday(1, 1, 1),
+                new Workday(2, 1, 3),
+                new Workday(3, 1, 5),
+                new Workday(4, 1, 7),
+                new Workday(5, 1, 9),
+                new Workday(6, 2, 2),
+                new Workday(7, 2, 4),
+                new Workday(8, 2, 6),
+                new Workday(9, 2, 8),
+                new Workday(10, 3, 1),
+                new Workday(11, 3, 3),
+                new Workday(12, 3, 5),
+                new Workday(13, 3, 7),
+                new Workday(14, 3, 9),
+                new Workday(15, 4, 2),
+                new Workday(16, 4, 4),
+                new Workday(17, 4, 6),
+                new Workday(18, 4, 8)
             );
             modelBuilder.Entity<Workday>().Property(e => e.Id).HasIdentityOptions(startValue: 19);
 
-            modelBuilder.Entity<Appointment>().HasData(
+            modelBuilder.Entity<Workday>().OwnsMany(w => w.Appointments,
+                a =>
+                {
+                    a.WithOwner().HasForeignKey("WorkdayId");
+                    a.Property<int>("Id");
+                    a.HasKey("Id");
+                });
+
+            modelBuilder.Entity<Workday>().OwnsMany(w => w.Appointments).HasData(
                 // anonymous type
                 new
                 {
@@ -1495,7 +1413,28 @@ namespace HospitalClassLibrary.Data
                     WorkdayId = 18
                 }
             );
-            modelBuilder.Entity<Appointment>().Property(e => e.Id).HasIdentityOptions(startValue: 34);
+
+            modelBuilder.Entity<DoctorSchedule>().HasData(
+                new DoctorSchedule(1, 1),
+                new DoctorSchedule(2, 2),
+                new DoctorSchedule(3, 3),
+                new DoctorSchedule(4, 4),
+                new DoctorSchedule(5, 5),
+                new DoctorSchedule(6, 6)
+            );
+            modelBuilder.Entity<DoctorSchedule>().Property(e => e.Id).HasIdentityOptions(startValue: 7);
+
+            modelBuilder.Entity<DoctorSchedule>()
+                .HasMany(doctorSchedule => doctorSchedule.OnCallShifts)
+                .WithOne()
+                .HasForeignKey(onCallShift => onCallShift.DoctorId)
+                .HasPrincipalKey(doctorSchedule => doctorSchedule.DoctorId);
+
+            modelBuilder.Entity<DoctorSchedule>()
+                .HasMany(doctorSchedule => doctorSchedule.Workdays)
+                .WithOne()
+                .HasForeignKey(workday => workday.DoctorId)
+                .HasPrincipalKey(doctorSchedule => doctorSchedule.DoctorId);
         }
     }
 }
