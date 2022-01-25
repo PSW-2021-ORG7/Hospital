@@ -167,7 +167,7 @@ namespace HospitalUnitTests
                 SourceRoomId = 1,
                 DestinationRoomId = 2,
                 EquipmentId = 12,
-                Quantity = 17,
+                Quantity = new Quantity(17),
                 TransferDate = new DateTime(2021, 11, 29, 18, 0, 0),
                 TransferDuration = 60
             };

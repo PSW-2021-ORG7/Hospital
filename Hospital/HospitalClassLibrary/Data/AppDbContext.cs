@@ -44,6 +44,7 @@ namespace HospitalClassLibrary.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new RoomEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new QuantityEntityTypeConfiguration());
 
             modelBuilder.Entity<Building>().HasData(
                new Building
@@ -68,6 +69,14 @@ namespace HospitalClassLibrary.Data
                     ba.Property(rd => rd.Y).HasColumnName("Y");
                     ba.Property(rd => rd.Width).HasColumnName("Width");
                     ba.Property(rd => rd.Height).HasColumnName("Height");
+                });
+
+            modelBuilder.Entity<EquipmentTransfer>().OwnsOne(e => e.Quantity);
+            modelBuilder.Entity<EquipmentTransfer>().OwnsOne(
+                o => o.Quantity,
+                sa =>
+                {
+                    sa.Property(p => p.Amount).HasColumnName("Amount");
                 });
 
             modelBuilder.Entity<Room>().OwnsOne(r => r.RoomDimensions).HasData(

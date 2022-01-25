@@ -1,5 +1,6 @@
 ﻿using HospitalClassLibrary.Events.LogEvent;
 using HospitalClassLibrary.RoomEquipment.Models;
+using HospitalClassLibrary.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,11 +9,7 @@ namespace HospitalClassLibrary.Events.EventEquipmentTransfer
 {
     public class EquipmentTransferEventParams : EventParams
     {
-        private EquipmentTransfer e;
-
-        public EquipmentTransferEventParams()
-        {
-        }
+        public EquipmentTransferEventParams(){}
 
         public int SourceRoomId { get; set; }
 
@@ -23,7 +20,7 @@ namespace HospitalClassLibrary.Events.EventEquipmentTransfer
 
         public int EquipmentId { get; set; }
 
-        public int Quantity { get; set; }
+        public Quantity Quantity { get; set; }
 
         public EquipmentTransferEventParams(EquipmentTransfer e)
         {

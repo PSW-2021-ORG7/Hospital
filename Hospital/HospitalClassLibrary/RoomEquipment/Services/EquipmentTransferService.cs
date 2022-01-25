@@ -14,21 +14,21 @@ namespace HospitalClassLibrary.RoomEquipment.Services
         private readonly IEquipmentRepository _equipmentRepository;
         private readonly ILogEventService<EquipmentTransferEventParams> _logEquipmentTransferEventService;
 
-        public EquipmentTransferService(IEquipmentTransferRepository equipmentTransferRepository, IEquipmentRepository equipmentRepository
-            , ILogEventService<EquipmentTransferEventParams> logEquipmentTransferEventService)
+        public EquipmentTransferService(IEquipmentTransferRepository equipmentTransferRepository, IEquipmentRepository equipmentRepository, 
+            ILogEventService<EquipmentTransferEventParams> logEquipmentTransferEventService)
         {
             _equipmentTransferRepository = equipmentTransferRepository;
             _equipmentRepository = equipmentRepository;
             _logEquipmentTransferEventService = logEquipmentTransferEventService;
         }
 
-        public async Task Create(EquipmentTransfer e)
+        public async Task Create(EquipmentTransfer equipmentTransfer)
         {
-            await _equipmentTransferRepository.CreateAsync(e);
-            var eventparams = new EquipmentTransferEventParams(e);
+            await _equipmentTransferRepository.CreateAsync(equipmentTransfer);
+            var eventparams = new EquipmentTransferEventParams(equipmentTransfer);
             _logEquipmentTransferEventService.LogEvent(eventparams);
-            var equipment = await _equipmentRepository.GetByIdAsync(e.EquipmentId);
-            equipment.ReservedQuantity += e.Quantity;
+            var equipment = await _equipmentRepository.GetByIdAsync(equipmentTransfer.EquipmentId);
+            equipment.ReservedQuantity += equipmentTransfer.Quantity.Amount;
             await _equipmentRepository.UpdateAsync(equipment);
         }
 

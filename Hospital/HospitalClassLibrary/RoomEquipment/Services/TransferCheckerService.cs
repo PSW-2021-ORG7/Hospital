@@ -38,6 +38,7 @@ namespace HospitalClassLibrary.RoomEquipment.Services
   
                 await UpdateSrcRoomEquipment(transfer);
 
+                //Feature envy
                 var dstRoomEquipment = transfer.DestinationRoom.Equipment.FirstOrDefault(e => e.EquipmentItem.Name == transfer.Equipment.EquipmentItem.Name);
                 if (dstRoomEquipment == null)
                 {
@@ -55,8 +56,8 @@ namespace HospitalClassLibrary.RoomEquipment.Services
         private async Task UpdateSrcRoomEquipment(EquipmentTransfer transfer)
         {
             var srcRoomEquipment = transfer.SourceRoom.Equipment.First(e => e.Id == transfer.EquipmentId);
-            srcRoomEquipment.Quantity -= transfer.Quantity;
-            srcRoomEquipment.ReservedQuantity -= transfer.Quantity;
+            srcRoomEquipment.Quantity -= transfer.Quantity.Amount;
+            srcRoomEquipment.ReservedQuantity -= transfer.Quantity.Amount;
             await _equipmentRepository.UpdateAsync(srcRoomEquipment);
         }
 
@@ -68,7 +69,7 @@ namespace HospitalClassLibrary.RoomEquipment.Services
                 Room = transfer.DestinationRoom,
                 EquipmentItemId = transfer.Equipment.EquipmentItemId,
                 EquipmentItem = transfer.Equipment.EquipmentItem,
-                Quantity = transfer.Quantity,
+                Quantity = transfer.Quantity.Amount,
                 ReservedQuantity = 0
             };
             await _equipmentRepository.CreateAsync(equipment);
@@ -76,7 +77,7 @@ namespace HospitalClassLibrary.RoomEquipment.Services
 
         private async Task UpdateDstRoomEquipment(Equipment dstRoomEquipment, EquipmentTransfer transfer)
         {
-            dstRoomEquipment.Quantity += transfer.Quantity;
+            dstRoomEquipment.Quantity += transfer.Quantity.Amount;
             await _equipmentRepository.UpdateAsync(dstRoomEquipment);
         }
     }

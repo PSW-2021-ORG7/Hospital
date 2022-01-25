@@ -21,9 +21,6 @@ namespace HospitalClassLibrary.Renovations.Services
         private readonly ILogEventService<MergeRenovationEventParams> _logMergeRenovationEventService;
 
         private readonly IRoomRepository _roomRepository;
-        private ISplitRenovationRepository object1;
-        private IMergeRenovationRepository object2;
-        private IRoomRepository object3;
         bool fromFront;
 
         public RenovationService(ISplitRenovationRepository splitRenovationRepository, IMergeRenovationRepository mergeRenovationRepository, IRoomRepository roomRepository, ILogEventService<MergeRenovationEventParams> logMergeRenovationEventService, ILogEventService<SplitRenovationEventParams> logSplitRenovationEventService)
