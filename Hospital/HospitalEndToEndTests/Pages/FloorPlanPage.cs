@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
@@ -148,32 +147,14 @@ namespace HospitalEndToEndTests.Pages
             return FloorSelectionRadioButtons.ElementAt(0).GetAttribute("id")[5..];
         }
 
-        public List<IWebElement> GetVisibleRooms()
+        public ICollection<IWebElement> GetVisibleRooms()
         {
-            var visibleRooms = new List<IWebElement>();
-            foreach (var room in FloorPlan)
-            {
-                if (room.GetCssValue("visibility") == "visible")
-                {
-                    visibleRooms.Add(room);
-                }
-            }
-
-            return visibleRooms;
+          return FloorPlan.Where(r => r.GetCssValue("visibility") == "visible").Select(r => r).ToList();
         }
 
         public List<IWebElement> GetHiddenRooms()
         {
-            var hiddenRooms = new List<IWebElement>();
-            foreach (var room in FloorPlan)
-            {
-                if (room.GetCssValue("visibility") == "hidden")
-                {
-                    hiddenRooms.Add(room);
-                }
-            }
-
-            return hiddenRooms;
+            return FloorPlan.Where(r => r.GetCssValue("visibility") == "hidden").Select(r => r).ToList();
         }
 
         public void Navigate() => _driver.Navigate().GoToUrl(_floorPlanPageUri);

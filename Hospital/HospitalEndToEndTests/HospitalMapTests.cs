@@ -34,7 +34,6 @@ namespace HospitalEndToEndTests
         {
             _hospitalMapPage.ClickOnBuilding();
             Assert.Equal("http://localhost:4200/hospital-map/floor-plan?buildingId=1", _driver.Url);
-            Dispose();
         }
 
         public void Dispose()
