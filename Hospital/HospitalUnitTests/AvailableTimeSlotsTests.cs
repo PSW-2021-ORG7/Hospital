@@ -84,18 +84,8 @@ namespace HospitalUnitTests
             var dateRange = new DateTimeRange() { Start = requirements.Start, End = requirements.End.AddHours(WorkHoursEnd) };
             var appointments = new List<Appointment>
             {
-                new Appointment()
-                {
-                    Id = 0,
-                    StartTime = new DateTime(2021, 11, 26, 9, 0, 0),
-                    EndTime = new DateTime(2021, 11, 26, 9, 30, 0)
-                },
-                new Appointment()
-                {
-                    Id = 1,
-                    StartTime = new DateTime(2021, 11, 26, 13, 30, 0),
-                    EndTime = new DateTime(2021, 11, 26, 14, 0, 0)
-                }
+                new Appointment(new DateTime(2021, 11, 26, 9, 0, 0), new DateTime(2021, 11, 26, 9, 30, 0)),
+                new Appointment(new DateTime(2021, 11, 26, 13, 30, 0), new DateTime(2021, 11, 26, 14, 0, 0))
             };
             var transfers = new List<DateTimeRange>
             {
@@ -154,8 +144,8 @@ namespace HospitalUnitTests
 
         private static Appointment GetAppointment()
         {
-            var appointment = new Appointment()
-                { StartTime = new DateTime(2021, 11, 26, 9, 0, 0), EndTime = new DateTime(2021, 11, 26, 9, 30, 0) };
+            var appointment =
+                new Appointment(new DateTime(2021, 11, 26, 9, 0, 0), new DateTime(2021, 11, 26, 9, 30, 0));
             return appointment;
         }
 

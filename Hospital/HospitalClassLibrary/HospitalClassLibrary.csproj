@@ -19,6 +19,14 @@
     <Compile Remove="Migrations\20220110114521_FirstMigration.Designer.cs" />
     <Compile Remove="Migrations\20220111013020_RefactorRoomDimensions.cs" />
     <Compile Remove="Migrations\20220111013020_RefactorRoomDimensions.Designer.cs" />
+    <Compile Remove="Migrations\20220125002540_UpdateForeignKeys.cs" />
+    <Compile Remove="Migrations\20220125002540_UpdateForeignKeys.Designer.cs" />
+    <Compile Remove="Migrations\20220125013803_AddPrincipalKey.cs" />
+    <Compile Remove="Migrations\20220125013803_AddPrincipalKey.Designer.cs" />
+    <Compile Remove="Migrations\20220125014849_AddPrincipalKey.cs" />
+    <Compile Remove="Migrations\20220125014849_AddPrincipalKey.Designer.cs" />
+    <Compile Remove="Migrations\20220125020851_AddPrincipalKey.cs" />
+    <Compile Remove="Migrations\20220125020851_AddPrincipalKey.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

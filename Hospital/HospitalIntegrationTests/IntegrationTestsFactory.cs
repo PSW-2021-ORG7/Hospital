@@ -7,6 +7,7 @@ using HospitalClassLibrary.GraphicalEditor.Models;
 using HospitalClassLibrary.RoomEquipment.Models;
 using HospitalClassLibrary.Schedule.Models;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Razor.Compilation;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -223,14 +224,23 @@ namespace HospitalIntegrationTests
             };
 
 
-            var workday = new Workday()
+            var workday = new Workday(1, 1, 1,
+                new Shift()
+                {
+                    Id = 1, Start = new DateTime(2021, 12, 1, 8, 0, 0), End = new DateTime(2021, 12, 1, 23, 0, 0)
+                }, new List<Appointment>());
+
+            var doctor = new Doctor()
             {
                 Id = 1,
-                Appointments = new List<Appointment>(),
-                Doctor = new Doctor(),
-                DoctorId = 1,
-                Shift = new Shift() {Id = 1, Start = new DateTime(2021, 12, 1, 8, 0, 0), End = new DateTime(2021, 12, 1, 23, 0, 0)},
-                ShiftId = 1
+                Name = "Aca",
+                Surname = "Ivic",
+                DateOfBirth = new DateTime(1999, 12, 1, 8, 0, 0),
+                Phone = "6739998214",
+                Email = "email@emailovic.com",
+                Gender = Gender.MALE,
+                Specialization = Specialization.CARDIOLOGIST,
+                UsedOffDays = 5
             };
 
             context.Room.Add(srcRoom1);
@@ -250,6 +260,7 @@ namespace HospitalIntegrationTests
             context.Equipment.Add(equipmentForMergeRenovation2);
 
             context.Workday.Add(workday);
+            context.Doctor.Add(doctor);
         }
 
     }
