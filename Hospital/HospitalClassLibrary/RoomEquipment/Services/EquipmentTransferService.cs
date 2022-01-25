@@ -27,8 +27,8 @@ namespace HospitalClassLibrary.RoomEquipment.Services
             await _equipmentTransferRepository.CreateAsync(equipmentTransfer);
             var eventparams = new EquipmentTransferEventParams(equipmentTransfer);
             _logEquipmentTransferEventService.LogEvent(eventparams);
-            var equipment = await _equipmentRepository.GetByIdAsync(equipmentTransfer.EquipmentId);
-            equipment.ReservedQuantity += equipmentTransfer.Quantity.Amount;
+            var equipment = await _equipmentRepository.GetByIdAsync(equipmentTransfer.TransferEquipmentInfo.EquipmentId);
+            equipment.ReservedQuantity += equipmentTransfer.TransferEquipmentInfo.Quantity;
             await _equipmentRepository.UpdateAsync(equipment);
         }
 

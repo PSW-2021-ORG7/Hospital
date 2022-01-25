@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using HospitalClassLibrary.Renovations.Models;
 using HospitalClassLibrary.RoomEquipment.Models;
+using HospitalClassLibrary.Shared.Models;
 using HospitalClassLibrary.Shared.Services;
 using Shouldly;
 using Xunit;
@@ -16,7 +17,7 @@ namespace HospitalUnitTests
         {
             var service = new CancellationService();
 
-            var canBeCancelled = service.CanBeCancelled(equipmentTransfer.TransferDate);
+            var canBeCancelled = service.CanBeCancelled(equipmentTransfer.TransferDateInfo.TransferDate);
 
             canBeCancelled.Result.ShouldBe(result);
         }
@@ -38,19 +39,13 @@ namespace HospitalUnitTests
             {
                 new object[]
             {
-                new EquipmentTransfer()
-                {
-                    TransferDate = new DateTime(2021, 12, 26)
-                },
+                new EquipmentTransfer(0, 1, 2, new DateTime(2021, 12, 26), 60, 12, 17),
                 false
             },
 
                 new object[] 
             {
-                new EquipmentTransfer()
-                {
-                    TransferDate = new DateTime(2022, 5, 24)
-                },
+                new EquipmentTransfer(0, 1, 2, new DateTime(2022, 5, 24), 60, 12, 17),
                 true
             }
             };

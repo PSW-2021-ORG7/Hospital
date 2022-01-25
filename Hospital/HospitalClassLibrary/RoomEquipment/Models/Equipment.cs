@@ -1,6 +1,4 @@
-﻿using HospitalClassLibrary.GraphicalEditor.Models;
-
-namespace HospitalClassLibrary.RoomEquipment.Models
+﻿namespace HospitalClassLibrary.RoomEquipment.Models
 {
     public class Equipment
     {
@@ -14,5 +12,17 @@ namespace HospitalClassLibrary.RoomEquipment.Models
 
         public int Quantity { get; set; }
         public int ReservedQuantity { get; set; }
+
+        public bool Validate()
+        {
+            if(ReservedQuantity > Quantity)
+                return false;
+            return true;
+        }
+
+        public int GetAvailableQuantityForTransfer()
+        {
+            return Quantity - ReservedQuantity;
+        }
     }
 }

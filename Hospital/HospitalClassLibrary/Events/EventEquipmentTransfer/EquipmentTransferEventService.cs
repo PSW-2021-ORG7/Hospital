@@ -20,7 +20,7 @@ namespace HospitalClassLibrary.Events.EventEquipmentTransfer
             { TimeStamp = DateTime.Now,
               DestinationRoomId = eventParams.DestinationRoomId,
               SourceRoomId = eventParams.SourceRoomId,
-              Quantity = eventParams.Quantity.Amount,
+              Quantity = eventParams.Quantity,
               EquipmentId = eventParams.EquipmentId,
               TransferDate = eventParams.TransferDate,
               TransferDuration = eventParams.TransferDuration

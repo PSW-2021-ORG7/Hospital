@@ -20,16 +20,16 @@ namespace HospitalClassLibrary.Events.EventEquipmentTransfer
 
         public int EquipmentId { get; set; }
 
-        public Quantity Quantity { get; set; }
+        public int Quantity { get; set; }
 
         public EquipmentTransferEventParams(EquipmentTransfer e)
         {
-            SourceRoomId = e.SourceRoomId;
-            DestinationRoomId = e.DestinationRoomId;
-            TransferDate = e.TransferDate;
-            TransferDuration = e.TransferDuration;
-            EquipmentId = e.EquipmentId;
-            Quantity = e.Quantity;
+            SourceRoomId = e.TransferLocationInfo.SourceRoomId;
+            DestinationRoomId = e.TransferLocationInfo.DestinationRoomId;
+            TransferDate = e.TransferDateInfo.TransferDate;
+            TransferDuration = e.TransferDateInfo.TransferDuration;
+            EquipmentId = e.TransferEquipmentInfo.EquipmentId;
+            Quantity = e.TransferEquipmentInfo.Quantity;
         }
     }
 }

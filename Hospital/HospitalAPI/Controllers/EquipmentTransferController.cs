@@ -32,7 +32,7 @@ namespace HospitalAPI.Controllers
             try
             {
                 var equipmentTransfer = new EquipmentTransfer(e.Id, e.SourceRoomId, e.DestinationRoomId,
-                    e.TransferDate, e.TransferDuration, e.EquipmentId, new Quantity(e.Quantity));
+                    e.TransferDate, e.TransferDuration, e.EquipmentId, e.Quantity);
                 
                 if (equipmentTransfer == null)
                 {
@@ -69,7 +69,7 @@ namespace HospitalAPI.Controllers
         {
             var transfer = _mapper.Map<EquipmentTransfer>(e);
             
-            if (!await _cancellationService.CanBeCancelled(transfer.TransferDate))
+            if (!await _cancellationService.CanBeCancelled(transfer.TransferDateInfo.TransferDate))
             {
                 return BadRequest("Chosen equipment transfer cannot be canceled");
             }

@@ -54,12 +54,12 @@ namespace HospitalIntegrationTests
             var actualDstRoomEquipmentAsString = await actualDstRoomEquipment.Content.ReadAsStringAsync();
             var actualDstRoomEquipmentAsJson = JsonConvert.DeserializeObject<RoomDto>(actualDstRoomEquipmentAsString);
 
-            3.ShouldBe(3);
-            //actualTransfersAsJson.ShouldBeEmpty();
-            //actualSrcRoomEquipmentAsJson.Equipment.First().ReservedQuantity.ShouldBe(0);
-            //actualSrcRoomEquipmentAsJson.Equipment.First().Quantity.ShouldBe(expectedSrcRoomEquipmentQuantity);
-            //actualDstRoomEquipmentAsJson.Equipment.First().Quantity.ShouldBe(expectedDstRoomEquipmentQuantity);
-            //actualDstRoomEquipmentAsJson.Equipment.First().EquipmentItemId.ShouldBe(1);
+            //3.ShouldBe(3);
+            actualTransfersAsJson.ShouldBeEmpty();
+            actualSrcRoomEquipmentAsJson.Equipment.First().ReservedQuantity.ShouldBe(0);
+            actualSrcRoomEquipmentAsJson.Equipment.First().Quantity.ShouldBe(expectedSrcRoomEquipmentQuantity);
+            actualDstRoomEquipmentAsJson.Equipment.First().Quantity.ShouldBe(expectedDstRoomEquipmentQuantity);
+            actualDstRoomEquipmentAsJson.Equipment.First().EquipmentItemId.ShouldBe(1);
         }
 
         public static IEnumerable<object[]> Data()
@@ -71,7 +71,11 @@ namespace HospitalIntegrationTests
                 new EquipmentTransferDto()
                 {
                     SourceRoomId = 1,
+                    SourceRoomName = "",
+                    SourceRoomType = RoomType.DOCTOR_OFFICE,
                     DestinationRoomId = 4,
+                    DestinationRoomName = "",
+                    DestinationRoomType = RoomType.DOCTOR_OFFICE,
                     TransferDate = new DateTime(2021, 12, 4),
                     TransferDuration = 15,
                     EquipmentId = 1,
@@ -84,7 +88,11 @@ namespace HospitalIntegrationTests
                 new EquipmentTransferDto()
                 {
                     SourceRoomId = 2,
+                    SourceRoomName = "",
+                    SourceRoomType = RoomType.DOCTOR_OFFICE,
                     DestinationRoomId = 3,
+                    DestinationRoomName = "",
+                    DestinationRoomType = RoomType.DOCTOR_OFFICE,
                     TransferDate = new DateTime(2021, 12, 4),
                     TransferDuration = 15,
                     EquipmentId = 2,

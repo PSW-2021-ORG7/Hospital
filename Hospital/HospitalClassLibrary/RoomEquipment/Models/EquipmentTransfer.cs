@@ -6,47 +6,36 @@ namespace HospitalClassLibrary.RoomEquipment.Models
     public class EquipmentTransfer
     {
         public int Id { get; set; }
-
-        public int SourceRoomId { get; set; }
-        public Room SourceRoom { get; set; }
-
-        public int DestinationRoomId { get; set; }
-        public Room DestinationRoom { get; set; }
-
-        public DateTime TransferDate { get; set; }
-        public int TransferDuration { get; set; }
-
-        public int EquipmentId { get; set; }
-        public Equipment Equipment { get; set; }
-
-        public Quantity Quantity { get; set; }
+        public TransferLocationInfo TransferLocationInfo{ get; private set; }
+        public TransferEquipmentInfo TransferEquipmentInfo { get; private set; }
+        public TransferDateInfo TransferDateInfo { get; private set; }
 
         public EquipmentTransfer() {}
 
         public EquipmentTransfer(int id, int sourceRoomId, int destinationRoomId,
-            DateTime transferDate, int transferDuration, int equipmentId, Quantity quantity)
+            DateTime transferDate, int transferDuration, int equipmentId, int quantity)
         {
             Id = id;
-            SourceRoomId = sourceRoomId;
-            DestinationRoomId = destinationRoomId;
-            TransferDate = transferDate;
-            TransferDuration = transferDuration;
-            EquipmentId = equipmentId;
-            Quantity = quantity;
+            TransferLocationInfo = new TransferLocationInfo(sourceRoomId, destinationRoomId);
+            TransferEquipmentInfo = new TransferEquipmentInfo(equipmentId, quantity);
+            TransferDateInfo = new TransferDateInfo(transferDate, transferDuration);
             Validate();
         }
 
         private void Validate()
         {
-            if (SourceRoomId == DestinationRoomId)
+            if (!TransferLocationInfo.Validate())
             {
-                throw new Exception("Cannot make transfer to the same room!");
+                throw new Exception("Invalid transfer rooms!");
             }
-            if (!Quantity.Validate())
+            if (!TransferEquipmentInfo.Validate())
             {
-                throw new Exception("Quantity must be a positive number!");
+                throw new Exception("Invalid equipment information!");
             }
-            //if (SourceRoom.Equipment doesn't have that much quantity)
+            if (!TransferDateInfo.Validate())
+            {
+                throw new Exception("Invalid dates for transfer!");
+            }
         }
 
 
