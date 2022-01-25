@@ -7,5 +7,6 @@ namespace HospitalClassLibrary.Events.LogEvent
     public interface ILogEventService<in T> where T : EventParams
     {
         void LogEvent(T eventParams);
+
     }
 }

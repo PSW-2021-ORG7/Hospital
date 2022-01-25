@@ -8,6 +8,8 @@ using HospitalClassLibrary.RoomEquipment.Models;
 using HospitalClassLibrary.RoomEquipment.Services.Interfaces;
 using HospitalClassLibrary.Shared.Services.Interfaces;
 using HospitalClassLibrary.Shared.Models;
+using HospitalClassLibrary.Events.EventEquipmentTransfer;
+using HospitalClassLibrary.Events.LogEvent;
 
 namespace HospitalAPI.Controllers
 {
@@ -16,13 +18,17 @@ namespace HospitalAPI.Controllers
     public class EquipmentTransferController : ControllerBase
     {
         private readonly IEquipmentTransferService _equipmentTransferService;
+        //private readonly ILogEventService<EquipmentTransferEventParams> _equipmentTransferEventService;
+        private readonly IEquipmentTransferEventRepository _equipmentTransferEventRepository;
         private readonly ICancellationService _cancellationService;
         private readonly IMapper _mapper;
 
-        public EquipmentTransferController(IEquipmentTransferService equipmentTransferService, ICancellationService cancellationService, IMapper mapper)
+        public EquipmentTransferController(IEquipmentTransferService equipmentTransferService, ICancellationService cancellationService, IEquipmentTransferEventRepository equipmentTransferEventRepository,  IMapper mapper)
         {
             _equipmentTransferService = equipmentTransferService;
             _cancellationService = cancellationService;
+            //_equipmentTransferEventService = equipmentTransferEventService;
+            _equipmentTransferEventRepository = equipmentTransferEventRepository;
             _mapper = mapper;
         }
 
@@ -73,6 +79,12 @@ namespace HospitalAPI.Controllers
             await _equipmentTransferService.Delete(transfer);
 
             return NoContent();
+        }
+
+        [HttpGet("events")]
+        public async Task<IEnumerable<EquipmentTransferEvent>> GetTransferEvent()
+        {
+            return await _equipmentTransferEventRepository.GetAllEvents();
         }
     }
 }
